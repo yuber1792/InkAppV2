@@ -29,7 +29,8 @@
     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git",
     "cordova-plugin-admobpro",
     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
-    "org.apache.cordova.camera"
+    "org.apache.cordova.camera",
+    "org.apache.cordova.inappbrowser"
   ],
   "cordovaPlatforms": [
     "ios",

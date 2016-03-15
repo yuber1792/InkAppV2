@@ -2,6 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes) {
   Scopes.store('AppCtrl', $scope);
+  console.log("entra controlador appCtrl");
     $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
     
@@ -22,6 +23,7 @@ angular.module('starter.controllers', [])
 })
 .controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes) {
 Scopes.store('BocetosController', $scope);
+console.log("entra controlador bocetos");
 
 
   $scope.irTab =  function(nombre){
@@ -210,6 +212,7 @@ $scope.valorfiltro=true;
 })
 .controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes) {
 Scopes.store('IntroCtrl', $scope);
+console.log("entra controlador intro");
 
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
@@ -238,6 +241,7 @@ Scopes.store('IntroCtrl', $scope);
 
 .controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes) {
   Scopes.store('MultimediaController', $scope);
+  console.log("entra controlador multimedia ");
 
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
@@ -287,6 +291,7 @@ $scope.valorfiltro=true;
 })
 .controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes) {
   Scopes.store('PromocionesController', $scope);
+  console.log("entra controlador promo");
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
 
@@ -331,6 +336,7 @@ $scope.valorfiltro=true;
 })
 .controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes) {
   Scopes.store('EventosController', $scope);
+  console.log("entra controlador eventos");
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
      
@@ -385,6 +391,7 @@ $scope.valorfiltro=true;
 
 .controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes) {
   Scopes.store('PublicidadController', $scope);
+  console.log("entra controlador publi");
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
      
@@ -547,6 +554,7 @@ $scope.getContactList = function() {
 
 
 .controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup) {
+  console.log("entra controlador play");
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
       
@@ -805,6 +813,7 @@ $scope.valorfiltro=true;
 })
 
 .controller('filtroCtrl', function($scope, $ionicModal,$http,Scope) {
+  console.log("entra controlador filtro");
   Scopes.store('filtroCtrl', $scope);
    $scope.valorfiltro=true;
       //ventana  fintros
@@ -830,6 +839,7 @@ $scope.valorfiltro=true;
 
 .controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
       Scopes.store('editarArtistaController', $scope);
+      console.log("entra controlador editarArtista");
       $scope.loginData = {};
       $scope.loginData.usuario = window.localStorage.getItem("usuario");
       $scope.loginData.clave = window.localStorage.getItem("clave");
@@ -1161,8 +1171,12 @@ $scope.valorfiltro=true;
 
 .controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes) {
     Scopes.store('indexController', $scope);
-$scope.loginData = {};
-var idUsuarioLog = 0 ; 
+    console.log("entra controlador index");
+    $scope.loginData = {};
+     $scope.loginData.login ="no";
+
+    var idUsuarioLog = 0 ; 
+
 
    $scope.abrirLoading = function() {
     $ionicLoading.show({
@@ -1204,7 +1218,8 @@ $scope.logueado = 0 ;
   };
 
   // Perform the login action when the user submits the login form
-     $scope.mostrarLogin =false;
+  $scope.informacion={};
+  $scope.informacion.mostrarLogin =false;
   $scope.autentica = function() {
 
   
@@ -1212,8 +1227,8 @@ $scope.logueado = 0 ;
     console.log('Doing login', $scope.loginData);
     window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
     window.localStorage.setItem('clave' ,  $scope.loginData.clave);
-    $scope.mostrarLogin= true;
-    console.log("valor mostrar login" + $scope.mostrarLogin);
+    $scope.loginData.login="ok";  
+
     $scope.cerrarLogin();
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
     .success(function(data, status, headers, config){
@@ -1653,6 +1668,9 @@ $scope.getContactList = function() {
     };
 
     $scope.verificaFiltro = function(){
+      console.log($scope.loginData) ; 
+        $scope.loginData.login ="ok";
+        console.log($scope.loginData) ; 
              console.log( $scope.filtro.estilo + " --- "+ $scope.filtro.ciudad + "--" + $scope.filtro.mostrarCodigo ) ; 
         if ($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos") {
               if ($scope.filtro.mostrarCodigo === "undefined" || !$scope.filtro.mostrarCodigo ) {
