@@ -1256,6 +1256,7 @@ $scope.logueado = 0 ;
        $scope.loginData.login = false;
        window.localStorage.setItem('usuario' , "");
        window.localStorage.setItem('clave' ,  "");
+       $state.go("app.artistas");
   }
 
 
