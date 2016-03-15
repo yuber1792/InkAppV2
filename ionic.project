@@ -1,0 +1,12 @@
+{
+  "name": "InkGps",
+  "app_id": "dd47acc0",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

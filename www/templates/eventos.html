@@ -1,0 +1,54 @@
+<ion-view view-title="{{'Eventos' | translate}}" class="product-view">
+  <ion-content>
+<div class="product-card-content"   ng-repeat="evento in eventos"  ng-click="ir(evento.link)" >
+      <div class="item item-image">
+        <pre-img ratio="_1_1" helper-class="main-image">
+          <img ng-src="{{evento.imagen}}" spinner-on-load>
+        </pre-img>
+      </div>
+      <div class="item item-body">
+        <h3 class="product-title">{{evento.nombre}}</h3>
+        <!--<div>
+          <p class="product-like"><i class="icon ion-heart"></i>Like</p>
+          <p class="likes"></i>837</p>
+        </div>
+        <p class="product-price" ng-click="showAddToCartPopup(product)">${{product.price}}</p>
+        -->
+      </div>
+      <div class="item item-body">
+        <p class="product-description">{{evento.fecha}}</p>
+      </div>
+  </div>
+
+  
+
+  <!--<div ng-repeat="evento in eventos" class="list card " ng-click="ir(evento.link)" >
+  <div class="item item-divider fondoRojo">
+   
+     </div>
+  <div class="item item-avatar fondo">
+    <img src="{{evento.imagen}}">
+    <h2>{{evento.nombre}}</h2>
+    <p>{{evento.fecha}}</p>
+  </div>
+
+  <div class="item item-image">
+    <img src="{{evento.imagen}}">
+  </div>
+
+  <div class="item item-body justificar " >
+    
+    <p>
+      {{evento.descripcion}}
+    </p>
+    <!--<p>
+      <a href="#" class="subdued">1 Like</a>
+      <a href="#" class="subdued">5 Comments</a>
+    </p>-->
+  <!--</div>-->
+
+
+</div>
+
+  </ion-content>
+</ion-view>

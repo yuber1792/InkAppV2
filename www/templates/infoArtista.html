@@ -1,0 +1,106 @@
+<ion-view view-title="infoArtista" ng-controller="indexController">
+      <ion-content>
+      <div class="list card">
+
+ <!-- <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.imagen}}">
+    <h2>{{artistaSeleccionado.nombre}}</h2>
+    <p>{{artistaSeleccionado.especialidad}}</p>
+  </div>
+
+  <div class="item item-body">
+   
+    <p>
+     {{artistaSeleccionado.descripcion}}
+    </p>
+   
+  </div>
+
+  
+ mostrar tattos -->
+  <div class="card">
+  <div class="item item-divider">
+  Proyectos
+  </div>
+  <div class="item item-text-wrap">
+   <!-- <div class="list card">-->
+    <a class="item item-list-detail">
+      <ion-scroll direction="x">
+        <img ng-repeat="image in artistaSeleccionado.trabajos track by $index" ng-src="{{image}}" ng-click="showImages($index)" class="image-list-thumb" width="40%" height="40%" />
+      </ion-scroll>
+    </a>
+
+<!-- agregar nueva imagen
+
+  <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.trabajos[0].imagen}}">
+    <h2>{{artistaSeleccionado.trabajos[0].nombre}}</h2>
+    <p>{{artistaSeleccionado.trabajos[0].desc}}</p>
+  </div>
+  <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.trabajos[1].imagen}}">
+    <h2>{{artistaSeleccionado.trabajos[1].nombre}}</h2>
+    <p>{{artistaSeleccionado.trabajos[1].desc}}</p>
+  </div>
+  <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.trabajos[2].imagen}}">
+    <h2>{{artistaSeleccionado.trabajos[2].nombre}}</h2>
+    <p>{{artistaSeleccionado.trabajos[2].desc}}</p>
+  </div>
+  <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.trabajos[3].imagen}}">
+    <h2>{{artistaSeleccionado.trabajos[3].nombre}}</h2>
+    <p>{{artistaSeleccionado.trabajos[3].desc}}</p>
+  </div>
+  <div class="item item-avatar">
+    <img src="./img/{{artistaSeleccionado.trabajos[4].imagen}}">
+    <h2>{{artistaSeleccionado.trabajos[4].nombre}}</h2>
+    <p>{{artistaSeleccionado.trabajos[4].desc}}</p>
+  </div>
+  
+  fin agregar nueva imagen -->
+
+ 
+<!-- fin mostrar tattos-->
+
+
+<!--</div>-->
+  </div>
+  <!--<div class="item item-divider">
+    I'm a Footer in a Card!
+  </div>-->
+</div>
+
+<div class="list card">
+
+<a class="item item-avatar" href="#" ng-click="openGeo()">
+    <img  width="48px" height="48px" src="./img/pin.png">
+      <h2>{{artistaSeleccionado.direccion}}</h2>  
+    </a>
+
+ 
+ <a class="item item-avatar" href="#" ng-click="whatsapp()">
+    <img  width="48px" height="48px" src="./img/whatsapp.png">
+    {{artistaSeleccionado.celular}}
+  </a>
+
+  <a class="item item-avatar"  href="#" ng-click="twitter()" >
+    <img  width="48px" height="48px"  src="./img/twitter.png">
+    {{artistaSeleccionado.twitter}}
+  </a>
+
+ <a class="item item-avatar" href="#" href="#" ng-click="facebook()">
+    <img  width="48px" height="48px" src="./img/facebook.png">
+    {{artistaSeleccionado.facebook}}
+  </a>
+  <a class="item item-avatar" href="#" ng-click="instagram()">
+    <img  width="48px" height="48px" src="./img/Instagram.png">
+    {{artistaSeleccionado.instagram}}
+  </a>
+
+</div>
+</div>
+      
+      </ion-content>
+      </ion-view>
+

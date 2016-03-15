@@ -1,0 +1,29 @@
+<div class="modal">
+
+    
+      <ion-header-bar class="bar-stable bar-dark">
+        <h1 class="title">{{estiloSeleccionado.nombre}} </h1>
+         <div class="buttons">
+            <button class="button button-clear" ng-click="closeEstilo()">Cerrar</button>
+        </div>
+      </ion-header-bar>
+      <ion-content>
+          <div class="list card">
+
+ 
+
+  <div class="item item-body">
+    <img class="full-image" src="./img/{{estiloSeleccionado.imagen}}" width="80%" height="15%">
+    <p>
+     {{estiloSeleccionado.descripcion}}
+    </p>
+   
+  </div>
+
+ 
+
+</div>
+      
+      </ion-content>
+    
+</div>

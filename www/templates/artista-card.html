@@ -1,0 +1,30 @@
+      <div class="post-card" ng-click="cargarSeleccionado($index)" >
+                <div class="list card">
+                  <div class="item item-image">
+                    <pre-img ratio="_3_2" helper-class="main-image">
+                      <img ng-src="{{artista.trabajos[0]}}" spinner-on-load>
+                    </pre-img>
+                  </div>
+
+                  <!--<i ng-if="post.liked" class="post-like-action clicked icon ion-ios-heart"></i>-->
+                  <!--<i ng-if="!post.liked" class="post-like-action icon ion-ios-heart-outline"></i>-->
+
+                  <div class="item item-body">
+                    <h4 class="card-title">{{artista.nombre}}</h4>
+                    <p class="card-description">
+                      <a class="card-user-name" ui-sref="app.profile.posts({userId:post.userId})">{{artista.especialidad}}
+                      </a>
+                    </p>
+                    <span class="card-moment-posted" am-time-ago="post.date"></span>
+                    <div class="card-avatar-image-outer">
+                      <a ui-sref="app.profile.posts({userId:post.userId})">
+                        <pre-img ratio="_1_1" helper-class="avatar-image rounded-image">
+                          <img ng-src="{{artista.imagen}}" spinner-on-load>
+                        </pre-img>
+                      </a>
+                    </div>
+
+                    <i class="post-share icon ion-share"></i>
+                  </div>
+            </div>
+        </div>

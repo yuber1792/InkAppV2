@@ -1,0 +1,54 @@
+<ion-view view-title="{{'promociones' | translate}}" class="product-view">
+  <ion-content>
+
+  <div class="product-card-content"  ng-repeat="promocion in promociones" >
+      <div class="item item-image">
+        <pre-img ratio="_1_1" helper-class="main-image">
+          <img ng-src="{{promocion.imagen}}" spinner-on-load>
+        </pre-img>
+      </div>
+      <div class="item item-body">
+        <h3 class="product-title">{{promocion.nombre}}</h3>
+        <!--<div>
+          <p class="product-like"><i class="icon ion-heart"></i>Like</p>
+          <p class="likes"></i>837</p>
+        </div>
+        <p class="product-price" ng-click="showAddToCartPopup(product)">${{product.price}}</p>
+        -->
+      </div>
+      <div class="item item-body">
+        <p class="product-description">{{promocion.fecha}}</p>
+      </div>
+  </div>
+
+  <!--
+  <div ng-repeat="promocion in promociones" class="list card " >
+  <div class="item item-divider fondoRojo">
+   
+     </div>
+  <div class="item item-avatar fondo">
+    <img src="{{promocion.imagen}}">
+    <h2>{{promocion.nombre}}</h2>
+    <p>{{promocion.fecha}}</p>
+  </div>
+
+  <div class="item item-image">
+    <img src="{{promocion.imagen}}">
+  </div>
+
+  <div class="item item-body justificar fondo">
+    
+    <p>
+      {{promocion.descripcion}}
+    </p>
+    <!--<p>
+      <a href="#" class="subdued">1 Like</a>
+      <a href="#" class="subdued">5 Comments</a>
+    </p>-->
+  <!--</div>
+
+
+</div>-->
+
+  </ion-content>
+</ion-view>
