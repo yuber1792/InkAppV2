@@ -1,4 +1,4 @@
-<ion-side-menus  enable-menu-with-back-views="false" cache-view="false" >
+<ion-side-menus  ng-controller="indexController" enable-menu-with-back-views="false" cache-view="false" >
   <ion-side-menu-content  >
     <ion-nav-bar class="bar-dark" >
       <ion-nav-back-button>
@@ -11,9 +11,10 @@
         
 
       
-      <ion-nav-buttons side="right"    cache-view="false" >
+      <ion-nav-buttons side="right">
            
-          <button  ng-controller="indexController" ng-if="parseInt(loginData.login) == parseInt('1')" class="button button-icon button-clear ion-navicon" 
+      
+          <button  ng-if="loginData.login" class="button button-icon button-clear ion-navicon" 
                  menu-toggle="right" >
           </button>
     
@@ -36,7 +37,7 @@
         <!--<ion-item menu-close ng-click="login()">
           Login  
         </ion-item>-->
-    <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="irTab('artistas')">
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('artistas')">
           <i class="icon ion-ios-location icono"></i>
           {{"buscarArtistas" | translate}} 
     </ion-item>
@@ -76,7 +77,7 @@
          <i class="icon ion-medkit icono"></i>
             {{"recuperacion" | translate}}
         </ion-item>-->
-         <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="abrirLogin()">
+         <ion-item class="menuInkGps" menu-close ng-click="abrirLogin()">
          <i class="icon ion-person icono"></i>
             {{"loginUsuario" | translate}}
         </ion-item>
@@ -126,16 +127,16 @@
         <!--<ion-item menu-close ng-click="login()">
           Login  
         </ion-item>-->
-    <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="irTab('editarArtista')">
+    <ion-item class="menuInkGps" menu-close  ng-click="irTab('editarArtista')">
           <i class="icon ion-edit icono"></i>
           {{"editarPerfil" | translate}} 
     </ion-item>
-    <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="irTab('editarFotos')">
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('editarFotos')">
           <i class="icon ion-images icono"></i>
           {{"editarFotos" | translate}}
     </ion-item>
  
-          <ion-item class="menuInkGps" menu-close ng-click="irTab('eventos')">
+          <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
           <i class="icon ion-log-out icono"></i>
            {{"cerrarSesion" | translate}}
     </ion-item>

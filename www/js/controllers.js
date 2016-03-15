@@ -1173,9 +1173,9 @@ $scope.valorfiltro=true;
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.loginData = {};
-    $scope.loginData.login = 0;
+    $scope.loginData.login = false;
 
-    var idUsuarioLog = 0 ; 
+    var idUsuarioLog = true ; 
 
 
    $scope.abrirLoading = function() {
@@ -1228,6 +1228,10 @@ $scope.logueado = 0 ;
     window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
     window.localStorage.setItem('clave' ,  $scope.loginData.clave);
     $scope.loginData.login = 1;
+    idUsuarioLog = true; 
+     $scope.loginData.login = true;
+
+      console.log('Doing login', $scope.loginData);
 
     $scope.cerrarLogin();
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
@@ -1247,6 +1251,12 @@ $scope.logueado = 0 ;
     // code if using a login system
   
   };
+
+  $scope.cerrarSesion = function (){
+       $scope.loginData.login = false;
+       window.localStorage.setItem('usuario' , "");
+       window.localStorage.setItem('clave' ,  "");
+  }
 
 
 
