@@ -1173,7 +1173,7 @@ $scope.valorfiltro=true;
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.loginData = {};
-     $scope.loginData.login ="no";
+    $scope.loginData.login = 0;
 
     var idUsuarioLog = 0 ; 
 
@@ -1227,7 +1227,7 @@ $scope.logueado = 0 ;
     console.log('Doing login', $scope.loginData);
     window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
     window.localStorage.setItem('clave' ,  $scope.loginData.clave);
-    $scope.loginData.login="ok";  
+    $scope.loginData.login = 1;
 
     $scope.cerrarLogin();
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')

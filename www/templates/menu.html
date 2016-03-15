@@ -13,7 +13,7 @@
       
       <ion-nav-buttons side="right"    cache-view="false" >
            
-          <button   ng-if="loginData.login == 'ok'" class="button button-icon button-clear ion-navicon" 
+          <button  ng-controller="indexController" ng-if="parseInt(loginData.login) == parseInt('1')" class="button button-icon button-clear ion-navicon" 
                  menu-toggle="right" >
           </button>
     
@@ -80,10 +80,7 @@
          <i class="icon ion-person icono"></i>
             {{"loginUsuario" | translate}}
         </ion-item>
-        <ion-item class="menuInkGps"  ng-show="informacion.mostrarLogin" menu-close ng-controller="indexController" ng-click="abrirLogin()">
-         <i class="icon ion-person icono"></i>
-            sirve
-        </ion-item>
+     
 
  
         
