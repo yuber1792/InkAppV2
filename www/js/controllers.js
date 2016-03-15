@@ -4,7 +4,8 @@ angular.module('starter.controllers', [])
   Scopes.store('AppCtrl', $scope);
     $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+    
+
          $state.go('app.'+nombre);
 
     }
@@ -25,7 +26,7 @@ Scopes.store('BocetosController', $scope);
 
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+     
         $window.location.href  ='#/app/'+nombre;
 
     }
@@ -212,7 +213,7 @@ Scopes.store('IntroCtrl', $scope);
 
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+
          $state.go('app.'+nombre);
 
     }
@@ -240,7 +241,7 @@ Scopes.store('IntroCtrl', $scope);
 
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+       
          $state.go('app.'+nombre);
 
     }
@@ -288,7 +289,7 @@ $scope.valorfiltro=true;
   Scopes.store('PromocionesController', $scope);
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+
  $window.location.href  ='#/app/'+nombre;
 
     }
@@ -332,7 +333,7 @@ $scope.valorfiltro=true;
   Scopes.store('EventosController', $scope);
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+     
         $window.location.href  ='#/app/'+nombre;
 
     }
@@ -386,7 +387,8 @@ $scope.valorfiltro=true;
   Scopes.store('PublicidadController', $scope);
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+     
+
          $window.location.href  ='#/app/'+nombre;
 
     }
@@ -547,7 +549,8 @@ $scope.getContactList = function() {
 .controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup) {
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
-        console.log("entra");
+      
+
          $window.location.href  ='#/app/'+nombre;
 
     }
@@ -827,9 +830,12 @@ $scope.valorfiltro=true;
 
 .controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
       Scopes.store('editarArtistaController', $scope);
-      $scope.loginData = Scopes.get('indexController').loginData;
+      $scope.loginData = {};
+      $scope.loginData.usuario = window.localStorage.getItem("usuario");
+      $scope.loginData.clave = window.localStorage.getItem("clave");
       console.log("Entra a controlador  editar pefil ");
       console.log($scope.loginData);
+      $scope.artistaLogueado = {};
 
       $scope.selImagenPerfil= function() {
           
@@ -938,7 +944,7 @@ $scope.valorfiltro=true;
   $scope.selImages = function() {
     
     var options = {
-      quality: 50,
+      quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 200,
@@ -1056,6 +1062,8 @@ $scope.valorfiltro=true;
   };
       $scope.artistaLogueado = [];
   $scope.cargaServicio = function(){
+    console.log("Entra cargar Servicio " + $scope.loginData.usuario);
+    $scope.artistaLogueado = {};
     /*console.log('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas');
     $http.defaults.useXDomain = true;
     $http.get('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas')
@@ -1089,17 +1097,17 @@ $scope.valorfiltro=true;
       })
       .then(function(response){
       idUsuarioLog =   $stateParams.idParametro ; 
-        $scope.autentica();
+   
        // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
             $scope.resultadoArtistas  =  response.data ; 
             for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
              //console.log($scope.resultadoArtistas[i].id);
-                if(parseInt($scope.resultadoArtistas[i].id) === 174){
+                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($scope.loginData.usuario)){
                   //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
                     $scope.artistaLogueado = $scope.resultadoArtistas[i] ; 
                 }
             }
-
+          
       });
      /* $scope.artistaLogueado = 
                       {"direccion":"Zona rosa",
@@ -1131,6 +1139,8 @@ $scope.valorfiltro=true;
     console.log("nombre =>" + $scope.artistaLogueado.nombre);
 
   }
+
+   $scope.cargaServicio();
 
 })
 
@@ -1184,7 +1194,9 @@ $scope.logueado = 0 ;
   
 
     console.log('Doing login', $scope.loginData);
-    
+    window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
+    window.localStorage.setItem('clave' ,  $scope.loginData.clave);
+   
     $scope.cerrarLogin();
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
     .success(function(data, status, headers, config){
@@ -1275,10 +1287,10 @@ $scope.scrollTop = function() {//ng-click for back to top button
 //$window.location.href = '#/app/artistas';
 
     $scope.irTab =  function(nombre){
-         $window.location.href = '#/app/'+nombre;
+         //$window.location.href = '#/app/'+nombre;
         
 
-          //$state.go('app.'+nombre);
+          $state.go('app.'+nombre);
         
 
          
