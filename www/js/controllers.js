@@ -833,9 +833,24 @@ $scope.valorfiltro=true;
       $scope.loginData = {};
       $scope.loginData.usuario = window.localStorage.getItem("usuario");
       $scope.loginData.clave = window.localStorage.getItem("clave");
-      console.log("Entra a controlador  editar pefil ");
-      console.log($scope.loginData);
+      console.log("Entra a controlador  editar pefil state params  ");
+      console.log("State params usuario ==>"+$stateParams.usuario);
+      console.log("State params clave  ==>"+$stateParams.clave);
+
       $scope.artistaLogueado = {};
+        $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab editar "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
+
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else{
+
+           $state.go('app.'+nombre);
+         }
+     
+    }
 
       $scope.selImagenPerfil= function() {
           
@@ -1102,7 +1117,7 @@ $scope.valorfiltro=true;
             $scope.resultadoArtistas  =  response.data ; 
             for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
              //console.log($scope.resultadoArtistas[i].id);
-                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($scope.loginData.usuario)){
+                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($stateParams.usuario)){
                   //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
                     $scope.artistaLogueado = $scope.resultadoArtistas[i] ; 
                 }
@@ -1291,13 +1306,15 @@ $scope.scrollTop = function() {//ng-click for back to top button
     $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-          $state.go('app.'+nombre);
-        
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else{
 
-         
-
-
+           $state.go('app.'+nombre);
+         }
+     
     }
 
  

@@ -12,7 +12,7 @@
 
       
         <ion-nav-buttons side="right"  >
-        <a  ng-if="loginData.usuario === '123'"  class="button button-icon button-clear ion-navicon" menu-toggle="right" ng-click="select('SIRVIOINFO')">
+        <a    class="button button-icon button-clear ion-navicon" menu-toggle="right" ng-click="select('SIRVIOINFO')">
         </a>
       </ion-nav-buttons>
 
@@ -126,7 +126,7 @@
           <i class="icon ion-edit icono"></i>
           {{"editarPerfil" | translate}} 
     </ion-item>
-    <ion-item class="menuInkGps" menu-close ng-click="irTab('editarFotos')">
+    <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="irTab('editarFotos')">
           <i class="icon ion-images icono"></i>
           {{"editarFotos" | translate}}
     </ion-item>

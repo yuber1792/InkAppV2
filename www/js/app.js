@@ -606,20 +606,28 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       }
     })
       .state('app.editarArtista', {
-      url: "/editarArtista",
+      url: "/editarArtista/:usuario/:clave",
       views: {
         'menuContent': {
           templateUrl: "templates/editarArtista.html",
-          controller: 'editarArtistaController'
+          controller: 'editarArtistaController',
+          params: {
+                      usuario: null,
+                      clave:null
+                  }
         }
       }
     })
         .state('app.editarFotos', {
-      url: "/editarFotos",
+      url: "/editarFotos/:usuario/:clave",
       views: {
         'menuContent': {
           templateUrl: "templates/editarFotos.html",
-          controller: 'editarArtistaController'
+          controller: 'editarArtistaController',
+            params: {
+                      usuario: null,
+                      clave:null
+                  }
         }
       }
     })
