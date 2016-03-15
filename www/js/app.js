@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var db = null;
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services'])
 
 
 
@@ -610,7 +610,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       views: {
         'menuContent': {
           templateUrl: "templates/editarArtista.html",
-          controller: 'indexController'
+          controller: 'editarArtistaController'
         }
       }
     })
@@ -619,8 +619,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       views: {
         'menuContent': {
           templateUrl: "templates/editarFotos.html",
-          controller: 'indexController',
-          params:      {'idParametro': 213}
+          controller: 'editarArtistaController'
         }
       }
     })

@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes) {
+  Scopes.store('AppCtrl', $scope);
     $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -18,8 +19,8 @@ angular.module('starter.controllers', [])
   
 
 })
-.controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window) {
-
+.controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes) {
+Scopes.store('BocetosController', $scope);
 
 
   $scope.irTab =  function(nombre){
@@ -206,7 +207,9 @@ $scope.valorfiltro=true;
 
 
 })
-.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes) {
+Scopes.store('IntroCtrl', $scope);
+
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -232,7 +235,9 @@ $scope.valorfiltro=true;
 
 
 
-.controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state) {
+.controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes) {
+  Scopes.store('MultimediaController', $scope);
+
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -279,7 +284,8 @@ $scope.valorfiltro=true;
     })
   //alert("entra");
 })
-.controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window) {
+.controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes) {
+  Scopes.store('PromocionesController', $scope);
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -322,8 +328,8 @@ $scope.valorfiltro=true;
     })
   //alert("entra");
 })
-.controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state) {
-
+.controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes) {
+  Scopes.store('EventosController', $scope);
   $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -376,7 +382,8 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state) {
+.controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes) {
+  Scopes.store('PublicidadController', $scope);
    $scope.irTab =  function(nombre){
         // $window.location.href = '#/app/'+nombre;
         console.log("entra");
@@ -794,8 +801,8 @@ $scope.valorfiltro=true;
   ];
 })
 
-.controller('filtroCtrl', function($scope, $ionicModal,$http) {
- 
+.controller('filtroCtrl', function($scope, $ionicModal,$http,Scope) {
+  Scopes.store('filtroCtrl', $scope);
    $scope.valorfiltro=true;
       //ventana  fintros
     $ionicModal.fromTemplateUrl('./templates/filtro.html', {
@@ -818,21 +825,38 @@ $scope.valorfiltro=true;
    
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams) {
-   
-$scope.loginData = {};
-var idUsuarioLog = 0 ; 
+.controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+      Scopes.store('editarArtistaController', $scope);
+      $scope.loginData = Scopes.get('indexController').loginData;
+      console.log("Entra a controlador  editar pefil ");
+      console.log($scope.loginData);
 
-   $scope.abrirLoading = function() {
-    $ionicLoading.show({
-      template: 'Cargando...'
-    });
-  };
-  $scope.cerrarLoading = function(){
-    $ionicLoading.hide();
-  };
+      $scope.selImagenPerfil= function() {
+          
 
-/**********Editar fotos  ******************/
+          var options = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            targetWidth: 200,
+            targetHeight: 200
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageUri) {
+            console.log('img', imageUri);
+         
+            //$scope.images.push(imageUri);
+             $scope.artistaLogueado.imagen =  imageUri;
+                
+          }, function(err) {
+          // error
+          });
+
+      };
+
+
+
+      /**********Editar fotos  ******************/
 
   $scope.ready = false;
   $scope.images = [];
@@ -842,28 +866,7 @@ var idUsuarioLog = 0 ;
     if($rootScope.appReady.status) $scope.ready = true;
   });
   
-   $scope.selImagenPerfil= function() {
-    
-    
-    var options = {
-      quality: 100,
-      destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 200,
-      targetHeight: 200
-    };
-
-    $cordovaCamera.getPicture(options).then(function(imageUri) {
-      console.log('img', imageUri);
    
-      //$scope.images.push(imageUri);
-       $scope.artistaLogueado.imagen =  imageUri;
-          
-    }, function(err) {
-    // error
-    });
-
-  };
   $scope.selImagenTrabajos= function(index) {
     //alert("entra seleccionar foto " + index);
 
@@ -1051,67 +1054,7 @@ var idUsuarioLog = 0 ;
     $scope.showMap();
 
   };
-
-
-
-
-//eventos  wizard videos
-// Called to navigate to the main app
-  //$scope.startVideo = function() {
-  //  $state.go('app.videos');
- // };
-
-$scope.logueado = 0 ; 
- $scope.loginData.usuarioAutenticado = 0;
- console.log("valor inicial ==>"  + $scope.loginData.usuarioAutenticado  );
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modalLogin) {
-    $scope.modalLogin = modalLogin;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.cerrarLogin = function() {
-    $scope.modalLogin.hide();
-  };
-
-  // Open the login modal
-  $scope.abrirLogin = function() {
-    $scope.modalLogin.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.autentica = function() {
-
-  
-
-    console.log('Doing login', $scope.loginData);
-    $scope.loginData.usuarioAutenticado = 1;  
-    $scope.logueado = 1; 
-    console.log("luego del set ==> " + $scope.loginData.usuarioAutenticado);
-     
-     idUsuarioLog = $scope.loginData.username;
-     console.log("Valor de username ==>" + idUsuarioLog);
-    $scope.cerrarLogin();
-      /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
-    .success(function(data, status, headers, config){
-
-    })
-    .error(function(data, status, headers, config){
-      alert("**** Verificar conexion a internet ****");
-  
-    })
-    .then(function(response){
-      $scope.bocetos = response.data;
-      $scope.hide();
-    })*/
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-  
-  };
-    $scope.artistaLogueado = [];
+      $scope.artistaLogueado = [];
   $scope.cargaServicio = function(){
     /*console.log('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas');
     $http.defaults.useXDomain = true;
@@ -1147,10 +1090,10 @@ $scope.logueado = 0 ;
       .then(function(response){
       idUsuarioLog =   $stateParams.idParametro ; 
         $scope.autentica();
-        console.log("llama servicio usuario  id  ==>" + $scope.loginData);
+       // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
             $scope.resultadoArtistas  =  response.data ; 
             for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
-              console.log($scope.resultadoArtistas[i].id);
+             //console.log($scope.resultadoArtistas[i].id);
                 if(parseInt($scope.resultadoArtistas[i].id) === 174){
                   //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
                     $scope.artistaLogueado = $scope.resultadoArtistas[i] ; 
@@ -1188,6 +1131,79 @@ $scope.logueado = 0 ;
     console.log("nombre =>" + $scope.artistaLogueado.nombre);
 
   }
+
+})
+
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes) {
+    Scopes.store('indexController', $scope);
+$scope.loginData = {};
+var idUsuarioLog = 0 ; 
+
+   $scope.abrirLoading = function() {
+    $ionicLoading.show({
+      template: 'Cargando...'
+    });
+  };
+  $scope.cerrarLoading = function(){
+    $ionicLoading.hide();
+  };
+
+
+
+
+
+//eventos  wizard videos
+// Called to navigate to the main app
+  //$scope.startVideo = function() {
+  //  $state.go('app.videos');
+ // };
+
+$scope.logueado = 0 ; 
+
+ console.log("valor inicial ==>"  + $scope.loginData.usuarioAutenticado  );
+  // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+    scope: $scope
+  }).then(function(modalLogin) {
+    $scope.modalLogin = modalLogin;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.cerrarLogin = function() {
+    $scope.modalLogin.hide();
+  };
+
+  // Open the login modal
+  $scope.abrirLogin = function() {
+    $scope.modalLogin.show();
+  };
+
+  // Perform the login action when the user submits the login form
+  $scope.autentica = function() {
+
+  
+
+    console.log('Doing login', $scope.loginData);
+    
+    $scope.cerrarLogin();
+      /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
+    .success(function(data, status, headers, config){
+
+    })
+    .error(function(data, status, headers, config){
+      alert("**** Verificar conexion a internet ****");
+  
+    })
+    .then(function(response){
+      $scope.bocetos = response.data;
+      $scope.hide();
+    })*/
+
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+  
+  };
+
 
 
 
@@ -1259,10 +1275,10 @@ $scope.scrollTop = function() {//ng-click for back to top button
 //$window.location.href = '#/app/artistas';
 
     $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
+         $window.location.href = '#/app/'+nombre;
         
 
-          $state.go('app.'+nombre);
+          //$state.go('app.'+nombre);
         
 
          
