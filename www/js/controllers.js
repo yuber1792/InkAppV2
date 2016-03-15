@@ -1189,6 +1189,7 @@ $scope.logueado = 0 ;
   };
 
   // Perform the login action when the user submits the login form
+     $scope.mostrarLogin =false;
   $scope.autentica = function() {
 
   
@@ -1196,7 +1197,8 @@ $scope.logueado = 0 ;
     console.log('Doing login', $scope.loginData);
     window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
     window.localStorage.setItem('clave' ,  $scope.loginData.clave);
-   
+    $scope.mostrarLogin= true;
+    console.log("valor mostrar login" + $scope.mostrarLogin);
     $scope.cerrarLogin();
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
     .success(function(data, status, headers, config){

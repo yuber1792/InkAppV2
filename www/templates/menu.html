@@ -1,5 +1,5 @@
 <ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content ng-controller="indexController">
+  <ion-side-menu-content >
     <ion-nav-bar class="bar-dark" >
       <ion-nav-back-button>
       </ion-nav-back-button>
@@ -12,8 +12,8 @@
 
       
         <ion-nav-buttons side="right"  >
-        <button   class="button button-icon button-clear ion-navicon" menu-toggle="right" ng-click="select('SIRVIOINFO')">
-        </button>
+        <a  ng-if="loginData.usuario === '123'"  class="button button-icon button-clear ion-navicon" menu-toggle="right" ng-click="select('SIRVIOINFO')">
+        </a>
       </ion-nav-buttons>
 
   
@@ -69,10 +69,10 @@
          <i class="icon ion-medkit icono"></i>
             {{"recuperacion" | translate}}
         </ion-item>
-          <ion-item class="menuInkGps" menu-close ng-click="irTab('recuperacion')">
+         <!-- <ion-item class="menuInkGps" menu-close ng-click="irTab('recuperacion')">
          <i class="icon ion-medkit icono"></i>
             {{"recuperacion" | translate}}
-        </ion-item>
+        </ion-item>-->
          <ion-item class="menuInkGps" menu-close ng-controller="indexController" ng-click="abrirLogin()">
          <i class="icon ion-person icono"></i>
             {{"loginUsuario" | translate}}
