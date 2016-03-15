@@ -844,8 +844,8 @@ $scope.valorfiltro=true;
             quality: 100,
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            targetWidth: 200,
-            targetHeight: 200
+            targetWidth: 600,
+            targetHeight: 600
           };
 
           $cordovaCamera.getPicture(options).then(function(imageUri) {
@@ -880,8 +880,8 @@ $scope.valorfiltro=true;
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 200,
-      targetHeight: 200
+      targetWidth: 600,
+      targetHeight: 600
     };
 
     $cordovaCamera.getPicture(options).then(function(imageUri) {
@@ -905,8 +905,8 @@ $scope.valorfiltro=true;
             sourceType : Camera.PictureSourceType.CAMERA, 
             allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
+            targetWidth: 600,
+            targetHeight: 600,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true
         };
@@ -927,8 +927,8 @@ $scope.valorfiltro=true;
             sourceType : Camera.PictureSourceType.CAMERA, 
             allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
+            targetWidth:600,
+            targetHeight: 600,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true
         };
@@ -947,8 +947,8 @@ $scope.valorfiltro=true;
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 200,
-      targetHeight: 200
+      targetWidth: 600,
+      targetHeight: 600
     };
 
     $cordovaCamera.getPicture(options).then(function(imageUri) {
