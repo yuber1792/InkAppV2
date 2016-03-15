@@ -618,7 +618,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
         }
       }
     })
-        .state('app.editarFotos', {
+    .state('app.editarFotos', {
       url: "/editarFotos/:usuario/:clave",
       views: {
         'menuContent': {
