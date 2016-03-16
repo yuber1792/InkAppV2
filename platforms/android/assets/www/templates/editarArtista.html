@@ -1,0 +1,96 @@
+<ion-view  class="feed-view" view-title="{{'editarPerfil' | translate}}">
+
+
+      <ion-content ng-init="cargaServicio()" on-scroll="getScrollPosition()">   
+
+
+          <div class="list ">
+            
+             <label class="item item-stacked-label">
+              <center><span class="input-label letraBlanca">Foto de perfil</span><br></center>
+              <img  style="width: 100% ;" ng-src="{{artistaLogueado.imagen}}" />
+              
+        
+            </label>
+            <button id="2" class="button button-block" 
+                ng-click="selImagenPerfil()" >
+                     Seleccionar otra imagen
+              </button>
+
+            <button id="1" class="button button-block" ng-click="tomarFotoDePerfil()" >
+                     Tomar foto 
+              </button>
+      
+            
+     
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Nombre</span>
+              <input type="text" ng-model="artistaLogueado.nombre" style="width: 100%;" placeholder="">
+            </label>
+
+             <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Descripcion</span>
+               <textarea placeholder="{{item.type }} Description*" rows="1"  ng-model="artistaLogueado.descripcion" ng-Required="true"   style="width: 100%; height: 100%;"  name="description"></textarea>
+            </label>
+
+             <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Celular</span>
+              <input  ng-model="artistaLogueado.celular" type="text" style="width: 100%;" placeholder="">
+            </label>
+
+             <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Ciudad</span>
+              <input   ng-model="artistaLogueado.ciudad" type="text" style="width: 100%;" placeholder="John">
+            </label>
+
+             <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Direccion</span>
+              <input  ng-model="artistaLogueado.especialidad" ng-model="artistaLogueado.direccion" type="text"  style="width: 100%;" placeholder="John">
+            </label>
+
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Especialidad</span>
+              <input  ng-model="artistaLogueado.especialidad" type="text" style="width: 100%;" placeholder="John">
+            </label>
+
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Estudio</span>
+              <input  ng-model="artistaLogueado.estudio" type="text" style="width: 100%;" placeholder="John">
+            </label>
+
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Url facebook</span>
+              <input  ng-model="artistaLogueado.usuarioFacebook" type="text" style="width: 100%;" placeholder="John">
+            </label>
+
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Url instagram</span>
+              <input  ng-model="artistaLogueado.usuarioInstagram" type="text" style="width: 100%;" placeholder="John">
+            </label>
+
+             
+
+
+          <button class="button button-full button-stable  letraBlanca" ng-click="abrirUbicacion()">
+             Modificar ubicacion
+            </button>
+            
+              
+              
+
+            
+
+        
+          <button class="button button-full button-stable  letraBlanca" ng-click="cargaServicio()">
+             Guardar
+            </button>
+
+          </div>
+
+      </ion-content>
+      
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

@@ -1,0 +1,22 @@
+<div class="modal">
+  
+
+
+      <ion-header-bar class="bar-stable bar-dark">
+        <h1 class="title">Ink Gps</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="cerrarArtistas()">Cerrar</button>
+        </div>
+      </ion-header-bar>
+      <ion-content>   
+        <div class="list">
+           <a ng-repeat="artista in artistas" class="item item-thumbnail-left"  style="  background-color: yellow;" ng-click="cargarSeleccionado($index)" >
+             <img src="{{artista.imagen}}">
+             <h2>{{artista.nombre}}</h2>
+             <p>{{artista.especialidad}}</p>
+          </a>
+        </div>
+      </ion-content>
+
+  
+</div>

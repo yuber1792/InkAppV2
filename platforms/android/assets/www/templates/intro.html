@@ -1,0 +1,229 @@
+<ion-view view-title="InkGps">
+
+        <ion-nav-buttons side="left">
+          <!--  <button class="button button-assertive button-clear no-animation"
+                  ng-click="startApp()" ng-if="!slideIndex">
+            Skip Intro
+          </button>
+        <button class="button button-assertive button-clear no-animation"
+                  ng-click="previous()" ng-if="slideIndex > 0">
+            atras
+          </button>-->
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right"> 
+          <button class="button button-clear no-animation ion-android-arrow-forward button-icon"
+                  ng-click="next()" ng-if="slideIndex != 10">
+            
+          </button>
+          <button class="button  button-clear no-animation"
+                  ng-click="startApp()" ng-if="slideIndex == 10">
+            Finalizar
+          </button>
+        </ion-nav-buttons>
+        <ion-slide-box disable-scroll="true" on-slide-changed="slideChanged(index)" ng-click="next()" ng-if="slideIndex != 11">
+
+
+       
+
+
+
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Menu</h3>
+            <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/menu_tutorial.jpg">
+                      <p>
+                        El opción "Menú" te mostrará los diferentes ítems que componen la aplicación.
+                      </p>
+    
+              </div>
+            </div>
+            
+            </ion-content>
+          </ion-slide>
+
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Buscar artistas</h3>
+               <div class="list card">
+                  <div class="item item-body justificar">
+                      <img class="full-image" src="./img/ayuda/buscar_artistas_tutorial.jpg">
+                          <p>
+                             En el ítem "Buscar artistas" InkGps te mostrará los mejores artistas  para que puedas ver su portafólio, teléfono, ubicación, redes sociales etc.
+                          </p>
+                      <img class="full-image" src="./img/ayuda/boton_filtrar_tutorial.jpg">
+                          <p>
+                            Presiona el botón filtrar para habilitar las diferentes opciones para encontrar el artista que buscas , podrás  indicar la ciudad, el estilo que más te gusta, y con esta información tendrás un resultado preciso de lo que buscas.
+                          </p>
+                   </div>
+                </div>          
+            </ion-content>
+          </ion-slide>
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Estilos</h3>
+              <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/estilos_tutorial.jpg">
+                      <p>
+                        ¿No sabes que tatuarte? Seleccionando la opción “Estilos” encontrarás información clara sobre la amplia gama de los diferentes estilos que existen.
+
+                        <br>
+                        Entre los mas conocidos encontraras:
+                        <br>
+                        <br>
+                        -Nueva escuela<br>
+                        -Vieja escuela<br>
+                        -Neotracional<br>
+                        -Realismo<br>
+                        y muchos mas.
+                      </p>
+    
+              </div>
+            </div>
+            
+
+            </ion-content>
+          </ion-slide>
+
+           <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Eventos</h3>
+            <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/eventos_tutorial.jpg">
+                      <p>
+                          ¿Eres de los que no les gusta perderse ningún evento del tatuaje?, en la opción "Eventos",  InkGps te cuenta cuales son los eventos que se realizarán en las diferentes ciudades de Colombia. 
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+
+           <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Multimedia & Streaming</h3>
+              <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/multimedia_tutorial.jpg">
+                      <p>
+                           Aqui podrás ver las transmiciones en directo que realizaremos en los eventos, también encontrarás  videos  y contenido multimedia  relacionado con el mundo del  
+                           tatuaje.
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+
+      
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Promociones</h3>
+             <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/promociones_tutorial.jpg">
+                      <p>
+                        Aquí encontrarás las diferentes promociones que ofrece cada artista, si te interesan no dudes en contactarte con alguno de ellos.
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Bocetos</h3>
+             <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/bocetos_tutorial.jpg">
+                      <p>
+                        También te mostramos los diseños propios de los artistas, son una excelente opción cuando  no sabes que tatuarte.
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+           <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Tipos de procedimientos</h3>
+             <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/procedimientos_tutorial.jpg">
+                      <p>
+                        Aqui podrás encontrar los diferentes procedimientos que existen relacionados con el tatuaje, si te gusta un tatuaje normal, un coverup, una remoción o si definitivamente te gusta una escarificación, InkGps te explica cada uno.
+                      </p>
+    
+              </div>
+            </div>
+            
+            </ion-content>
+          </ion-slide>
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Recuperación</h3>
+             <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/recuperacion_tutorial.jpg">
+                      <p>
+                        Para que tengas un excelente tatuaje, debes tener en cuenta la recuperación del mismo, en la opción "Recuperación" te explicamos lo fácil que es cuidar tu tatuaje mientras termina de curarse.
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+          <ion-slide>
+            <ion-content>
+            <br>
+             <h3>Dolimetro</h3>
+             <div class="list card">
+              <div class="item item-body justificar">
+                  <img class="full-image" src="./img/ayuda/dolimentro_tutorial.jpg">
+                      <p>
+                        Seleccionando la opción “Dolímetro” encontrarás un mapa de intensidad de dolor en las diferentes partes del cuerpo, según tu género.
+
+                        Pero recuerda que cada persona puede tener un mayor o menor umbral del dolor.
+                      </p>
+    
+              </div>
+            </div>
+             
+            </ion-content>
+          </ion-slide>
+
+            <ion-slide>
+                <ion-content>
+                  <br>
+                    <h3>Gracias</h3>
+                    <div id="logo" class="image item-image">
+                      <img src="./img/ayuda/calca_inkgps.jpg">
+                    </div>
+                  <p>
+                      INKGPS la mejor forma de conectarte con el mundo del tatuaje.
+                  </p>
+                  
+                </ion-content>
+          </ion-slide>
+
+
+
+        </ion-slide-box>
+      </ion-view>

@@ -1,0 +1,36 @@
+<div class="modal" >
+
+    
+      <ion-header-bar class="bar-stable bar-dark">
+    
+        <h1 class="title arriba"> <img src="./img/inkgps_banner_logo_blanco.png" width="30%" height="80%"></h1>
+         <div class="buttons">
+              <button class="button button-icon button-clear ion-ios-checkmark-outline"  ng-click="closeRegla()"></button>
+        </div>
+
+      </ion-header-bar>
+  
+       
+  <ion-content>
+
+  <div class="list">
+       
+
+  <label ng-repeat="reg in regla"  class="item item-radio">
+    <input type="radio" style="height:1cm;" ng-model="valorRegla.val" value="{{reg}}" name="group">
+    <div class="item-content">
+     {{reg}} cm
+    </div>
+    <i class="radio-icon ion-checkmark"></i>
+  </label>
+
+  
+
+</div>
+
+
+
+
+  </ion-content>
+
+</div>

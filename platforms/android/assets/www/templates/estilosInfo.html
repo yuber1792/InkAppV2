@@ -1,0 +1,18 @@
+<ion-view view-title="estilosInfo">
+  <ion-content>
+  	 <!--<div class="list">
+           <a ng-repeat="estilo in estilos" class="item item-thumbnail-left"  href="#/app/playList/{{estilo.id}}" >
+             <img src="./img/{{estilo.imagen}}">
+             <h2>{{estilo.title}}</h2>
+           
+          </a>
+        </div>-->
+
+   <ion-list>
+      <ion-item ng-repeat="estilo in estilos" href="#/app/playList/{{estilo.id}}">
+        {{estilo.title}}
+          <img src="./img/{{estilo.imagen}}">
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

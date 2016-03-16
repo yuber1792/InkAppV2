@@ -1,0 +1,148 @@
+<ion-side-menus  ng-controller="indexController" enable-menu-with-back-views="false" cache-view="false" >
+  <ion-side-menu-content  >
+    <ion-nav-bar class="bar-dark" >
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="select('SIRVIOINFO')">
+        </button>
+      </ion-nav-buttons>
+     
+        
+
+      
+      <ion-nav-buttons side="right">
+           
+      
+          <button  ng-if="loginData.login" class="button button-icon button-clear ion-navicon" 
+                 menu-toggle="right" >
+          </button>
+    
+      </ion-nav-buttons>
+
+  
+     <!-- <ion-nav-buttons side="right"  >
+        <a ng-show="valorfiltro" class="button button-icon button-clear ion-funnel iconoFiltro" ng-click="openFiltro()" >
+
+        </a>
+        
+      </ion-nav-buttons>-->
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="left"  >
+    <ion-content class="fo" >
+    <br>
+      <ion-list class="dark">
+        <!--<ion-item menu-close ng-click="login()">
+          Login  
+        </ion-item>-->
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('artistas')">
+          <i class="icon ion-ios-location icono"></i>
+          {{"buscarArtistas" | translate}} 
+    </ion-item>
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('playlists')">
+          <i class="icon ion-android-color-palette icono"></i>
+          {{"estilosTatuaje" | translate}}
+    </ion-item>
+          <ion-item class="menuInkGps" menu-close ng-click="irTab('eventos')">
+          <i class="icon ion-earth icono"></i>
+           {{"Eventos" | translate}}
+          </ion-item>
+       <!--  <ion-item menu-close href="#/app/multimedia">
+         <i class="icon ion-videocamera icono"></i>
+            {{"multimedia" | translate}}
+        </ion-item>-->
+         <ion-item class="menuInkGps" menu-close ng-click="irTab('publicidad')">
+          <i class="icon ion-home icono"></i>
+            {{"estudios" | translate}}
+        </ion-item>
+       <ion-item class="menuInkGps" menu-close ng-click="irTab('promociones')">
+          <i class="icon ion-android-bulb icono"></i>
+            {{"promociones" | translate}}
+        </ion-item>
+          <ion-item class="menuInkGps"  menu-close ng-click="irTab('bocetos')">
+          <i class="icon ion-paintbrush icono"></i>
+            {{"bocetos" | translate}}
+        </ion-item>
+          <ion-item class="menuInkGps" menu-close ng-click="irTab('tipoProcedimiento')">
+         <i class="icon ion-ios-gear icono"></i>
+          {{"procedimientos" | translate}}
+        </ion-item>
+          <ion-item class="menuInkGps" menu-close ng-click="irTab('recuperacion')">
+         <i class="icon ion-medkit icono"></i>
+            {{"recuperacion" | translate}}
+        </ion-item>
+         <!-- <ion-item class="menuInkGps" menu-close ng-click="irTab('recuperacion')">
+         <i class="icon ion-medkit icono"></i>
+            {{"recuperacion" | translate}}
+        </ion-item>-->
+         <ion-item class="menuInkGps" menu-close ng-click="abrirLogin()">
+         <i class="icon ion-person icono"></i>
+            {{"loginUsuario" | translate}}
+        </ion-item>
+     
+
+ 
+        
+<!--
+        <ion-item menu-close href="#/app/browse">
+         <i class="icon ion-ios-eye icono"></i>
+          {{"dolimetro" | translate}}
+        </ion-item>
+       -->
+      
+        
+        
+       <!-- <ion-item menu-close href="#/app/ayuda">
+         <i class="icon ion-ios-lightbulb icono"></i>
+           {{"ayuda" | translate}}
+        </ion-item>-->
+
+         <ion-item class="menuInkGps"  menu-close ng-click="irTab('denunciar')">
+         <i class="icon ion-android-warning icono"></i>
+          {{"denunciar" | translate}}
+        </ion-item>
+        <!--ion-item menu-close href="#/app/push">
+         <i class="icon ion-ios-lightbulb icono"></i>
+          push
+        </ion-item-->
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+
+
+
+
+
+
+
+
+
+  <!-- menu de  artista  logueado   -->
+  <ion-side-menu side="right"  >
+    <ion-content class="fo" >
+    <br>
+      <ion-list class="dark">
+        <!--<ion-item menu-close ng-click="login()">
+          Login  
+        </ion-item>-->
+    <ion-item class="menuInkGps" menu-close  ng-click="irTab('editarArtista')">
+          <i class="icon ion-edit icono"></i>
+          {{"editarPerfil" | translate}} 
+    </ion-item>
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('editarFotos')">
+          <i class="icon ion-images icono"></i>
+          {{"editarFotos" | translate}}
+    </ion-item>
+ 
+          <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
+          <i class="icon ion-log-out icono"></i>
+           {{"cerrarSesion" | translate}}
+    </ion-item>
+   
+      </ion-list>
+    </ion-content>
+
+  </ion-side-menu>
+</ion-side-menus>
