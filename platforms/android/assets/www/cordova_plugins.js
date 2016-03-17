@@ -72,8 +72,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.1.0",
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-camera": "2.1.1",
-    "cordova-plugin-extension": "1.3.0",
-    "cordova-plugin-admobpro": "2.12.3"
-};
+    "cordova-plugin-admobpro": "2.12.3",
+    "cordova-plugin-extension": "1.3.0"
+}
 // BOTTOM OF METADATA
 });

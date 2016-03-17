@@ -1169,7 +1169,7 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
@@ -1195,6 +1195,21 @@ $scope.valorfiltro=true;
       //  alert("version =>" +version);
 
         }, false);
+
+
+    $scope.compartir = function(){
+      alert("entre");
+        $cordovaSocialSharing
+          .shareViaFacebook("!!!", image, link)
+          .then(function(result) {
+            alert("Paso");
+            alert(result);
+          }, function(err) {
+            alert("no paso");
+            alert(err);
+            // An error occurred. Show a message to the user
+          });
+    }
   
 
     $scope.loginData = {};
