@@ -1342,6 +1342,19 @@ $ionicModal.fromTemplateUrl('./templates/videoArtista.html', {
     };
 
 
+     // An alert dialog
+ $scope.ventanaLoginIncorrecto = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Login incorrecto',
+     template: 'El id de usuario o clave son invalidos.'
+   });
+
+   alertPopup.then(function(res) {
+     console.log('Thank you for not eating my delicious ice cream cone');
+   });
+ };
+
+
 
 //abrir url de manera segura
  $scope.trustSrc = function(src) {
