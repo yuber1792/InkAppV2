@@ -1125,7 +1125,7 @@ $scope.valorfiltro=true;
                       "usuarioTwitter":"false",
                       "celular":"+573133599185"} ;*/
     console.log($scope.artistaLogueado);
-    console.log("nombre =>" + $scope.artistaLogueado.nombre);
+    //console.log("nombre =>" + $scope.artistaLogueado.nombre);
 
   }
 
@@ -1133,13 +1133,14 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
     $scope.artistaLogueado = {};
-    document.addEventListener("deviceready", function () {
+    
 
+    document.addEventListener("deviceready", function () {
         var device = $cordovaDevice.getDevice();
         var cordova = $cordovaDevice.getCordova();
         var model = $cordovaDevice.getModel();
@@ -1161,24 +1162,44 @@ $scope.valorfiltro=true;
 
         }, false);
 
+ 
 
-    $scope.compartir = function(){
-      alert("entre");
-        $cordovaSocialSharing
-          .shareViaFacebook("!!!", image, link)
-          .then(function(result) {
-            alert("Paso");
-            alert(result);
+
+
+
+    $scope.compartir = function(imagen){
+    console.log("inicia");
+         /*$cordovaSocialSharing
+          .shareViaFacebook("Artista", imagen, "link")
+          .then(function(result) {          
+           
           }, function(err) {
-            alert("no paso");
+            alert("Se a presentado un error !!!");
             alert(err);
             // An error occurred. Show a message to the user
-          });
+          });*/
+        $cordovaScreenshot.capture()
+             .then(function(result) {
+              alert("resultado " + result);
+                  //on success you get the image url
+                    $cordovaSocialSharing
+                    .shareViaFacebook("Artista", imagen, "link")
+                        .then(function(result) {          
+                 
+                         }, function(err) {
+                          alert("Se a presentado un error !!!");
+                          alert(err);
+                  // An error occurred. Show a message to the user
+                        });
+               
+             }, function(err) {
+                 console.log("there was an error taking a a screenshot!");
+        });
     }
   
 
     $scope.loginData = {};
-    $scope.loginData.login = true;
+    $scope.loginData.login = false;
   console.log("valor usuario " + window.localStorage.getItem('usuario'));
     if( window.localStorage.getItem('usuario') === "" || 
          window.localStorage.getItem('clave') === "" 
@@ -1188,6 +1209,7 @@ $scope.valorfiltro=true;
           }
           else{
            $rootScope.artistaLogueado = window.localStorage.getItem('artistaLogueado');
+           $scope.loginData.login = true;
 
           }
 

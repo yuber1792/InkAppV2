@@ -843,11 +843,20 @@ $scope.valorfiltro=true;
       $scope.loginData = {};
       $scope.loginData.usuario = window.localStorage.getItem("usuario");
       $scope.loginData.clave = window.localStorage.getItem("clave");
-      console.log("Entra a controlador  editar pefil state params  ");
-      console.log("State params usuario ==>"+$stateParams.usuario);
-      console.log("State params clave  ==>"+$stateParams.clave);
+      console.log("valor");
+      console.log(angular.toJson(window.localStorage.getItem('artistaLogueado')));
 
-      $scope.artistaLogueado = {};
+
+     // $scope.artistaLogueado = {};
+
+    
+      $scope.artistaLogueado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
+     
+      
+      console.log("artista loguado");
+      console.log($scope.artistaLogueado);
+
+
         $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
@@ -1085,55 +1094,10 @@ $scope.valorfiltro=true;
     $scope.showMap();
 
   };
-      $scope.artistaLogueado = [];
+    
   $scope.cargaServicio = function(){
     console.log("Entra cargar Servicio " + $scope.loginData.usuario);
-    $scope.artistaLogueado = {};
-    /*console.log('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas');
-    $http.defaults.useXDomain = true;
-    $http.get('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas')
-      .success(function(data, status, headers, config){
-      //alert("**** SUCCESS ****");
-     // alert(status);
-      })
-      .error(function(data, status, headers, config){
-      //alert("**** Verificar conexion a internet ****");
-     // alert(status);
-     // alert(angular.toJson(data))
-     console.log("No correcto");
-      })
-      .then(function(response){
-
-        console.log("correcto");
-        $scope.ArtistaLogueado = response.data ; 
-            console.log(response.data);
-      });  */
-       $http.defaults.useXDomain = true;
-
-      $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-      .success(function(data, status, headers, config){
-      //alert("**** SUCCESS ****");
-     // alert(status);
-      })
-      .error(function(data, status, headers, config){
-      //alert("**** Verificar conexion a internet ****");
-     // alert(status);
-     // alert(angular.toJson(data))
-      })
-      .then(function(response){
-      idUsuarioLog =   $stateParams.idParametro ; 
    
-       // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
-            $scope.resultadoArtistas  =  response.data ; 
-            for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
-             //console.log($scope.resultadoArtistas[i].id);
-                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($stateParams.usuario)){
-                  //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
-                    $scope.artistaLogueado = $scope.resultadoArtistas[i] ; 
-                }
-            }
-          
-      });
      /* $scope.artistaLogueado = 
                       {"direccion":"Zona rosa",
                       "ciudad":"Bogotá",
@@ -1161,7 +1125,7 @@ $scope.valorfiltro=true;
                       "usuarioTwitter":"false",
                       "celular":"+573133599185"} ;*/
     console.log($scope.artistaLogueado);
-    console.log("nombre =>" + $scope.artistaLogueado.nombre);
+    //console.log("nombre =>" + $scope.artistaLogueado.nombre);
 
   }
 
@@ -1169,12 +1133,14 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
-    document.addEventListener("deviceready", function () {
+    $scope.artistaLogueado = {};
+    
 
+    document.addEventListener("deviceready", function () {
         var device = $cordovaDevice.getDevice();
         var cordova = $cordovaDevice.getCordova();
         var model = $cordovaDevice.getModel();
@@ -1196,24 +1162,56 @@ $scope.valorfiltro=true;
 
         }, false);
 
+ 
 
-    $scope.compartir = function(){
-      alert("entre");
-        $cordovaSocialSharing
-          .shareViaFacebook("!!!", image, link)
-          .then(function(result) {
-            alert("Paso");
-            alert(result);
+
+
+
+    $scope.compartir = function(imagen){
+    console.log("inicia");
+         /*$cordovaSocialSharing
+          .shareViaFacebook("Artista", imagen, "link")
+          .then(function(result) {          
+           
           }, function(err) {
-            alert("no paso");
+            alert("Se a presentado un error !!!");
             alert(err);
             // An error occurred. Show a message to the user
-          });
+          });*/
+        $cordovaScreenshot.capture()
+             .then(function(result) {
+              alert("resultado " + result);
+                  //on success you get the image url
+                    $cordovaSocialSharing
+                    .shareViaFacebook("Artista", imagen, "link")
+                        .then(function(result) {          
+                 
+                         }, function(err) {
+                          alert("Se a presentado un error !!!");
+                          alert(err);
+                  // An error occurred. Show a message to the user
+                        });
+               
+             }, function(err) {
+                 console.log("there was an error taking a a screenshot!");
+        });
     }
   
 
     $scope.loginData = {};
     $scope.loginData.login = false;
+  console.log("valor usuario " + window.localStorage.getItem('usuario'));
+    if( window.localStorage.getItem('usuario') === "" || 
+         window.localStorage.getItem('clave') === "" 
+          ){
+            $scope.loginData.login = false;
+           
+          }
+          else{
+           $rootScope.artistaLogueado = window.localStorage.getItem('artistaLogueado');
+           $scope.loginData.login = true;
+
+          }
 
     var idUsuarioLog = true ; 
 
@@ -1257,23 +1255,103 @@ $scope.logueado = 0 ;
     $scope.modalLogin.show();
   };
 
+   // An alert dialog
+ $scope.loginIncorrectoMensaje = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'Login incorrecto',
+       buttons: [
+                       
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                  console.log("ok");
+                                  //return scope.data.response;
+
+                              }
+                        }
+                        ]
+   });
+
+   alertPopup.then(function(res) {
+     console.log('cierra mensaje');
+   });
+ };
+
+
   // Perform the login action when the user submits the login form
   $scope.informacion={};
   $scope.informacion.mostrarLogin =false;
   $scope.autentica = function() {
 
+     
+    /*console.log('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas');
+    $http.defaults.useXDomain = true;
+    $http.get('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas')
+      .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+      })
+      .error(function(data, status, headers, config){
+      //alert("**** Verificar conexion a internet ****");
+     // alert(status);
+     // alert(angular.toJson(data))
+     console.log("No correcto");
+      })
+      .then(function(response){
+
+        console.log("correcto");
+        $scope.ArtistaLogueado = response.data ; 
+            console.log(response.data);
+      });  */
+       $http.defaults.useXDomain = true;
+
+      $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+      .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+      })
+      .error(function(data, status, headers, config){
+      //alert("**** Verificar conexion a internet ****");
+     // alert(status);
+     // alert(angular.toJson(data))
+      })
+      .then(function(response){
+      idUsuarioLog =   $stateParams.idParametro ; 
+   
+       // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
+            $scope.resultadoArtistas  =  response.data ; 
+            for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
+             //console.log($scope.resultadoArtistas[i].id);
+                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($scope.loginData.usuario)){
+                  //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
+                    $rootScope.artistaLogueado = $scope.resultadoArtistas[i] ; 
+
+                      console.log('Doing login', $scope.loginData);
+                      window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
+                      window.localStorage.setItem('clave' ,  $scope.loginData.clave);
+                      window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
+                      $scope.loginData.login = 1;
+                      idUsuarioLog = true; 
+                      $scope.loginData.login = true;
+
+                      console.log('Doing login', $scope.loginData);
+
+                      $scope.cerrarLogin();
+                      return;
+                }
+            }
+            $scope.loginIncorrectoMensaje();
+          
+      });
+
   
 
-    console.log('Doing login', $scope.loginData);
-    window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
-    window.localStorage.setItem('clave' ,  $scope.loginData.clave);
-    $scope.loginData.login = 1;
-    idUsuarioLog = true; 
-     $scope.loginData.login = true;
-
-      console.log('Doing login', $scope.loginData);
-
-    $scope.cerrarLogin();
+   
       /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
     .success(function(data, status, headers, config){
 
@@ -1296,6 +1374,7 @@ $scope.logueado = 0 ;
        $scope.loginData.login = false;
        window.localStorage.setItem('usuario' , "");
        window.localStorage.setItem('clave' ,  "");
+        window.localStorage.setItem('artistaLogueado' ,  "");
        $state.go("app.artistas");
   }
 

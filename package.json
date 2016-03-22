@@ -31,7 +31,9 @@
     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
     "org.apache.cordova.camera",
     "org.apache.cordova.inappbrowser",
-    "cordova-plugin-x-socialsharing"
+    "cordova-plugin-x-socialsharing",
+    "cordova-plugin-media-capture",
+    "https://github.com/gitawego/cordova-screenshot.git"
   ],
   "cordovaPlatforms": [
     "ios",
