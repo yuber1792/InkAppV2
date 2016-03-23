@@ -1178,7 +1178,8 @@ $scope.valorfiltro=true;
             alert(err);
             // An error occurred. Show a message to the user
           });*/
-        $cordovaScreenshot.capture()
+      
+      /*  $cordovaScreenshot.capture()
              .then(function(result) {
               alert("resultado " + result);
                   //on success you get the image url
@@ -1194,8 +1195,21 @@ $scope.valorfiltro=true;
                
              }, function(err) {
                  console.log("there was an error taking a a screenshot!");
+        });*/
+
+         $cordovaSocialSharing
+        .shareViaEmail("Mensaje de prueba solcicitus de  cita ", "Alguien solicito una cita ", "contactoinkgps@gmail.com", null, null, imagen)
+        .then(function(result) {
+          alert("sirvio");
+          // Success!
+        }, function(err) {
+          alert("fallo");
+          // An error occurred. Show a message to the user
         });
     }
+
+   
+  
   
 
     $scope.loginData = {};
