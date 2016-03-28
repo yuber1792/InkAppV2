@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
         "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
@@ -19,10 +22,13 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
-        "cordova-plugin-extension": {
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
         "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
         "cordova-plugin-splashscreen": {
@@ -34,15 +40,36 @@
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
-        "cordova-plugin-media-capture": {
+        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         },
         "com.darktalker.cordova.screenshot": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "com.jcjee.plugins.emailcomposer": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         }
     },
     "dependent_plugins": {
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "ionic-plugin-deploy": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "mobi.moica.whatsapp": {
+            "PACKAGE_NAME": "com.ionicframework.inkgps563349"
+        },
+        "org.apache.cordova.contacts": {
             "PACKAGE_NAME": "com.ionicframework.inkgps563349"
         }
     }

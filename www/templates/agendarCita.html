@@ -1,0 +1,165 @@
+<ion-view  class="feed-view" view-title="{{'agregarCita' | translate}}">
+      <ion-header-bar class="transparente">
+        <!--<div class="buttons">
+            <button class="button button-icon button-clear ion-navicon" ng-click="closeInfoPublicidad()"></button>
+        </div>-->
+        <!--<h1 class="title">{{publicidadSeleccionada.nombre}}</h1>-->
+         <div class="buttons">
+            <button class="button button-icon button-clear  ion-arrow-left-c" style="color: white;" ng-click="cerrarAgendarCita()"></button>
+        </div>
+      </ion-header-bar>
+
+      <ion-content  on-scroll="getScrollPosition()">   
+
+
+          <div class="list ">
+            
+         
+            
+     
+            <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Tu nombre*</span>
+              <input type="text" ng-model="agendarCitaData.nombre" style="width: 100%;" placeholder="">
+            </label>
+             <label class="item item-stacked-label">
+                 <span class="input-label letraBlanca">Tipo de procedimiento</span>
+                <ion-list>
+                  <ion-radio style="font-size: 10pt;" ng-model="agendarCitaData.tipoProcedimiento" ng-repeat="data in tiposProcedimientoCita" ng-value="data.value">{{data.text}}</ion-radio>
+               
+                </ion-list>
+             </label>
+             <div ng-if="agendarCitaData.tipoProcedimiento == 'Modificacion corporal'">
+                         <label class="item fondoFeed">
+                            <label class="item item-input item-select">
+                                    <div class="input-label">
+                                        {{"zona" | translate}} 
+                                    </div>
+                                    <select ng-model="agendarCitaData.zonaModificacion">
+                                
+                                          <option>Cara</option>
+                                          <option>Oreja</option>
+                                          <option>Lengua</option>
+                                          <option selected>Labios</option>
+                                          <option>genitales</option>
+                                          <option>tetillas</option>
+                                          <option>Cabeza</option>
+                                          <option>Cuello</option>
+                                          <option>Espalda</option>
+                                          <option >Hombro</option>
+                                          <option>Pecho</option>
+                                          <option>Brazo</option>
+                                          <option>Antebrazo</option>
+                                          <option>Mano</option>
+                                          <option>Abdomen</option>
+                                           <option>Costillas</option>
+                                          <option>Ingle</option>
+                                          <option>Pierna</option>
+                                           <option>Rodilla</option>
+                                            <option>Pantorrilla</option>
+                                             <option>Pie</option>
+                                </select>
+                          </label>
+                        </label>
+
+                         <label class="item fondoFeed">
+                            <label class="item item-input item-select">
+                                    <div class="input-label">
+                                        Tipo procedimiento
+                                    </div>
+                                    <select ng-model="agendarCitaData.tipoModificacion">
+                                
+                                          <option>Escarificación</option>
+                                          <option>Piercing</option>
+                                          <option>Bifurcacion lengua</option>
+                                          <option selected>Microdermal</option>
+                                          <option>Reconstruccion de lobulo</option>
+                                         
+                                </select>
+                          </label>
+                        </label>
+
+             </div>
+             <div ng-if="agendarCitaData.tipoProcedimiento != 'Modificacion corporal'">
+               
+
+         
+             <label class="item fondoFeed " >
+              <div class="input-label letraBlanca">
+                  {{"ancho" | translate}} 
+              </div>
+              <input type="button" value="{{'regla' | translate}} " class="button button-assertive" style="float:right; clear:both;" ng-click="openReglaAgenda(1)"/>
+              <div class="list">
+
+                <div class="item range range-assertive">
+                  <i class="icon ion-ios-minus-outline"></i>
+                  <input type="range" ng-model="agendarCitaData.ancho" name="volume" min="0" max="50" value="10">
+                  <i class="icon ion-ios-plus-outline"></i>
+                   
+                  {{agendarCitaData.ancho}}
+                </div>
+              </div>
+
+          </label>
+
+           <label class="item fondoFeed">
+              <div class="input-label letraBlanca">
+                   {{"alto" | translate}} 
+              </div>
+               <input type="button" value="{{'regla' | translate}}" class="button button-assertive" style="float:right; clear:both; height: 100%" ng-click="openReglaAgenda(2)"/>
+              <div class="list">
+                <div class="item range range-assertive">
+                  <i class="icon ion-ios-minus-outline"></i>
+                  <input type="range" ng-model="agendarCitaData.alto" name="volume" min="0" max="50" value="10">
+                  <i class="icon ion-ios-plus-outline"></i>
+                  {{agendarCitaData.alto}}
+                </div>
+              </div>
+          </label>
+           <label class="item fondoFeed">
+            <label class="item item-input item-select">
+                    <div class="input-label">
+                        {{"zona" | translate}} 
+                    </div>
+                    <select ng-model="agendarCitaData.zona">
+                 <option>Cabeza</option>
+                  <option>Cara</option>
+                  <option>Cuello</option>
+                  <option>Espalda</option>
+                  <option selected>Hombro</option>
+                  <option>Pecho</option>
+                  <option>Brazo</option>
+                  <option>Antebrazo</option>
+                  <option>Mano</option>
+                  <option>Abdomen</option>
+                   <option>Costillas</option>
+                  <option>Ingle</option>
+                  <option>Pierna</option>
+                   <option>Rodilla</option>
+                    <option>Pantorrilla</option>
+                     <option>Pie</option>
+                </select>
+          </label>
+          </label>
+        </div>
+          <label class="item item-stacked-label">
+                 <button id="2" class="button button-block" 
+                        ng-click="selImagenAgendarCita()" >
+                             Adjuntar imagen 
+                  </button>
+          </label>
+           <img  style="width: 100% ;" ng-src="{{agendarCitaData.imagen}}" />
+     
+        
+          <button class="button button-full button-stable  letraBlanca" ng-click="enviarMail()">
+             Agendar
+            </button>
+
+          </div>
+
+      </ion-content>
+      
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

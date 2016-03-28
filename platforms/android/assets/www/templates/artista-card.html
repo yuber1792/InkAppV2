@@ -1,5 +1,5 @@
-      <div class="post-card"  >
-                <div  class="list card">
+      <div class="post-card" ng-click="cargarSeleccionado($index)"  >
+                <div  class="list card" >
                   <div ng-click="cargarSeleccionado($index)" class="item item-image">
                     <pre-img ratio="_3_2" helper-class="main-image">
                       <img ng-src="{{artista.trabajos[0]}}" spinner-on-load>
@@ -17,7 +17,7 @@
                       </a>
                     </p>
                     <span class="card-moment-posted" am-time-ago="post.date"></span>
-                    <div ng-if="marca != 'samsung'" class="card-avatar-image-outer">
+                    <div ng-if="marca != 'samsung'"   class="card-avatar-image-outer">
                       <a ui-sref="app.profile.posts({userId:post.userId})">
                         <pre-img ratio="_1_1" helper-class="avatar-image rounded-image">
                           <img ng-src="{{artista.imagen}}" spinner-on-load>
@@ -25,7 +25,7 @@
                       </a>
                     </div>
 
-                    <i class="post-share icon ion-share" ng-click="compartir(artista.trabajos[0])"></i>
+                    <!--<i class="post-share icon ion-share" ng-click="compartir(artista.trabajos[0])"></i>-->
                   </div>
             </div>
         </div>

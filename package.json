@@ -33,7 +33,9 @@
     "org.apache.cordova.inappbrowser",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-media-capture",
-    "https://github.com/gitawego/cordova-screenshot.git"
+    "https://github.com/gitawego/cordova-screenshot.git",
+    "https://github.com/katzer/cordova-plugin-email-composer.git",
+    "https://github.com/jcjee/email-composer.git"
   ],
   "cordovaPlatforms": [
     "ios",

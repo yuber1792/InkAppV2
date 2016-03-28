@@ -244,7 +244,14 @@ background-image:url("../img/fondo.jpg");
 }
  
 #map {
-    width: 100%;
+    width: 90%;
+    left: 5%;
     height: 70%;
+    box-shadow:0 3px 25px black;
   
+}
+
+.fondoFeed {
+
+  background-color: #D93333;
 }

@@ -3,12 +3,21 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes) {
   Scopes.store('AppCtrl', $scope);
   console.log("entra controlador appCtrl");
-    $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
-    
+     $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-         $state.go('app.'+nombre);
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
 
+           $state.go('app.'+nombre);
+         }
+     
     }
   $scope.valorfiltro=true;
   $scope.usuarioAutenticado = 0  ;
@@ -26,11 +35,21 @@ Scopes.store('BocetosController', $scope);
 console.log("entra controlador bocetos");
 
 
-  $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
-     
-        $window.location.href  ='#/app/'+nombre;
+    $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
+
+           $state.go('app.'+nombre);
+         }
+     
     }
 
    $ionicModal.fromTemplateUrl('./templates/detalleArtistaBocetos.html', {
@@ -214,11 +233,21 @@ $scope.valorfiltro=true;
 Scopes.store('IntroCtrl', $scope);
 console.log("entra controlador intro");
 
-   $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
+     $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-         $state.go('app.'+nombre);
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
 
+           $state.go('app.'+nombre);
+         }
+     
     }
   // Called to navigate to the main app
   $scope.startApp = function() {
@@ -244,10 +273,20 @@ console.log("entra controlador intro");
   console.log("entra controlador multimedia ");
 
   $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
-       
-         $state.go('app.'+nombre);
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
+
+           $state.go('app.'+nombre);
+         }
+     
     }
  $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
@@ -292,11 +331,21 @@ $scope.valorfiltro=true;
 .controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes) {
   Scopes.store('PromocionesController', $scope);
   console.log("entra controlador promo");
-  $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
+   $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
- $window.location.href  ='#/app/'+nombre;
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
 
+           $state.go('app.'+nombre);
+         }
+     
     }
 $scope.valorfiltro=true;
    $scope.show = function() {
@@ -337,12 +386,23 @@ $scope.valorfiltro=true;
 .controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes) {
   Scopes.store('EventosController', $scope);
   console.log("entra controlador eventos");
-  $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
-     
-        $window.location.href  ='#/app/'+nombre;
+   $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
+
+           $state.go('app.'+nombre);
+         }
+     
     }
+    
 $scope.ir = function(url){
    
           window.open(url, '_system', 'location=yes');
@@ -392,12 +452,21 @@ $scope.valorfiltro=true;
 .controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes) {
   Scopes.store('PublicidadController', $scope);
   console.log("entra controlador publi");
-   $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
+     $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
+
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
+
+           $state.go('app.'+nombre);
+         }
      
-
-         $window.location.href  ='#/app/'+nombre;
-
     }
  $ionicModal.fromTemplateUrl('./templates/modalPublicidad.html', {
         scope: $scope
@@ -555,12 +624,21 @@ $scope.getContactList = function() {
 
 .controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup) {
   console.log("entra controlador play");
-  $scope.irTab =  function(nombre){
-        // $window.location.href = '#/app/'+nombre;
-      
+    $scope.irTab =  function(nombre){
+         //$window.location.href = '#/app/'+nombre;
+        
+         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-         $window.location.href  ='#/app/'+nombre;
+            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
+         }else{
 
+           $state.go('app.'+nombre);
+         }
+     
     }
   $scope.valorfiltro=true;
   $scope.playlists = [
@@ -852,7 +930,7 @@ $scope.valorfiltro=true;
     
       $scope.artistaLogueado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
      
-      
+  
       console.log("artista loguado");
       console.log($scope.artistaLogueado);
 
@@ -894,6 +972,7 @@ $scope.valorfiltro=true;
 
       };
 
+     
 
 
       /**********Editar fotos  ******************/
@@ -1133,7 +1212,7 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
@@ -1162,9 +1241,29 @@ $scope.valorfiltro=true;
 
         }, false);
 
- 
+    $scope.cargaDescubrir =  function (){
+          $http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+          .success(function(data, status, headers, config){
+          //alert("**** SUCCESS ****");
+         // alert(status);
+          })
+          .error(function(data, status, headers, config){
+          //alert("**** Verificar conexion a internet ****");
+         // alert(status);
+         // alert(angular.toJson(data))
+          })
+          .then(function(response){
+                $scope.artistas=[];
+                $scope.artistas = response.data;
+                console.log("respuesta feed =>");
+                console.log($scope.artistas);
+          });
+    }
+
+     $scope.cargaDescubrir();
 
 
+   
 
 
     $scope.compartir = function(imagen){
@@ -1209,8 +1308,96 @@ $scope.valorfiltro=true;
     }
 
    
+
+     $scope.agendarCitaData = {};
+      $scope.selImagenAgendarCita= function() {
+          
+
+          var options = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            targetWidth: 600,
+            targetHeight: 600
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageUri) {
+            console.log('img', imageUri);
+         
+            //$scope.images.push(imageUri);
+             $scope.agendarCitaData.imagen =  imageUri;
+                
+          }, function(err) {
+          // error
+          });
+
+      };
+
+
+
+  $scope.tiposProcedimientoCita = [
+    { text: "Tatuaje", value: "Tatuaje" },
+    { text: "Cover up", value: "Cover up" },
+    { text: "Modificacion corporal", value: "Modificacion corporal" }
+  ];
+  $scope.agendarCitaData.tipoProcedimiento = 'Tatuaje';
+  $scope.agendarCitaData.nombre = '';
+  $scope.agendarCitaData.ancho = '10';
+  $scope.agendarCitaData.alto= '10';
+  $scope.agendarCitaData.zona  ='Pecho';
+  $scope.agendarCitaData.zonaModificacion = 'Pecho';
+  $scope.agendarCitaData.tipoModificacion = 'Piercing';
+
   
-  
+  $scope.enviarMail = function(){
+
+
+
+   
+    if($scope.agendarCitaData.tipoProcedimiento != 'Modificacion corporal'){
+      $scope.agendarCitaData.descripcion = "Hola, "+$scope.artistaSeleccionado.nombre + "<br><br>";
+      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una cita, ya que deseo realizarme un ";
+      $scope.agendarCitaData.descripcion +=  $scope.agendarCitaData.tipoProcedimiento +", con las siguientes características: <br><br>" ;
+      $scope.agendarCitaData.descripcion += "Ancho:" + $scope.agendarCitaData.ancho +" CM<br>";
+      $scope.agendarCitaData.descripcion += "Alto:" + $scope.agendarCitaData.alto +" CM<br>";
+      $scope.agendarCitaData.descripcion += "Zona del cuerpo:" + $scope.agendarCitaData.zona +"<br><br>";
+      if($scope.agendarCitaData.imagen != undefined || $scope.agendarCitaData.imagen != "unidefined"){
+        $scope.agendarCitaData.descripcion += "Adjunto imagen de lo que deseo.";
+      }
+    }else{
+      $scope.agendarCitaData.descripcion = "Hola, "+$scope.artistaSeleccionado.nombre + "<br><br>";
+      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una cita, ya que deseo realizarme una ";
+      $scope.agendarCitaData.descripcion +=  $scope.agendarCitaData.tipoProcedimiento +", con las siguientes características: <br><br>" ;
+      $scope.agendarCitaData.descripcion += "Tipo modificación:" + $scope.agendarCitaData.tipoModificacion +"<br>";
+      $scope.agendarCitaData.descripcion += "Zona del cuerpo:" + $scope.agendarCitaData.zonaModificacion +"<br><br>";
+      if($scope.agendarCitaData.imagen != undefined || $scope.agendarCitaData.imagen != "unidefined"){
+        $scope.agendarCitaData.descripcion += "Adjunto imagen de lo que deseo.";
+      }
+
+    }
+    console.log($scope.agendarCitaData.imagen);
+    console.log($scope.agendarCitaData.descripcion);
+
+    // $scope.agendarCitaData.descripcion  = "<h5>Hola</h5> <br><br> <h2>Mi nombre es "+$scope.agendarCitaData.nombre+", estoy interesado en un "+$scope.agendarCitaData.tipoProcedimiento+", las medidas son ancho:"+$scope.agendarCitaData.ancho+" cm alto:" + $scope.agendarCitaData.alto+" la zona  en la cual lo deseo es " + $scope.agendarCitaData.zona+"</h2>";
+    
+              $cordovaSocialSharing
+                .shareViaEmail( $scope.agendarCitaData.descripcion , 
+                                "InkGps Solicitud de cita", 
+                                "contactoinkgps@gmail.com", 
+                                null, 
+                                null, 
+                                $scope.agendarCitaData.imagen)
+                .then(function(result) {
+                $scope.cerrarAgendarCita();
+                  // Success!
+                }, function(err) {
+                  alert("fallo");
+                  // An error occurred. Show a message to the user
+              });
+    
+
+    }
+
 
     $scope.loginData = {};
     $scope.loginData.login = false;
@@ -1389,7 +1576,7 @@ $scope.logueado = 0 ;
        window.localStorage.setItem('usuario' , "");
        window.localStorage.setItem('clave' ,  "");
         window.localStorage.setItem('artistaLogueado' ,  "");
-       $state.go("app.artistas");
+       $state.go("app.descubrir");
   }
 
 
@@ -1482,6 +1669,9 @@ $scope.scrollTop = function() {//ng-click for back to top button
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
+         }else if (nombre === 'descubrir'){
+            $state.go('app.'+nombre);
+            $scope.cargaDescubrir();
          }else{
 
            $state.go('app.'+nombre);
@@ -1569,6 +1759,23 @@ $scope.show1 = function() {
     // Open the login modal
     $scope.mostrarArtistas = function () {
         $scope.modal1.show();
+    };
+
+
+    $ionicModal.fromTemplateUrl('./templates/agendarCita.html', {
+        scope: $scope
+    }).then(function (modalCita) {
+        $scope.modalCita = modalCita;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.cerrarAgendarCita = function () {
+        $scope.modalCita.hide();
+    };
+
+    // Open the login modal
+    $scope.mostrarAgendarCita = function () {
+        $scope.modalCita.show();
     };
 
 
@@ -1773,6 +1980,10 @@ $scope.getContactList = function() {
 
 
     $scope.valorRegla = {
+        val: 1
+      };
+
+      $scope.valorReglaAgenda = {
         val: 1
       };
 
@@ -2352,6 +2563,8 @@ $scope.insert = function(firstname, lastname) {
    
     };
 
+     
+
     // Open the login modal
     $scope.openRegla= function (tipo) {
      // alert("event");
@@ -2367,6 +2580,42 @@ $scope.insert = function(firstname, lastname) {
         $scope.modalRegla.show();
       
 
+    };
+
+     $ionicModal.fromTemplateUrl('./templates/reglaAgenda.html', {
+        scope: $scope
+    }).then(function (modalReglaAgenda) {
+        $scope.modalReglaAgenda = modalReglaAgenda;
+    });
+
+     // Open the login modal
+    $scope.openReglaAgenda= function (tipo) {
+     // alert("event");
+        if (tipo === 1)
+        {
+
+           $scope.agendarCitaData.tipoRegla = 1;
+        }else{
+
+             $scope.agendarCitaData.tipoRegla = 2;
+        }
+
+        $scope.modalReglaAgenda.show();
+      
+
+    };
+
+    $scope.closeReglaAgenda = function () {
+         
+         if($scope.agendarCitaData.tipoRegla === 1)
+         {
+            $scope.agendarCitaData.ancho = $scope.valorReglaAgenda.val;
+         }else{
+           $scope.agendarCitaData.alto = $scope.valorReglaAgenda.val;
+         }
+     
+        $scope.modalReglaAgenda.hide();
+   
     };
 
 

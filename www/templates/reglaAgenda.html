@@ -5,7 +5,7 @@
     
         <h1 class="title arriba"> <img src="./img/inkgps_banner_logo_blanco.png" width="30%" height="80%"></h1>
          <div class="buttons">
-              <button class="button button-icon button-clear ion-ios-checkmark-outline" style="color:white;" ng-click="closeRegla()"></button>
+              <button class="button button-icon button-clear ion-ios-checkmark-outline" style="color:white;" ng-click="closeReglaAgenda()"></button>
         </div>
 
       </ion-header-bar>
@@ -17,7 +17,7 @@
        
 
   <label ng-repeat="reg in regla"  class="item item-radio">
-    <input type="radio" style="height:1cm;" ng-model="valorRegla.val" value="{{reg}}" name="group">
+    <input type="radio" style="height:1cm;" ng-model="valorReglaAgenda.val" value="{{reg}}" name="group">
     <div class="item-content">
      {{reg}} cm
     </div>

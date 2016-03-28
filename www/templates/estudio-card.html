@@ -16,7 +16,7 @@
                       </a>
                     </p>
                     <span class="card-moment-posted" am-time-ago="post.date"></span>
-                    <div class="card-avatar-image-outer">
+                    <div ng-if="marca != 'samsung'"  class="card-avatar-image-outer">
                       <a ui-sref="app.profile.posts({userId:post.userId})">
                         <pre-img ratio="_1_1" helper-class="avatar-image rounded-image">
                           <img ng-src="{{publicidad[$index].imagen}}" spinner-on-load>
@@ -24,7 +24,7 @@
                       </a>
                     </div>
 
-                    <i class="post-share icon ion-share"></i>
+                   <!-- <i class="post-share icon ion-share"></i>-->
                   </div>
             </div>
         </div>

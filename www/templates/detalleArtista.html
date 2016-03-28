@@ -4,7 +4,7 @@
   <ion-view ng-class="{'own-profile': myProfile}" class="profile-view" cache-view="false" view-title="Profile">
      
   <ion-content has-bouncing='false' class="profile-content" delegate-handle="profile-scroll">
- <button class="button button-icon button-clear icon  ion-arrow-left-c blanco"  ng-click="closeLogin()"></button>
+ <button class="button button-icon button-clear icon  ion-arrow-left-c blanco" style="color: white;" ng-click="closeLogin()"></button>
     <div class="row profile-data">
  
       <div class="col">
@@ -52,20 +52,15 @@
             </button>
           </div>
         </div>
+         <button class="btn tema button button-full button-assertive button-outline" ng-click="mostrarAgendarCita()">Agendar visita</button>
          <a class="item item-list-detail">
               <ion-scroll direction="x">
        <!-- <img ng-repeat="image in artistaSeleccionado.trabajos" ng-src="./img/{{image.imagen}}" ng-click="showImages($index)" class="image-list-thumb" width="40%" height="40%" />-->
 
-        <img ng-repeat="image in artistaSeleccionado.trabajos" ng-src="{{image}}" ng-click="showImages($index)" class="image-list-thumb1" width="40%" height="40%" />
-      </ion-scroll>
-    </a>
-        <div class="row split-actions" ng-if="myProfile">
-          <div class="col">
-            <button class="button button-block icon-left ion-gear-a settings-button" ui-sref="app.settings">
-              Settings
-            </button>
-          </div>
-        </div>
+                <img ng-repeat="image in artistaSeleccionado.trabajos" ng-src="{{image}}" ng-click="showImages($index)" class="image-list-thumb1" width="40%" height="40%" />
+              </ion-scroll>
+        </a>
+       
         <!--div class="row split-actions">
           <div class="col user-interaction">
             <p>
@@ -79,7 +74,9 @@
           </div>
         </div-->
       </div>
+
     </div>
+
     <ion-nav-view class="profile-sub-views" name="profileContent">
 
     <a class="item item-avatar" href="#" ng-click="openGeo()" >

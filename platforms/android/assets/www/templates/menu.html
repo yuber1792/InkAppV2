@@ -37,11 +37,15 @@
         <!--<ion-item menu-close ng-click="login()">
           Login  
         </ion-item>-->
+        <ion-item class="menuInkGps" menu-close ng-click="irTab('descubrir')">
+          <i class="icon ion-eye icono"></i>
+          {{"explorar" | translate}} 
+    </ion-item>
     <ion-item class="menuInkGps" menu-close ng-click="irTab('artistas')">
-          <i class="icon ion-ios-location icono"></i>
+          <i class="ion-ios-search-strong icono"></i>
           {{"buscarArtistas" | translate}} 
     </ion-item>
-    <ion-item class="menuInkGps" menu-close ng-click="irTab('playlists')">
+    <ion-item class="menuInkGps" menu-close ng-click="irTab('estilosTatuaje')">
           <i class="icon ion-android-color-palette icono"></i>
           {{"estilosTatuaje" | translate}}
     </ion-item>

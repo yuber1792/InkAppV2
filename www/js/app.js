@@ -54,7 +54,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       }
 
 
-
+/*
       var admobid = {};
         // select the right Ad Id according to platform
         if( /(android)/i.test(navigator.userAgent) ) { 
@@ -80,7 +80,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
          // isTesting: true,
           autoShow:true} 
        );
- 
+ */
+                   
                    
 
 
@@ -183,7 +184,9 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             editarPerfil :"Edit profile",
             editarFotos :"Edit photos",
             cerrarSesion :"Log out",
-            editarUbicacion :"Edit ubication"
+            editarUbicacion :"Edit ubication",
+            explorar :"Explorar",
+            agendarCita: "Agendar cita"
 
 
 
@@ -238,7 +241,9 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
              editarPerfil :"Editar perfil",
              editarFotos :"Editar fotos",
              cerrarSesion :"Cerrar sesion",
-            editarUbicacion :"Editar ubicacion"
+            editarUbicacion :"Editar ubicacion",
+            explorar :"Explorar",
+            agendarCita: "Agendar cita"
 
 
 
@@ -294,7 +299,9 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
              editarPerfil :"Edit profile",
              editarFotos :"Editar fotos",
              cerrarSesion :"Log out",
-            editarUbicacion :"Edit ubication"
+            editarUbicacion :"Edit ubication",
+            explorar :"Explorar",
+            agendarCita: "Agendar cita"
 
 
 
@@ -573,11 +580,11 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
+    .state('app.estilosTatuaje', {
+      url: "/estilosTatuaje",
       views: {
         'menuContent': {
-          templateUrl: "templates/playlists.html",
+          templateUrl: "templates/estilosTatuaje.html",
           controller: 'PlaylistsCtrl'
         }
       }
@@ -673,13 +680,23 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
         }
       }
     })
+     .state('app.descubrir', {
+      url: "/descubrir",
+     cache : false,
+      views: {
+        'menuContent': {
+          templateUrl: "templates/descubrir.html",
+          controller: 'indexController'
+        }
+      }
+    })
    
 
  
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/artistas');
+  $urlRouterProvider.otherwise('/app/descubrir');
 
 
 });

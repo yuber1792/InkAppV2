@@ -2,7 +2,7 @@
    
   <ion-view ng-class="{'own-profile': myProfile}" class="profile-view" cache-view="false" view-title="Profile">
   <ion-content has-bouncing='false' class="profile-content" delegate-handle="profile-scroll">
-   <button class="button button-icon button-clear icon  ion-arrow-left-c"  ng-click="closeDetallebocetos()()"></button>
+   <button class="button button-icon button-clear icon  ion-arrow-left-c"  ng-click="closeDetallebocetos()()" style="color: white;"></button>
     <div class="row profile-data">
       <div class="col">
         <ion-slide-box class="profile-slides" on-slide-changed="slideHasChanged($index)">
@@ -48,6 +48,7 @@
             </button>
           </div>
         </div>
+          <button class="btn tema button button-full button-assertive button-outline" ng-click="mostrarAgendarCita()">Agendar visita</button>
          <a class="item item-list-detail">
               <ion-scroll direction="x">
        <!-- <img ng-repeat="image in artistaSeleccionado.trabajos" ng-src="./img/{{image.imagen}}" ng-click="showImages($index)" class="image-list-thumb" width="40%" height="40%" />-->

@@ -1,6 +1,13 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/com.ionic.keyboard/www/keyboard.js",
+        "id": "com.ionic.keyboard.keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
         "id": "cordova-plugin-admobpro.AdMob",
         "clobbers": [
@@ -40,33 +47,6 @@ module.exports = [
         "id": "cordova-plugin-device.device",
         "clobbers": [
             "device"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-        "id": "cordova-plugin-whitelist.whitelist",
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
-        "id": "cordova-plugin-x-socialsharing.SocialSharing",
-        "clobbers": [
-            "window.plugins.socialsharing"
         ]
     },
     {
@@ -221,6 +201,40 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+        "id": "cordova-plugin-geolocation.geolocation",
+        "clobbers": [
+            "navigator.geolocation"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+        "id": "cordova-plugin-geolocation.PositionError",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+        "id": "cordova-plugin-globalization.GlobalizationError",
+        "clobbers": [
+            "window.GlobalizationError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+        "id": "cordova-plugin-globalization.globalization",
+        "clobbers": [
+            "navigator.globalization"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-media-capture/www/CaptureAudioOptions.js",
         "id": "cordova-plugin-media-capture.CaptureAudioOptions",
         "clobbers": [
@@ -270,28 +284,154 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+        "id": "cordova-plugin-whitelist.whitelist",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+        "id": "cordova-plugin-x-socialsharing.SocialSharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/ionic-plugin-deploy/www/ionicdeploy.js",
+        "id": "ionic-plugin-deploy.IonicDeploy",
+        "clobbers": [
+            "IonicDeploy"
+        ]
+    },
+    {
+        "file": "plugins/mobi.moica.whatsapp/www/whatsapp.js",
+        "id": "mobi.moica.whatsapp.whatsapp",
+        "clobbers": [
+            "cordova.plugins.Whatsapp"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/contacts.js",
+        "id": "org.apache.cordova.contacts.contacts",
+        "clobbers": [
+            "navigator.contacts"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/Contact.js",
+        "id": "org.apache.cordova.contacts.Contact",
+        "clobbers": [
+            "Contact"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactAddress.js",
+        "id": "org.apache.cordova.contacts.ContactAddress",
+        "clobbers": [
+            "ContactAddress"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactError.js",
+        "id": "org.apache.cordova.contacts.ContactError",
+        "clobbers": [
+            "ContactError"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactField.js",
+        "id": "org.apache.cordova.contacts.ContactField",
+        "clobbers": [
+            "ContactField"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactFindOptions.js",
+        "id": "org.apache.cordova.contacts.ContactFindOptions",
+        "clobbers": [
+            "ContactFindOptions"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactName.js",
+        "id": "org.apache.cordova.contacts.ContactName",
+        "clobbers": [
+            "ContactName"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactOrganization.js",
+        "id": "org.apache.cordova.contacts.ContactOrganization",
+        "clobbers": [
+            "ContactOrganization"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.contacts/www/ContactFieldType.js",
+        "id": "org.apache.cordova.contacts.ContactFieldType",
+        "merges": [
+            ""
+        ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
+        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
+        "clobbers": [
+            "PushNotification"
+        ]
+    },
+    {
         "file": "plugins/com.darktalker.cordova.screenshot/www/Screenshot.js",
         "id": "com.darktalker.cordova.screenshot.screenshot",
         "merges": [
             "navigator.screenshot"
+        ]
+    },
+    {
+        "file": "plugins/com.jcjee.plugins.emailcomposer/www/EmailComposer.js",
+        "id": "com.jcjee.plugins.emailcomposer.EmailComposer",
+        "clobbers": [
+            "EmailComposer"
         ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "com.ionic.keyboard": "1.0.4",
     "cordova-plugin-extension": "1.3.0",
-    "cordova-plugin-admobpro": "2.12.3",
+    "cordova-plugin-admobpro": "2.13.0",
     "cordova-plugin-camera": "2.1.1",
     "cordova-plugin-console": "1.0.2",
     "cordova-plugin-device": "1.1.1",
+    "cordova-plugin-file": "4.1.1",
+    "cordova-plugin-geolocation": "2.1.1-dev",
+    "cordova-plugin-globalization": "1.0.3-dev",
     "cordova-plugin-inappbrowser": "1.3.0",
-    "cordova-plugin-splashscreen": "3.1.0",
+    "cordova-plugin-media-capture": "1.2.0",
+    "cordova-plugin-splashscreen": "3.2.1",
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-x-socialsharing": "5.0.11",
-    "cordova-plugin-file": "4.1.1",
-    "cordova-plugin-media-capture": "1.2.0",
-    "com.darktalker.cordova.screenshot": "0.1.5"
+    "cordova-sqlite-storage": "0.8.0",
+    "ionic-plugin-deploy": "0.3.0",
+    "mobi.moica.whatsapp": "0.0.1",
+    "org.apache.cordova.contacts": "0.2.16",
+    "com.phonegap.plugins.PushPlugin": "2.5.0",
+    "com.darktalker.cordova.screenshot": "0.1.5",
+    "com.jcjee.plugins.emailcomposer": "1.4.6"
 };
 // BOTTOM OF METADATA
 });
