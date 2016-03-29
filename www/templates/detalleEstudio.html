@@ -1,50 +1,49 @@
-<div class="modal product-view feed-view" style="width:100% ;height:!100%"  >
 
-    
-    <ion-header-bar class="transparente">
-        <!--<div class="buttons">
-            <button class="button button-icon button-clear ion-navicon" ng-click="closeInfoPublicidad()"></button>
-        </div>-->
-        <!--<h1 class="title">{{publicidadSeleccionada.nombre}}</h1>-->
-         <div class="buttons">
-            <button class="button button-icon button-clear  ion-arrow-left-c" ng-click="closeInfoPublicidad()"></button>
-        </div>
-      </ion-header-bar>
-      <ion-content>
+<div class="modal product-view" >
+      
    
-      <div class="product-card-content"   ng-click="ir(publicidadSeleccionada.url)" >
-            <div class="item item-image">
-              <pre-img ratio="_1_1" helper-class="main-image">
-                <img ng-src="{{publicidadSeleccionada.imagen}}" spinner-on-load>
-              </pre-img>
-            </div>
-            <div class="item item-body">
-              <h3 class="product-title">{{publicidadSeleccionada.descripcion}}</h3>
-              <!--<div>
-                <p class="product-like"><i class="icon ion-heart"></i>Like</p>
-                <p class="likes"></i>837</p>
-              </div>
-              <p class="product-price" ng-click="showAddToCartPopup(product)">${{product.price}}</p>
-              -->
-            </div>
-            <div class="item item-body">
-              <p class="product-description">{{evento.fecha}} ---</p>
-            </div>
-      </div>
-      <!-- <div class="item item-body fondo" ng-click="ir(publicidadSeleccionada.url)">
-             <img class="full-image" src="{{publicidadSeleccionada.imagen}}">
-             
-              <p>
-               {{publicidadSeleccionada.descripcion}}
-              
-              </p>
-              <p ng-show="publicidadSeleccionada.showLeerMas">
-               
-                <font color="#3333FF">Leer mas..</font>
+  <ion-view ng-class="{'own-profile': myProfile}" class="profile-view" cache-view="false" view-title="Profile">
+     
+  <ion-content has-bouncing='false' class="profile-content" delegate-handle="profile-scroll">
+ <button class="button button-icon button-clear icon  ion-arrow-left-c blanco" style="color: white;" ng-click="closeInfoPublicidad()"></button>
+    <div class="row profile-data">
+ 
+      <div class="col">
 
-              </p>
-       </div>-->
-            <div  ng-show="publicidadSeleccionada.tieneRedes">
+        <ion-slide-box class="profile-slides" on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div class="row slide-content">
+              <div class="col col-center user-data">
+                <!-- We need a wrapper with width set for the preload image directive -->
+                <div class="user-image-outer">
+                  <pre-img ratio="_1_1" helper-class="rounded-image">
+                    <img class="user-image" ng-src="{{publicidadSeleccionada.imagen}}" spinner-on-load>
+                  </pre-img>
+                </div>
+                <h2 class="user-name">{{user.name}}</h2>
+                <p class="user-resume">
+                  <b>{{user.followers}}</b> {{publicidadSeleccionada.nombre}} &nbsp;&nbsp;<b>{{user.following}}</b> 
+                </p>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="row slide-content">
+              <div class="col col-center user-data">
+                <p class="user-resume">
+                 {{publicidadSeleccionada.descripcion}}
+                </p>
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+    </div>
+
+
+    <ion-nav-view class="profile-sub-views" name="profileContent">
+
+        <!--<div  ng-show="publicidadSeleccionada.tieneRedes">
                <li class="item item-toggle">
                  Redes sociales
                    <label class="toggle toggle-assertive">
@@ -53,9 +52,9 @@
                         <div class="handle"></div>
                       </div>
                     </label>
-                </li>
+                </li>-->
            
-            <div ng-show="publicidadSeleccionada.showRedes">
+            <!--<div ng-show="publicidadSeleccionada.showRedes">-->
                 <div class="list card">
 
                 <a class="item item-avatar" href="#" ng-click="openGeo()" >
@@ -89,8 +88,8 @@
 
                 </div>
 
-            </div>
-             </div>
+           <!-- </div> -->
+            <!-- </div> -->
 
             <div ng-show="publicidadSeleccionada.tieneImagenes">
                <li class="item item-toggle">
@@ -136,9 +135,12 @@
  
                     </div>
               </div>
-            
-
-        
-      </ion-content>
-    
+  </ion-nav-view>
+  </ion-content>
+</ion-view>    
 </div>
+
+
+
+<!--             -->
+

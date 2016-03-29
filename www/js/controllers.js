@@ -468,7 +468,7 @@ $scope.valorfiltro=true;
          }
      
     }
- $ionicModal.fromTemplateUrl('./templates/modalPublicidad.html', {
+ $ionicModal.fromTemplateUrl('./templates/detalleEstudio.html', {
         scope: $scope
     }).then(function (modalpubli) {
         $scope.modalpubli= modalpubli;

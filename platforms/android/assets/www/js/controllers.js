@@ -468,7 +468,7 @@ $scope.valorfiltro=true;
          }
      
     }
- $ionicModal.fromTemplateUrl('./templates/modalPublicidad.html', {
+ $ionicModal.fromTemplateUrl('./templates/detalleEstudio.html', {
         scope: $scope
     }).then(function (modalpubli) {
         $scope.modalpubli= modalpubli;
@@ -1356,7 +1356,7 @@ $scope.valorfiltro=true;
    
     if($scope.agendarCitaData.tipoProcedimiento != 'Modificacion corporal'){
       $scope.agendarCitaData.descripcion = "Hola, "+$scope.artistaSeleccionado.nombre + "<br><br>";
-      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una cita, ya que deseo realizarme un ";
+      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una visita, ya que deseo realizarme un ";
       $scope.agendarCitaData.descripcion +=  $scope.agendarCitaData.tipoProcedimiento +", con las siguientes características: <br><br>" ;
       $scope.agendarCitaData.descripcion += "Ancho:" + $scope.agendarCitaData.ancho +" CM<br>";
       $scope.agendarCitaData.descripcion += "Alto:" + $scope.agendarCitaData.alto +" CM<br>";
@@ -1366,7 +1366,7 @@ $scope.valorfiltro=true;
       }
     }else{
       $scope.agendarCitaData.descripcion = "Hola, "+$scope.artistaSeleccionado.nombre + "<br><br>";
-      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una cita, ya que deseo realizarme una ";
+      $scope.agendarCitaData.descripcion += "Mi nombre es "+$scope.agendarCitaData.nombre+", me gustaría agendar una visita, ya que deseo realizarme una ";
       $scope.agendarCitaData.descripcion +=  $scope.agendarCitaData.tipoProcedimiento +", con las siguientes características: <br><br>" ;
       $scope.agendarCitaData.descripcion += "Tipo modificación:" + $scope.agendarCitaData.tipoModificacion +"<br>";
       $scope.agendarCitaData.descripcion += "Zona del cuerpo:" + $scope.agendarCitaData.zonaModificacion +"<br><br>";
