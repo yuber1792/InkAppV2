@@ -2,7 +2,7 @@
     "cordova-plugin-console": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-console"
+            "id": "cordova-plugin-console@~1.0.2"
         },
         "is_top_level": true,
         "variables": {}
@@ -10,7 +10,7 @@
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-device"
+            "id": "cordova-plugin-device@~1.1.1"
         },
         "is_top_level": true,
         "variables": {}
@@ -74,7 +74,7 @@
     "cordova-plugin-media-capture": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-media-capture"
+            "id": "cordova-plugin-media-capture@~1.2.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -160,6 +160,15 @@
         "source": {
             "type": "git",
             "url": "https://github.com/jcjee/email-composer.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-email-composer": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzer/cordova-plugin-email-composer.git",
             "subdir": "."
         },
         "is_top_level": true,

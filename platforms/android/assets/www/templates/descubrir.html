@@ -1,0 +1,25 @@
+<ion-view  class="feed-view" view-title="{{'explorar' | translate}}">
+
+
+      <ion-content  on-scroll="getScrollPosition()">   
+
+
+
+
+
+       
+
+         <div ng-repeat="artista in artistas">
+            <section ng-include="'templates/artista-card.html'" class="post-card-outer"></section>
+        </div>
+
+  
+
+       
+      </ion-content>
+        <div  ng-show="mostrarScroll">
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

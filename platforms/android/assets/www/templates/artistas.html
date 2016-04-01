@@ -61,7 +61,7 @@
             <li class="item item-toggle tema" >
                {{"buscarCodigo" | translate}} 
                <label class="toggle toggle-assertive">
-                  <input ng-model="filtro.mostrarCodigo" type="checkbox">
+                  <input ng-model="filtro.mostrarCodigo"  type="checkbox">
                   <div class="track">
                     <div class="handle"></div>
                   </div>
@@ -71,7 +71,7 @@
             <div ng-show="filtro.mostrarCodigo">
                  <div class="item item-text-wrap justificar">
                 <label class="item item-input tema">
-                  <input type="text" ng-model="filtro.codigo" placeholder=" {{'escribeCodigo' | translate}} "
+                  <input type="number" ng-model="filtro.codigo"  placeholder="Codigo"
                     ng-enter='keyPressed()'  >
                 </label>
                 </div>

@@ -14,10 +14,8 @@ angular.module('starter.controllers', [])
             $state.go('app.'+nombre);
             $scope.cargaDescubrir();
          }else{
-
            $state.go('app.'+nombre);
-         }
-     
+         }     
     }
   $scope.valorfiltro=true;
   $scope.usuarioAutenticado = 0  ;
@@ -1134,7 +1132,80 @@ $scope.valorfiltro=true;
 
         $scope.map = map;
   }
+  $scope.$watch("artistaLogueado.descripcion", function(newValue, oldValue){
 
+        if (newValue.length > 180){
+            $scope.artistaLogueado.descripcion = oldValue;
+           
+        }
+            $scope.valorDescripcion  =  $scope.artistaLogueado.descripcion.length;
+        
+         
+        
+    });
+
+  $scope.guardar = function(){
+
+    alert("guardo");
+  }
+
+   $scope.mensajeDatosFaltantes = function(campo) {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Información',
+       template: 'El campo '+ campo + ' es requerido',
+        buttons: [
+                     
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                 console.log("ok")
+                                  //return scope.data.response;
+
+                              }
+                        }
+                ]
+
+     });
+
+       alertPopup.then(function(res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+       });
+    };
+  $scope.campoValidacion = ""; 
+  $scope.verficarEdicion = function (){
+        if($scope.artistaLogueado.imagen  ===  null ||  $scope.artistaLogueado.imagen  === ""){
+            $scope.campoValidacion = "Imagen perfil"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else if($scope.artistaLogueado.nombre === "" || $scope.artistaLogueado.nombre === undefined){
+            $scope.campoValidacion = "Nombre"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else if($scope.artistaLogueado.descripcion === "" || $scope.artistaLogueado.descripcion === undefined){
+            $scope.campoValidacion = "Descripción"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else if($scope.artistaLogueado.celular === "" || $scope.artistaLogueado.celular === undefined){
+            $scope.campoValidacion = "Celular"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else if($scope.artistaLogueado.ciudad === "" || $scope.artistaLogueado.ciudad === undefined){
+            $scope.campoValidacion = "Ciudad"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else if($scope.artistaLogueado.especialiodad === "" || $scope.artistaLogueado.especialidad === undefined){
+            $scope.campoValidacion = "Especialidad"; 
+            $scope.mensajeDatosFaltantes($scope.campoValidacion);
+            return ;
+        }else{
+          $scope.guardar();
+        }
+
+  }
    
   
   $scope.buscarMiUbicacion =function(){
@@ -1348,7 +1419,43 @@ $scope.valorfiltro=true;
   $scope.agendarCitaData.zonaModificacion = 'Pecho';
   $scope.agendarCitaData.tipoModificacion = 'Piercing';
 
-  
+
+    $scope.mensajeNombreRequerido = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Información',
+       template: 'El campo nombre es requerido',
+        buttons: [
+                     
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                 console.log("ok")
+                                  //return scope.data.response;
+
+                              }
+                        }
+                ]
+
+     });
+
+       alertPopup.then(function(res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+       });
+    };
+  $scope.validarEmailParaEnvio = function(){
+      if($scope.agendarCitaData.nombre === "" || $scope.agendarCitaData.nombre === null  ){
+           $scope.mensajeNombreRequerido();
+
+      }else{
+
+        $scope.enviarMail();
+      }
+
+  }
   $scope.enviarMail = function(){
 
 
@@ -2105,6 +2212,24 @@ $scope.getContactList = function() {
          console.log('Thank you for not eating my delicious ice cream cone');
        });
      };
+
+     $scope.mostrarTextoNoEncontroCodigo = function() {
+   
+   
+
+       var alertPopup = $ionicPopup.alert({
+         title: "Información",
+         template: "No se encontraron resultados.",
+          buttons: [
+          { text: 'Ok' ,
+           type: 'button-assertive'
+         }]
+       });
+
+       alertPopup.then(function(res) {
+         console.log('Thank you for not eating my delicious ice cream cone');
+       });
+     };
    
   //$scope.artistas ;
     $scope.filtrar = function () {
@@ -2134,54 +2259,31 @@ $scope.getContactList = function() {
       .then(function(response){
       //alert("**** THEN ****"+ response.data);
        $scope.filtro.cargando = true;
-        $scope.artistas = response.data;
-        $scope.trabajos = $scope.artistas[1].trabajos;
-        $scope.trabajosjson = JSON.stringify($scope.trabajos);
+        
         $scope.resultadoFiltro =[];
      
 
-        //SI BUSCA POR NOMBRE
-        if($scope.filtro.nombre != "")
-        {
-          $scope.siFiltro = false;
-          for (var i=0; i<$scope.artistas.length; i++){
-        //alert($scope.artistas[i].id + "   " + $scope.filtro.codigo);
-
-              if($scope.artistas[i].nombre === $scope.filtro.nombre)
-                {
-                 
-                  //alert("entra FILTRO nombre . " + $scope.idFiltro);
-                  $scope.resultadoFiltro = $scope.artistas[i];
-                    $scope.siFiltro = true;
-                }
-            }  
-              if($scope.siFiltro)
-                {
-
-                 //alert("tamaño filtro" + $scope.resultadoFiltro.length);
-                 $scope.artistas.length =0;
-                 $scope.artistas.push($scope.resultadoFiltro);
-               }else
-               {
-                alert("No hay resultados , se mostraran todos los artistas ");
-               }
-        }
+        
 
 
 
 
         //SI BUSCA  POR CODIGO 
         if ($scope.filtro.codigo != "") {
+           $scope.artistasCodigo = response.data;
+           $scope.trabajos = $scope.artistasCodigo[1].trabajos;
+           $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
+
           $scope.filtro.estilo = "Todos";
           $scope.filtro.ciudad = "Todos" 
-           $scope.siFiltro  = false;
-             for (var i=0; i<$scope.artistas.length; i++){
+          $scope.siFiltro  = false;
+             for (var i=0; i<$scope.artistasCodigo.length; i++){
         //alert($scope.artistas[i].id + "   " + $scope.filtro.codigo);
 
-              if($scope.artistas[i].id === $scope.filtro.codigo)
+              if(parseInt($scope.artistasCodigo[i].id) === parseInt($scope.filtro.codigo))
                 {
                  
-                  $scope.resultadoFiltro = $scope.artistas[i];
+                  $scope.resultadoFiltro = $scope.artistasCodigo[i];
                   $scope.siFiltro = true;
                 }
             }  
@@ -2192,30 +2294,34 @@ $scope.getContactList = function() {
          // alert("tamaño filtro" + $scope.resultadoFiltro.length);
         $scope.artistas.length =0;
         $scope.artistas.push($scope.resultadoFiltro);
-        }else
-               {
-              alert("No hay resultados , se mostraran todos los artistas ");
-               }
+        }else{
+              //alert("No hay resultados , se mostraran todos los artistas ");
+              $scope.mostrarTextoNoEncontroCodigo();
+          
+        }
         
        // alert("tamaño" + $scope.artistas.length);
-
+       
         }
 
       
         //SI BUSCA POR  ESTILO
         if($scope.filtro.estilo != "Todos" && $scope.filtro.ciudad == "Todos" )
         {
+           $scope.artistasCodigo = response.data;
+           $scope.trabajos = $scope.artistasCodigo[1].trabajos;
+           $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
 //alert("entra estilo");
           $scope.contador = 0
           $scope.siFiltro = false;
           $scope.artistasFiltro = []; 
-           for (var i=0; i<$scope.artistas.length; i++){
+           for (var i=0; i<$scope.artistasCodigo.length; i++){
               //alert($scope.artistas[i].especialidad +"---"+ $scope.filtro.estilo );
               //||  $scope.artistas[i].especialidad === "Todos"
-              if($scope.artistas[i].especialidad === $scope.filtro.estilo )
+              if($scope.artistasCodigo[i].especialidad === $scope.filtro.estilo )
                 {
                 //  alert("entra");
-                   $scope.artistasFiltro[$scope.contador] = $scope.artistas[i];
+                   $scope.artistasFiltro[$scope.contador] = $scope.artistasCodigo[i];
                    $scope.contador = $scope.contador +1 ; 
 
                    $scope.siFiltro = true;
@@ -2235,7 +2341,8 @@ $scope.getContactList = function() {
                   }
                }else
                {
-              alert("No hay resultados , se mostraran todos los artistas ");
+              //alert("No hay resultados , se mostraran todos los artistas ");
+               $scope.mostrarTextoNoEncontroCodigo();
                }
         
        // alert("tamaño" + $scope.artistas.length);
@@ -2248,17 +2355,20 @@ $scope.getContactList = function() {
          //SI BUSCA POR  CIUDAD
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo == "Todos" )
         {
+           $scope.artistasCodigo = response.data;
+           $scope.trabajos = $scope.artistasCodigo[1].trabajos;
+           $scope.trabajosjson = JSON.stringify($scope.trabajos);
          //    alert("entra ciudad");
           $scope.contador = 0
           $scope.siFiltro = false;
           $scope.artistasFiltro = []; 
-           for (var i=0; i<$scope.artistas.length; i++){
+           for (var i=0; i<$scope.artistasCodigo.length; i++){
               //alert($scope.artistas[i].especialidad +"---"+ $scope.filtro.estilo );
               //||  $scope.artistas[i].especialidad === "Todos"
-              if($scope.artistas[i].ciudad === $scope.filtro.ciudad )
+              if($scope.artistasCodigo[i].ciudad === $scope.filtro.ciudad )
                 {
                 //  alert("entra");
-                   $scope.artistasFiltro[$scope.contador] = $scope.artistas[i];
+                   $scope.artistasFiltro[$scope.contador] = $scope.artistasCodigo[i];
                    $scope.contador = $scope.contador +1 ; 
 
                    $scope.siFiltro = true;
@@ -2281,17 +2391,20 @@ $scope.getContactList = function() {
          //SI BUSCA POR  CIUDAD   Y  POR ESTILO 
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo != "Todos")
         {
+            $scope.artistasCodigo = response.data;
+           $scope.trabajos = $scope.artistasCodigo[1].trabajos;
+           $scope.trabajosjson = JSON.stringify($scope.trabajos);
           //alert("entra doble");
           $scope.contador = 0;
           $scope.siFiltro = false;
           $scope.artistasFiltro = []; 
-           for (var i=0; i<$scope.artistas.length; i++){
+           for (var i=0; i<$scope.artistasCodigo.length; i++){
               //alert($scope.artistas[i].especialidad +"---"+ $scope.filtro.estilo );
               //||  $scope.artistas[i].especialidad === "Todos"
-              if($scope.artistas[i].ciudad === $scope.filtro.ciudad )
+              if($scope.artistasCodigo[i].ciudad === $scope.filtro.ciudad )
                 {
                 //  alert("entra");
-                   $scope.artistasFiltro[$scope.contador] = $scope.artistas[i];
+                   $scope.artistasFiltro[$scope.contador] = $scope.artistasCodigo[i];
                    $scope.contador = $scope.contador +1 ; 
 
                    $scope.siFiltro = true;
@@ -2330,7 +2443,8 @@ $scope.getContactList = function() {
                   }
                }else
                {
-              alert("No hay resultados , se mostraran todos los artistas ");
+              //alert("No hay resultados , se mostraran todos los artistas ");
+               $scope.mostrarTextoNoEncontroCodigo();
                }
         }
 
@@ -2339,7 +2453,7 @@ $scope.getContactList = function() {
           //$scope.filtro.estilo = "Todos";
           $scope.filtro.codigo = "";
           $scope.filtro.nombre = "";
-          $scope.filtro.ciudad = "Todos";
+          //$scope.filtro.ciudad = "Todos";
          
         
 

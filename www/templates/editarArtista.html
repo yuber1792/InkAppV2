@@ -24,22 +24,22 @@
             
      
             <label class="item item-stacked-label">
-              <span class="input-label letraBlanca">Nombre</span>
+              <span class="input-label letraBlanca">Nombre*</span>
               <input type="text" ng-model="artistaLogueado.nombre" style="width: 100%;" placeholder="">
             </label>
 
              <label class="item item-stacked-label">
-              <span class="input-label letraBlanca">Descripcion</span>
-               <textarea placeholder="{{item.type }} Description*" rows="1"  ng-model="artistaLogueado.descripcion" ng-Required="true"   style="width: 100%; height: 100%;"  name="description"></textarea>
+              <span class="input-label letraBlanca">Descripcion*            {{valorDescripcion}}/180</span>
+               <textarea placeholder="{{item.type }} Description*" rows="1" ng-maxlength="200" ng-model="artistaLogueado.descripcion" ng-Required="true"   style="width: 100%; height: 100%;"  name="description"></textarea>
             </label>
 
              <label class="item item-stacked-label">
-              <span class="input-label letraBlanca">Celular</span>
+              <span class="input-label letraBlanca">Celular*</span>
               <input  ng-model="artistaLogueado.celular" type="text" style="width: 100%;" placeholder="">
             </label>
 
              <label class="item item-stacked-label">
-              <span class="input-label letraBlanca">Ciudad</span>
+              <span class="input-label letraBlanca">Ciudad*</span>
               <input   ng-model="artistaLogueado.ciudad" type="text" style="width: 100%;" placeholder="John">
             </label>
 
@@ -49,7 +49,7 @@
             </label>
 
             <label class="item item-stacked-label">
-              <span class="input-label letraBlanca">Especialidad</span>
+              <span class="input-label letraBlanca">Especialidad*</span>
               <input  ng-model="artistaLogueado.especialidad" type="text" style="width: 100%;" placeholder="John">
             </label>
 
@@ -75,13 +75,9 @@
              Modificar ubicacion
             </button>
             
-              
-              
-
-            
-
+                      
         
-          <button class="button button-full button-stable  letraBlanca" ng-click="cargaServicio()">
+          <button class="button button-full button-stable  letraBlanca" ng-click="verficarEdicion()">
              Guardar
             </button>
 
