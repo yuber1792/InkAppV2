@@ -38,19 +38,62 @@
               <input  ng-model="artistaLogueado.celular" type="text" style="width: 100%;" placeholder="">
             </label>
 
-             <label class="item item-stacked-label">
+             <label class="item item-stacked-label item">
               <span class="input-label letraBlanca">Ciudad*</span>
-              <input   ng-model="artistaLogueado.ciudad" type="text" style="width: 100%;" placeholder="John">
+               <select  style="display: block;
+                      padding-top: 2px;
+                      padding-left: 0;
+                      height: 35px;
+                      color: #111;
+                      width: 100%;
+                      vertical-align: middle;
+                      font-size: 14px;
+                      line-height: 16px;
+                      border: none;
+                      background: #fff;
+                      color: #333;
+                      text-indent: .01px;
+                      text-overflow: '';
+                      white-space: nowrap;
+                      font-size: 14px;
+                      cursor: pointer;
+                      direction: rtl;" ng-model="artistaLogueado.ciudad">
+                <option  ng-repeat="(key, value) in ciudadesCargadas" value="{{key}}">{{value}}</option>
+             
+              </select>
+              <!--<input   ng-model="artistaLogueado.ciudad" type="text" style="width: 100%;" placeholder="John">-->
             </label>
 
              <label class="item item-stacked-label">
               <span class="input-label letraBlanca">Direccion</span>
-              <input  ng-model="artistaLogueado.especialidad" ng-model="artistaLogueado.direccion" type="text"  style="width: 100%;" placeholder="John">
+              <input  ng-model="artistaLogueado.direccion" ng-model="artistaLogueado.direccion" type="text"  style="width: 100%;" placeholder="John">
             </label>
 
-            <label class="item item-stacked-label">
+            <label class="item item-stacked-label item">
               <span class="input-label letraBlanca">Especialidad*</span>
-              <input  ng-model="artistaLogueado.especialidad" type="text" style="width: 100%;" placeholder="John">
+              <select  style="display: block;
+                      padding-top: 2px;
+                      padding-left: 0;
+                      height: 35px;
+                      color: #111;
+                      width: 100%;
+                      vertical-align: middle;
+                      font-size: 14px;
+                      line-height: 16px;
+                      border: none;
+                      background: #fff;
+                      color: #333;
+                      text-indent: .01px;
+                      text-overflow: '';
+                      white-space: nowrap;
+                      font-size: 14px;
+                      cursor: pointer;
+                      direction: rtl;" 
+                      ng-model="artistaLogueado.especialidad">
+                <option  ng-repeat="(key, value) in estilosCargados" value="{{key}}">{{value}}</option>
+             
+              </select>
+             <!-- <input  ng-model="artistaLogueado.especialidad" type="text" style="width: 100%;" placeholder="John">-->
             </label>
 
             <label class="item item-stacked-label">

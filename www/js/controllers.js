@@ -1072,6 +1072,41 @@ $scope.valorfiltro=true;
 
   };
 
+     //llamar al servicio para cargar estilo
+$http.defaults.useXDomain = true;
+  $http.get('http://8-dot-inkdata-1019.appspot.com/estilos')
+    .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+
+    })
+    .error(function(data, status, headers, config){
+      alert("**** Verificar conexion a internet ****");
+  
+    })
+    .then(function(response){
+     
+      $scope.estilosCargados = response.data;
+      
+    })
+
+     //llamar al servicio para ciudad estilo
+    $http.get('http://8-dot-inkdata-1019.appspot.com/ciudades')
+    .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+
+    })
+    .error(function(data, status, headers, config){
+      alert("**** Verificar conexion a internet ****");
+  
+    })
+    .then(function(response){
+     
+      $scope.ciudadesCargadas = response.data;
+      
+    })
+
 
 /*******************Mapas  para la  edicion ***********************************/
   var marker  = null;
@@ -1146,7 +1181,8 @@ $scope.valorfiltro=true;
 
   $scope.guardar = function(){
 
-    alert("guardo");
+    console.log("Json");
+    console.log(angular.toJson($scope.artistaLogueado,true));
   }
 
    $scope.mensajeDatosFaltantes = function(campo) {
