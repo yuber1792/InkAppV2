@@ -953,7 +953,7 @@ $scope.valorfiltro=true;
 
           var options = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URL,
+            destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             targetWidth: 600,
             targetHeight: 600
@@ -990,7 +990,7 @@ $scope.valorfiltro=true;
 
     var options = {
       quality: 100,
-      destinationType: Camera.DestinationType.FILE_URL,
+      destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 600,
       targetHeight: 600
@@ -1229,14 +1229,16 @@ $http.defaults.useXDomain = true;
 
   }
   $scope.guardarFotos =function (){
-       var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire+'/trabajos');
+       var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire);
               // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
       objetofotos.update( { 
-                            0:$scope.artistaLogueado.trabajos[0],
-                            1:$scope.artistaLogueado.trabajos[1],
-                            2:$scope.artistaLogueado.trabajos[2],
-                            3:$scope.artistaLogueado.trabajos[3],
-                            4:$scope.artistaLogueado.trabajos[4]
+                            trabajos : {
+                                          0:$scope.artistaLogueado.trabajos[0],
+                                          1:$scope.artistaLogueado.trabajos[1],
+                                          2:$scope.artistaLogueado.trabajos[2],
+                                          3:$scope.artistaLogueado.trabajos[3],
+                                          4:$scope.artistaLogueado.trabajos[4]
+                                        }
 
                           });
 
@@ -1286,6 +1288,7 @@ $http.defaults.useXDomain = true;
   $scope.guardar = function(){
 
     console.log("Json");
+
 
 
       var fredNameRef = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire);
@@ -1486,6 +1489,7 @@ $http.defaults.useXDomain = true;
 
         // While there remain elements to shuffle
         while (m) {
+          console.log("entra while ");
           // Pick a remaining element…
           i = Math.floor(Math.random() * m--);
 
