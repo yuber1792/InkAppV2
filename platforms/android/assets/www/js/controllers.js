@@ -141,7 +141,8 @@ $scope.valorfiltro=true;
  
      $scope.cargarSeleccionadoBoceto = function (id) {
     
-      $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+      //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+  $http.get('https://inkgpsapp.firebaseio.com/data.json')
     .success(function(data, status, headers, config){
 
     })
@@ -952,7 +953,7 @@ $scope.valorfiltro=true;
 
           var options = {
             quality: 100,
-            destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.FILE_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             targetWidth: 600,
             targetHeight: 600
@@ -962,7 +963,7 @@ $scope.valorfiltro=true;
             console.log('img', imageUri);
          
             //$scope.images.push(imageUri);
-             $scope.artistaLogueado.imagen =  imageUri;
+             $scope.artistaLogueado.imagen = "data:image/jpeg;base64," + imageUri;
                 
           }, function(err) {
           // error
@@ -989,7 +990,7 @@ $scope.valorfiltro=true;
 
     var options = {
       quality: 100,
-      destinationType: Camera.DestinationType.FILE_URI,
+      destinationType: Camera.DestinationType.FILE_URL,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 600,
       targetHeight: 600
@@ -999,7 +1000,7 @@ $scope.valorfiltro=true;
       console.log('img', imageUri);
    
       //$scope.images.push(imageUri);
-       $scope.artistaLogueado.trabajos[index] =  imageUri;
+       $scope.artistaLogueado.trabajos[index] = "data:image/jpeg;base64," + imageUri;
           
     }, function(err) {
     // error
@@ -1056,7 +1057,7 @@ $scope.valorfiltro=true;
     
     var options = {
       quality: 100,
-      destinationType: Camera.DestinationType.FILE_URI,
+      destinationType: Camera.DestinationType.FILE_URL,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 600,
       targetHeight: 600
@@ -1064,7 +1065,7 @@ $scope.valorfiltro=true;
 
     $cordovaCamera.getPicture(options).then(function(imageUri) {
       console.log('img', imageUri);
-      $scope.images.push(imageUri);
+      $scope.images.push("data:image/jpeg;base64," +imageUri);
           
     }, function(err) {
     // error
@@ -1072,33 +1073,71 @@ $scope.valorfiltro=true;
 
   };
 
+     //llamar al servicio para cargar estilo
+$http.defaults.useXDomain = true;
+  $http.get('http://8-dot-inkdata-1019.appspot.com/estilos')
+    .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+
+    })
+    .error(function(data, status, headers, config){
+      alert("**** Verificar conexion a internet ****");
+  
+    })
+    .then(function(response){
+     
+      $scope.estilosCargados = response.data;
+      
+    })
+
+     //llamar al servicio para ciudad estilo
+    $http.get('http://8-dot-inkdata-1019.appspot.com/ciudades')
+    .success(function(data, status, headers, config){
+      //alert("**** SUCCESS ****");
+     // alert(status);
+
+    })
+    .error(function(data, status, headers, config){
+      alert("**** Verificar conexion a internet ****");
+  
+    })
+    .then(function(response){
+     
+      $scope.ciudadesCargadas = response.data;
+      
+    })
+
 
 /*******************Mapas  para la  edicion ***********************************/
   var marker  = null;
+    
   $scope.showMap = function (){
-        var myLatlng = new google.maps.LatLng(4.627757313781544,-74.08699035644531);
+        var myLatlng = new google.maps.LatLng($scope.artistaLogueado.latitud,$scope.artistaLogueado.longitud);
         
         var mapOptions = {
           center: myLatlng,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.SATELLITE
         };
-        var map = new google.maps.Map(document.getElementById("map"),
+       var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
         
+       
         //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
+        var contentString = "<div><a ng-click='clickTest()'>Puedes arrastrar el mapa para reajustar la posición. </a></div>";
         var compiled = $compile(contentString)($scope);
 
         var infowindow = new google.maps.InfoWindow({
           content: compiled[0]
         });
 
-         marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          title: 'Uluru (Ayers Rock)'
+          title: 'Posicion'
         });
+        
 
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.open(map,marker);
@@ -1132,6 +1171,79 @@ $scope.valorfiltro=true;
 
         $scope.map = map;
   }
+  $scope.edicionUbicacionCorrecta = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'La ubicación se ha guardado satisfactoriamente.',
+       buttons: [
+                       
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                  console.log("ok");
+                                  //return scope.data.response;
+
+                              }
+                        }
+                        ]
+   });
+ }
+  $scope.edicionFotosCorrecta = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'Las imagenes se ha guardado satisfactoriamente.',
+       buttons: [
+                       
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                  console.log("ok");
+                                  //return scope.data.response;
+
+                              }
+                        }
+                        ]
+   });
+ }
+
+  $scope.guardarUbicacion =  function(){
+    
+
+     var objetoPosicionEd = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire);
+              // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
+      objetoPosicionEd.update( { 
+                            longitud : $scope.map.getCenter().lng(),
+                            latitud : $scope.map.getCenter().lat()
+                          });
+
+    $scope.edicionUbicacionCorrecta();
+
+
+  }
+  $scope.guardarFotos =function (){
+       var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire+'/trabajos');
+              // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
+      objetofotos.update( { 
+                            0:$scope.artistaLogueado.trabajos[0],
+                            1:$scope.artistaLogueado.trabajos[1],
+                            2:$scope.artistaLogueado.trabajos[2],
+                            3:$scope.artistaLogueado.trabajos[3],
+                            4:$scope.artistaLogueado.trabajos[4]
+
+                          });
+
+      $scope.edicionFotosCorrecta();
+
+
+  }
   $scope.$watch("artistaLogueado.descripcion", function(newValue, oldValue){
 
         if (newValue.length > 180){
@@ -1144,9 +1256,60 @@ $scope.valorfiltro=true;
         
     });
 
+  $scope.edicionCorrecta = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Información',
+     template: 'La informaciòn se ha guardado satisfactoriamente.',
+       buttons: [
+                       
+                        {
+                          text: '<b>Ok</b>',
+                          type: 'button-assertive'
+                              ,onTap: function(e) {
+                                  //e.preventDefault();
+                                  
+                              // Returning a value will cause the promise to resolve with the given value.
+                                  console.log("ok");
+                                  //return scope.data.response;
+
+                              }
+                        }
+                        ]
+   });
+
+   alertPopup.then(function(res) {
+     console.log('cierra mensaje');
+   });
+ };
+
+
   $scope.guardar = function(){
 
-    alert("guardo");
+    console.log("Json");
+
+
+      var fredNameRef = new Firebase('https://inkgpsapp.firebaseio.com/data/'+$rootScope.posicionEnFire);
+              // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
+      fredNameRef.update( { 
+                            imagen :$scope.artistaLogueado.imagen,
+                            nombre: $scope.artistaLogueado.nombre,
+                            descripcion:$scope.artistaLogueado.descripcion,
+                            celular:$scope.artistaLogueado.celular,
+                            ciudad:$scope.artistaLogueado.ciudad,
+                            direccion:$scope.artistaLogueado.direccion,
+                            especialidad:$scope.artistaLogueado.especialidad,
+                            estudio:$scope.artistaLogueado.estudio,
+                            facebook:$scope.artistaLogueado.facebook,
+                            usuarioFacebook:$scope.artistaLogueado.usuarioFacebook,
+                            usuarioInstagram:$scope.artistaLogueado.usuarioInstagram,
+                            instagram:$scope.artistaLogueado.usuarioInstagram
+
+                          });
+
+    
+    $scope.edicionCorrecta();
+
+
   }
 
    $scope.mensajeDatosFaltantes = function(campo) {
@@ -1283,11 +1446,17 @@ $scope.valorfiltro=true;
 
 })
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache) {
+
+
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,informacionData) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
-    $scope.artistaLogueado = {};
+ $scope.artistaLogueado = {};
+
+   
+   
+
     
 
     document.addEventListener("deviceready", function () {
@@ -1311,9 +1480,28 @@ $scope.valorfiltro=true;
       //  alert("version =>" +version);
 
         }, false);
+    
+      $rootScope.shuffleArray = function(array) {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle
+        while (m) {
+          // Pick a remaining element…
+          i = Math.floor(Math.random() * m--);
+
+          // And swap it with the current element.
+          t = array[m];
+          array[m] = array[i];
+          array[i] = t;
+        }
+
+        return array;
+      }
+
 
     $scope.cargaDescubrir =  function (){
-          $http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+          //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+                $http.get('https://inkgpsapp.firebaseio.com/data.json')
           .success(function(data, status, headers, config){
           //alert("**** SUCCESS ****");
          // alert(status);
@@ -1326,9 +1514,15 @@ $scope.valorfiltro=true;
           .then(function(response){
                 $scope.artistas=[];
                 $scope.artistas = response.data;
-                console.log("respuesta feed =>");
+               
+                console.log("respuesta feed  SHUFFLE=>");
+                 $rootScope.shuffleArray($scope.artistas);
                 console.log($scope.artistas);
           });
+
+     
+
+
     }
 
      $scope.cargaDescubrir();
@@ -1591,6 +1785,8 @@ $scope.logueado = 0 ;
  };
 
 
+
+
   // Perform the login action when the user submits the login form
   $scope.informacion={};
   $scope.informacion.mostrarLogin =false;
@@ -1618,7 +1814,16 @@ $scope.logueado = 0 ;
       });  */
        $http.defaults.useXDomain = true;
 
-      $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+       
+
+   
+   
+
+
+
+
+      //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+      $http.get('https://inkgpsapp.firebaseio.com/data.json')
       .success(function(data, status, headers, config){
       //alert("**** SUCCESS ****");
      // alert(status);
@@ -1633,16 +1838,21 @@ $scope.logueado = 0 ;
    
        // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
             $scope.resultadoArtistas  =  response.data ; 
+            
+         
             for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
              //console.log($scope.resultadoArtistas[i].id);
                 if(parseInt($scope.resultadoArtistas[i].id) === parseInt($scope.loginData.usuario)){
                   //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
                     $rootScope.artistaLogueado = $scope.resultadoArtistas[i] ; 
+                    $rootScope.posicionEnFire = i ; 
 
                       console.log('Doing login', $scope.loginData);
                       window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
                       window.localStorage.setItem('clave' ,  $scope.loginData.clave);
                       window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
+                      window.localStorage.setItem('posicionEnFire' ,  JSON.stringify($rootScope.posicionEnFire));
+                     
                       $scope.loginData.login = 1;
                       idUsuarioLog = true; 
                       $scope.loginData.login = true;
@@ -1650,9 +1860,11 @@ $scope.logueado = 0 ;
                       console.log('Doing login', $scope.loginData);
 
                       $scope.cerrarLogin();
+                      console.log("posicion en fire " + $rootScope.posicionEnFire);
                       return;
                 }
             }
+
             $scope.loginIncorrectoMensaje();
           
       });
@@ -1682,7 +1894,8 @@ $scope.logueado = 0 ;
        $scope.loginData.login = false;
        window.localStorage.setItem('usuario' , "");
        window.localStorage.setItem('clave' ,  "");
-        window.localStorage.setItem('artistaLogueado' ,  "");
+       window.localStorage.setItem('artistaLogueado' ,  "");
+       window.localStorage.setItem('posicionEnFire' ,"");
        $state.go("app.descubrir");
   }
 
@@ -2246,7 +2459,8 @@ $scope.getContactList = function() {
        //$window.location.reload(true);
       $http.defaults.useXDomain = true;
 
-      $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+    //  $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
+        $http.get('https://inkgpsapp.firebaseio.com/data.json')
       .success(function(data, status, headers, config){
       //alert("**** SUCCESS ****");
      // alert(status);
@@ -2309,6 +2523,7 @@ $scope.getContactList = function() {
         if($scope.filtro.estilo != "Todos" && $scope.filtro.ciudad == "Todos" )
         {
            $scope.artistasCodigo = response.data;
+            $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
 //alert("entra estilo");
@@ -2356,6 +2571,7 @@ $scope.getContactList = function() {
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo == "Todos" )
         {
            $scope.artistasCodigo = response.data;
+           $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.trabajos);
          //    alert("entra ciudad");
@@ -2392,6 +2608,7 @@ $scope.getContactList = function() {
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo != "Todos")
         {
             $scope.artistasCodigo = response.data;
+             $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.trabajos);
           //alert("entra doble");

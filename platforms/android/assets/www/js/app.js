@@ -6,7 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 var db = null;
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services'])
+
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase'])
 
 
 
@@ -42,6 +43,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+   //  firebaseData = new Firebase("https://inkgpsapp.firebaseio.com/data");
 
     if(typeof navigator.globalization !== "undefined") {
                 navigator.globalization.getPreferredLanguage(function(language) {
@@ -89,6 +92,29 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
 
 
 })
+
+.factory("informacionData", function($firebaseArray,$http) {
+  var dataink = null;
+  $http.get('https://inkgpsapp.firebaseio.com/data.json')
+              .success(function(data, status, headers, config){
+                //alert("**** SUCCESS ****");
+               // alert(status);
+              })
+              .error(function(data, status, headers, config){
+                console.log("error ===>");
+                console.log(status);
+                console.log(data);
+                console.log(headers);
+                console.log(config);            
+              })
+              .then(function(response){            
+              dataink = response.data;
+         });   
+    return dataink;
+}) 
+
+
+
 
   .directive('textarea', function() {
   return {
