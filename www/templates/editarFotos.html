@@ -10,13 +10,13 @@
 		<p >
 	
 			<button class="button button-block " 
-			ng-click="selImagenTrabajos($index)" ng-disabled="!ready">
+			ng-click="selImagenTrabajos($index)" >
 				Seleccionar otra imagen
 			</button>
 			<button class="button button-block " ng-click="tomarFotoDeImagen($index)" >
 				Tomar foto 
 			</button>
-			<img  style="width: 100% ;" ng-src="{{img}}" />
+			<img  style="width: 100% ;" src="{{img}}" />
 		</p>
 	</div>
 	  <button class="button button-full button-stable  letraBlanca" ng-click="guardarFotos()">
