@@ -1,22 +1,25 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes ,$rootScope) {
   Scopes.store('AppCtrl', $scope);
   console.log("entra controlador appCtrl");
-     $scope.irTab =  function(nombre){
+     /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         //console.log("ir tab index "  +$scope.loginData.usuario ); 
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+            for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+               }
+             $rootScope.shuffleArray($rootScope.artistas);
          }else{
            $state.go('app.'+nombre);
          }     
-    }
+    }*/
   $scope.valorfiltro=true;
   $scope.usuarioAutenticado = 0  ;
   // With the new view caching in Ionic, Controllers are only called
@@ -28,12 +31,12 @@ angular.module('starter.controllers', [])
   
 
 })
-.controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes) {
+.controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes,$rootScope) {
 Scopes.store('BocetosController', $scope);
 console.log("entra controlador bocetos");
 
 
-    $scope.irTab =  function(nombre){
+   /* $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -42,13 +45,14 @@ console.log("entra controlador bocetos");
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+             $rootScope.shuffleArray($rootScope.artistas);
+            
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
 
    $ionicModal.fromTemplateUrl('./templates/detalleArtistaBocetos.html', {
         scope: $scope
@@ -142,7 +146,7 @@ $scope.valorfiltro=true;
      $scope.cargarSeleccionadoBoceto = function (id) {
     
       //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-  $http.get('https://inkgpsapp.firebaseio.com/data.json')
+ /* $http.get('https://inkgpsapp.firebaseio.com/data.json')
     .success(function(data, status, headers, config){
 
     })
@@ -152,11 +156,11 @@ $scope.valorfiltro=true;
     })
     .then(function(response){
       $scope.artistas = {};
-     $scope.artistas = response.data;
-      for(var i = 0 ; i <= $scope.artistas.length ; i++){
+     $scope.artistas = response.data;*/
+      for(var i = 0 ; i <= $rootScope.artistas.length ; i++){
       //  console.log("valor id = " + id+ "vlor 2 = " +$scope.artistas[i].id);
 
-           if(parseInt($scope.artistas[i].id) === parseInt(id)){
+           if(parseInt($rootScope.artistas[i].id) === parseInt(id)){
               //if(angular.equals(id,$scope.artistas[i].id )){
               //alert("entra");
                  
@@ -167,26 +171,26 @@ $scope.valorfiltro=true;
 
                //  alert( $scope.artistas[id1].id );
               //  $scope.idArtista =  id+1;
-                $scope.artistaSeleccionado.codigo = $scope.artistas[i].id; 
-                $scope.artistaSeleccionado.nombre = $scope.artistas[i].nombre; 
-                $scope.artistaSeleccionado.estudio= $scope.artistas[i].estudio;
-                $scope.artistaSeleccionado.especialidad = $scope.artistas[i].especialidad; 
-                $scope.artistaSeleccionado.descripcion = $scope.artistas[i].descripcion; 
-                $scope.artistaSeleccionado.imagen = $scope.artistas[i].imagen; 
-                $scope.artistaSeleccionado.direccion = $scope.artistas[i].direccion; 
-                $scope.artistaSeleccionado.celular = $scope.artistas[i].celular; 
-                $scope.artistaSeleccionado.facebook = $scope.artistas[i].facebook; 
-                $scope.artistaSeleccionado.twitter = $scope.artistas[i].twitter; 
-                $scope.artistaSeleccionado.instagram = $scope.artistas[i].instagram; 
-                $scope.artistaSeleccionado.trabajos = $scope.artistas[i].trabajos;
-                $scope.artistaSeleccionado.opcionVideo = $scope.artistas[i].opcionVideo;
-                $scope.artistaSeleccionado.videos = $scope.artistas[i].videos;
-                $scope.artistaSeleccionado.latitud= $scope.artistas[i].latitud;
-                $scope.artistaSeleccionado.longitud = $scope.artistas[i].longitud;
-                $scope.artistaSeleccionado.ciudad = $scope.artistas[i].ciudad;
+                $scope.artistaSeleccionado.codigo = $rootScope.artistas[i].id; 
+                $scope.artistaSeleccionado.nombre = $rootScope.artistas[i].nombre; 
+                $scope.artistaSeleccionado.estudio= $rootScope.artistas[i].estudio;
+                $scope.artistaSeleccionado.especialidad = $rootScope.artistas[i].especialidad; 
+                $scope.artistaSeleccionado.descripcion = $rootScope.artistas[i].descripcion; 
+                $scope.artistaSeleccionado.imagen = $rootScope.artistas[i].imagen; 
+                $scope.artistaSeleccionado.direccion = $rootScope.artistas[i].direccion; 
+                $scope.artistaSeleccionado.celular = $rootScope.artistas[i].celular; 
+                $scope.artistaSeleccionado.facebook = $rootScope.artistas[i].facebook; 
+                $scope.artistaSeleccionado.twitter = $rootScope.artistas[i].twitter; 
+                $scope.artistaSeleccionado.instagram = $rootScope.artistas[i].instagram; 
+                $scope.artistaSeleccionado.trabajos = $rootScope.artistas[i].trabajos;
+                $scope.artistaSeleccionado.opcionVideo = $rootScope.artistas[i].opcionVideo;
+                $scope.artistaSeleccionado.videos = $rootScope.artistas[i].videos;
+                $scope.artistaSeleccionado.latitud= $rootScope.artistas[i].latitud;
+                $scope.artistaSeleccionado.longitud = $rootScope.artistas[i].longitud;
+                $scope.artistaSeleccionado.ciudad = $rootScope.artistas[i].ciudad;
                 $scope.allImages = $scope.artistaSeleccionado.trabajos;
-                $scope.artistaSeleccionado.usuarioFacebook = $scope.artistas[i].usuarioFacebook;
-                $scope.artistaSeleccionado.usuarioTwitter = $scope.artistas[i].usuarioTwitter;
+                $scope.artistaSeleccionado.usuarioFacebook = $rootScope.artistas[i].usuarioFacebook;
+                $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[i].usuarioTwitter;
                 $scope.mostrarTwitter  = false;
                 $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
                 //console.log($scope.artistaSeleccionado.video1);
@@ -202,7 +206,7 @@ $scope.valorfiltro=true;
                   // alert( $scope.artistaSeleccionado.mostrarTwitter);
                 }
 
-                $scope.artistaSeleccionado.usuarioInstagram = $scope.artistas[i].usuarioInstagram;
+                $scope.artistaSeleccionado.usuarioInstagram = $rootScope.artistas[i].usuarioInstagram;
                 $scope.mostrarInstagram  = false;
                  if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
                 {
@@ -219,7 +223,7 @@ $scope.valorfiltro=true;
       }
 
   
-    })
+   // })
  
      
 
@@ -228,11 +232,11 @@ $scope.valorfiltro=true;
 
 
 })
-.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes) {
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes,$rootScope) {
 Scopes.store('IntroCtrl', $scope);
 console.log("entra controlador intro");
 
-     $scope.irTab =  function(nombre){
+    /* $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -241,13 +245,14 @@ console.log("entra controlador intro");
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+            $rootScope.shuffleArray($rootScope.artistas);
+
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
   // Called to navigate to the main app
   $scope.startApp = function() {
     $state.go('app.ayuda');
@@ -267,11 +272,11 @@ console.log("entra controlador intro");
 
 
 
-.controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes) {
+.controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes,$rootScope) {
   Scopes.store('MultimediaController', $scope);
   console.log("entra controlador multimedia ");
 
-  $scope.irTab =  function(nombre){
+  /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -280,13 +285,13 @@ console.log("entra controlador intro");
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+            $rootScope.shuffleArray($rootScope.artistas);
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
  $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   }
@@ -327,10 +332,10 @@ $scope.valorfiltro=true;
     })
   //alert("entra");
 })
-.controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes) {
+.controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes,$rootScope) {
   Scopes.store('PromocionesController', $scope);
   console.log("entra controlador promo");
-   $scope.irTab =  function(nombre){
+   /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -339,13 +344,13 @@ $scope.valorfiltro=true;
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+            $rootScope.shuffleArray($rootScope.artistas);
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
 $scope.valorfiltro=true;
    $scope.show = function() {
     $ionicLoading.show({
@@ -382,10 +387,10 @@ $scope.valorfiltro=true;
     })
   //alert("entra");
 })
-.controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes) {
+.controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes,$rootScope) {
   Scopes.store('EventosController', $scope);
   console.log("entra controlador eventos");
-   $scope.irTab =  function(nombre){
+   /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -394,13 +399,14 @@ $scope.valorfiltro=true;
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+             $rootScope.shuffleArray($rootScope.artistas);
+            
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
     
 $scope.ir = function(url){
    
@@ -451,7 +457,8 @@ $scope.valorfiltro=true;
 .controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes) {
   Scopes.store('PublicidadController', $scope);
   console.log("entra controlador publi");
-     $scope.irTab =  function(nombre){
+     
+     /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -460,13 +467,14 @@ $scope.valorfiltro=true;
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+            $rootScope.shuffleArray($rootScope.artistas);
+            
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
  $ionicModal.fromTemplateUrl('./templates/detalleEstudio.html', {
         scope: $scope
     }).then(function (modalpubli) {
@@ -621,9 +629,9 @@ $scope.getContactList = function() {
 
 
 
-.controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup) {
+.controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup,$rootScope) {
   console.log("entra controlador play");
-    $scope.irTab =  function(nombre){
+    /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab index "  +$scope.loginData.usuario ); 
@@ -632,13 +640,14 @@ $scope.getContactList = function() {
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
+             $rootScope.shuffleArray($rootScope.artistas);
+          
          }else{
 
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
   $scope.valorfiltro=true;
   $scope.playlists = [
     { title: 'Realismo,ilustracion ', id: 1 },
@@ -917,9 +926,9 @@ $scope.valorfiltro=true;
 .controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
       Scopes.store('editarArtistaController', $scope);
       console.log("entra controlador editarArtista");
-      $scope.loginData = {};
-      $scope.loginData.usuario = window.localStorage.getItem("usuario");
-      $scope.loginData.clave = window.localStorage.getItem("clave");
+      //$rootScope.loginData = {};
+      $rootScope.loginData.usuario = window.localStorage.getItem("usuario");
+      $rootScope.loginData.clave = window.localStorage.getItem("clave");
       console.log("valor");
       console.log(angular.toJson(window.localStorage.getItem('artistaLogueado')));
 
@@ -934,7 +943,7 @@ $scope.valorfiltro=true;
       console.log($scope.artistaLogueado);
 
 
-        $scope.irTab =  function(nombre){
+      /*  $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
          console.log("ir tab editar "  +$scope.loginData.usuario ); 
@@ -946,7 +955,7 @@ $scope.valorfiltro=true;
            $state.go('app.'+nombre);
          }
      
-    }
+    }*/
 
       $scope.selImagenPerfil= function() {
           
@@ -955,8 +964,10 @@ $scope.valorfiltro=true;
             quality: 100,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
             targetWidth: 600,
-            targetHeight: 600
+            targetHeight: 600,
           };
 
           $cordovaCamera.getPicture(options).then(function(imageUri) {
@@ -1037,10 +1048,10 @@ $scope.valorfiltro=true;
             quality : 100, 
             destinationType : Camera.DestinationType.DATA_URL, 
             sourceType : Camera.PictureSourceType.CAMERA, 
-            allowEdit : true,
+            //allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
             targetWidth:600,
-            targetHeight: 600,
+            targetHeight: 900,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true
         };
@@ -1412,7 +1423,7 @@ $http.defaults.useXDomain = true;
   };
     
   $scope.cargaServicio = function(){
-    console.log("Entra cargar Servicio " + $scope.loginData.usuario);
+    console.log("Entra cargar Servicio " + $rootScope.loginData.usuario);
    
      /* $scope.artistaLogueado = 
                       {"direccion":"Zona rosa",
@@ -1449,17 +1460,93 @@ $http.defaults.useXDomain = true;
 
 })
 
+.controller('descubrirController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache ) {
+  
+
+    $rootScope.loginData = {};
+    $rootScope.loginData.login = false;
+  console.log("valor usuario " + window.localStorage.getItem('usuario'));
+    if( window.localStorage.getItem('usuario') === "" || 
+         window.localStorage.getItem('clave') === "" 
+          ){
+            $rootScope.loginData.login = false;
+           
+          }
+          else{
+           $rootScope.artistaLogueado = window.localStorage.getItem('artistaLogueado');
+           $rootScope.loginData.login = true;
+
+          }
+
+    var idUsuarioLog = true ; 
+
+   $rootScope.shuffleArray = function(array) {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle
+        while (m) {
+
+          // Pick a remaining element…
+          i = Math.floor(Math.random() * m--);
+
+          // And swap it with the current element.
+          t = array[m];
+          array[m] = array[i];
+          array[i] = t;
+        }
+
+        return array;
+      }
+ 
+    $rootScope.artistas = [];
+    $scope.cargaDescubrir =  function (){
+  
+
+      
+          //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+          $http.get('https://inkgpsapp.firebaseio.com/data.json')
+          .success(function(data, status, headers, config){
+          //alert("**** SUCCESS ****");
+         // alert(status);
+          })
+          .error(function(data, status, headers, config){
+          //alert("**** Verificar conexion a internet ****");
+         // alert(status);
+         // alert(angular.toJson(data))
+          })
+          .then(function(response){
+               
+               $rootScope.artistas = response.data;
+               for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+               }
+               
+               
+                console.log("respuesta feed  SHUFFLE=>");
+                 $rootScope.shuffleArray($rootScope.artistas);
+
+                 
+                console.log($rootScope.artistas);
+               
+          });
 
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,informacionData) {
+      console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
+    }
+    $scope.cargaDescubrir();
+
+})
+
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache ) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
     $scope.marca = "otro"; 
  $scope.artistaLogueado = {};
 
-   
-   
 
+
+   
+   
     
 
     document.addEventListener("deviceready", function () {
@@ -1489,7 +1576,7 @@ $http.defaults.useXDomain = true;
 
         // While there remain elements to shuffle
         while (m) {
-          console.log("entra while ");
+
           // Pick a remaining element…
           i = Math.floor(Math.random() * m--);
 
@@ -1501,11 +1588,14 @@ $http.defaults.useXDomain = true;
 
         return array;
       }
-
-
+ 
+    //$rootScope.artistas = [];
     $scope.cargaDescubrir =  function (){
+  
+
+      
           //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
-                $http.get('https://inkgpsapp.firebaseio.com/data.json')
+          $http.get('https://inkgpsapp.firebaseio.com/data.json')
           .success(function(data, status, headers, config){
           //alert("**** SUCCESS ****");
          // alert(status);
@@ -1516,21 +1606,31 @@ $http.defaults.useXDomain = true;
          // alert(angular.toJson(data))
           })
           .then(function(response){
-                $scope.artistas=[];
-                $scope.artistas = response.data;
+               
+               $rootScope.artistas = response.data;
+               for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+               }
+               
                
                 console.log("respuesta feed  SHUFFLE=>");
-                 $rootScope.shuffleArray($scope.artistas);
-                console.log($scope.artistas);
+                 $rootScope.shuffleArray($rootScope.artistas);
+
+                 
+                console.log($rootScope.artistas);
+               
           });
 
-     
 
-
+      console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
     }
+   
+   
+    
 
-     $scope.cargaDescubrir();
-
+      
+     //$scope.cargaDescubrir();
+     
 
    
 
@@ -1704,7 +1804,7 @@ $http.defaults.useXDomain = true;
     }
 
 
-    $scope.loginData = {};
+    /*$scope.loginData = {};
     $scope.loginData.login = false;
   console.log("valor usuario " + window.localStorage.getItem('usuario'));
     if( window.localStorage.getItem('usuario') === "" || 
@@ -1719,7 +1819,7 @@ $http.defaults.useXDomain = true;
 
           }
 
-    var idUsuarioLog = true ; 
+    var idUsuarioLog = true ; */
 
 
    $scope.abrirLoading = function() {
@@ -1743,7 +1843,7 @@ $http.defaults.useXDomain = true;
 
 $scope.logueado = 0 ; 
 
- console.log("valor inicial ==>"  + $scope.loginData.usuarioAutenticado  );
+ console.log("valor inicial ==>"  + $rootScope.loginData.usuarioAutenticado  );
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -1758,6 +1858,7 @@ $scope.logueado = 0 ;
 
   // Open the login modal
   $scope.abrirLogin = function() {
+
     $scope.modalLogin.show();
   };
 
@@ -1827,7 +1928,7 @@ $scope.logueado = 0 ;
 
 
       //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-      $http.get('https://inkgpsapp.firebaseio.com/data.json')
+     /* $http.get('https://inkgpsapp.firebaseio.com/data.json')
       .success(function(data, status, headers, config){
       //alert("**** SUCCESS ****");
      // alert(status);
@@ -1837,31 +1938,31 @@ $scope.logueado = 0 ;
      // alert(status);
      // alert(angular.toJson(data))
       })
-      .then(function(response){
+      .then(function(response){*/
       idUsuarioLog =   $stateParams.idParametro ; 
    
        // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
-            $scope.resultadoArtistas  =  response.data ; 
+            $scope.resultadoArtistas  =  $rootScope.artistas ; 
             
          
             for (var i = 0 ; i < $scope.resultadoArtistas.length; i++) {
              //console.log($scope.resultadoArtistas[i].id);
-                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($scope.loginData.usuario)){
+                if(parseInt($scope.resultadoArtistas[i].id) === parseInt($rootScope.loginData.usuario)){
                   //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
                     $rootScope.artistaLogueado = $scope.resultadoArtistas[i] ; 
                     $rootScope.posicionEnFire = i ; 
 
-                      console.log('Doing login', $scope.loginData);
-                      window.localStorage.setItem('usuario' ,  $scope.loginData.usuario);
-                      window.localStorage.setItem('clave' ,  $scope.loginData.clave);
+                      console.log('Doing login', $rootScope.loginData);
+                      window.localStorage.setItem('usuario' ,  $rootScope.loginData.usuario);
+                      window.localStorage.setItem('clave' ,  $rootScope.loginData.clave);
                       window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
                       window.localStorage.setItem('posicionEnFire' ,  JSON.stringify($rootScope.posicionEnFire));
                      
-                      $scope.loginData.login = 1;
+                      $rootScope.loginData.login = 1;
                       idUsuarioLog = true; 
-                      $scope.loginData.login = true;
+                      $rootScope.loginData.login = true;
 
-                      console.log('Doing login', $scope.loginData);
+                      console.log('Doing login', $rootScope.loginData);
 
                       $scope.cerrarLogin();
                       console.log("posicion en fire " + $rootScope.posicionEnFire);
@@ -1871,7 +1972,7 @@ $scope.logueado = 0 ;
 
             $scope.loginIncorrectoMensaje();
           
-      });
+      //});
 
   
 
@@ -1895,7 +1996,7 @@ $scope.logueado = 0 ;
   };
 
   $scope.cerrarSesion = function (){
-       $scope.loginData.login = false;
+       $rootScope.loginData.login = false;
        window.localStorage.setItem('usuario' , "");
        window.localStorage.setItem('clave' ,  "");
        window.localStorage.setItem('artistaLogueado' ,  "");
@@ -1985,18 +2086,34 @@ $scope.scrollTop = function() {//ng-click for back to top button
       //alert("ENTRA 3");
   };
 //$window.location.href = '#/app/artistas';
+    $scope.esDescubrir  = false ; 
 
-    $scope.irTab =  function(nombre){
+    $rootScope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
+         console.log("ir tab index "  +$rootScope.loginData.usuario ); 
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.cargaDescubrir();
-         }else{
+            $scope.esDescubrir  = false ; 
+            
+            for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+               }
+            $rootScope.shuffleArray($rootScope.artistas);
+         }else if (nombre === 'artistas'){
+            $state.go('app.'+nombre);
+            $scope.esDescubrir  = true ;
+            $rootScope.shuffleArray($rootScope.artistas);
+         }else if (nombre === 'login'){
+           // $state.go('app.'+nombre);
+            //$scope.esDescubrir  = true ;
+            $scope.abrirLogin();
+            //$rootScope.shuffleArray($rootScope.artistas);
+         }
+         else{
 
            $state.go('app.'+nombre);
          }
@@ -2156,26 +2273,26 @@ $scope.show1 = function() {
       $scope.login();
       
       $scope.idArtista =  id+1;
-       $scope.artistaSeleccionado.codigo = $scope.artistas[id].id; 
-      $scope.artistaSeleccionado.nombre = $scope.artistas[id].nombre; 
-      $scope.artistaSeleccionado.estudio= $scope.artistas[id].estudio;
-      $scope.artistaSeleccionado.especialidad = $scope.artistas[id].especialidad; 
-      $scope.artistaSeleccionado.descripcion = $scope.artistas[id].descripcion; 
-      $scope.artistaSeleccionado.imagen = $scope.artistas[id].imagen; 
-      $scope.artistaSeleccionado.direccion = $scope.artistas[id].direccion; 
-      $scope.artistaSeleccionado.celular = $scope.artistas[id].celular; 
-      $scope.artistaSeleccionado.facebook = $scope.artistas[id].facebook; 
-      $scope.artistaSeleccionado.twitter = $scope.artistas[id].twitter; 
-      $scope.artistaSeleccionado.instagram = $scope.artistas[id].instagram; 
-      $scope.artistaSeleccionado.trabajos = $scope.artistas[id].trabajos;
-      $scope.artistaSeleccionado.opcionVideo = $scope.artistas[id].opcionVideo;
-      $scope.artistaSeleccionado.videos = $scope.artistas[id].videos;
-      $scope.artistaSeleccionado.latitud= $scope.artistas[id].latitud;
-      $scope.artistaSeleccionado.longitud = $scope.artistas[id].longitud;
-      $scope.artistaSeleccionado.ciudad = $scope.artistas[id].ciudad;
+       $scope.artistaSeleccionado.codigo = $rootScope.artistas[id].id; 
+      $scope.artistaSeleccionado.nombre = $rootScope.artistas[id].nombre; 
+      $scope.artistaSeleccionado.estudio= $rootScope.artistas[id].estudio;
+      $scope.artistaSeleccionado.especialidad = $rootScope.artistas[id].especialidad; 
+      $scope.artistaSeleccionado.descripcion = $rootScope.artistas[id].descripcion; 
+      $scope.artistaSeleccionado.imagen = $rootScope.artistas[id].imagen; 
+      $scope.artistaSeleccionado.direccion = $rootScope.artistas[id].direccion; 
+      $scope.artistaSeleccionado.celular = $rootScope.artistas[id].celular; 
+      $scope.artistaSeleccionado.facebook = $rootScope.artistas[id].facebook; 
+      $scope.artistaSeleccionado.twitter = $rootScope.artistas[id].twitter; 
+      $scope.artistaSeleccionado.instagram = $rootScope.artistas[id].instagram; 
+      $scope.artistaSeleccionado.trabajos = $rootScope.artistas[id].trabajos;
+      $scope.artistaSeleccionado.opcionVideo = $rootScope.artistas[id].opcionVideo;
+      $scope.artistaSeleccionado.videos = $rootScope.artistas[id].videos;
+      $scope.artistaSeleccionado.latitud= $rootScope.artistas[id].latitud;
+      $scope.artistaSeleccionado.longitud = $rootScope.artistas[id].longitud;
+      $scope.artistaSeleccionado.ciudad = $rootScope.artistas[id].ciudad;
       $scope.allImages = $scope.artistaSeleccionado.trabajos;
-      $scope.artistaSeleccionado.usuarioFacebook = $scope.artistas[id].usuarioFacebook;
-      $scope.artistaSeleccionado.usuarioTwitter = $scope.artistas[id].usuarioTwitter;
+      $scope.artistaSeleccionado.usuarioFacebook = $rootScope.artistas[id].usuarioFacebook;
+      $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[id].usuarioTwitter;
       $scope.mostrarTwitter  = false;
       $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
       console.log($scope.artistaSeleccionado.video1);
@@ -2190,7 +2307,7 @@ $scope.show1 = function() {
         // alert( $scope.artistaSeleccionado.mostrarTwitter);
       }
 
-      $scope.artistaSeleccionado.usuarioInstagram = $scope.artistas[id].usuarioInstagram;
+      $scope.artistaSeleccionado.usuarioInstagram = $rootScope.artistas[id].usuarioInstagram;
       $scope.mostrarInstagram  = false;
        if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
       {
@@ -2360,9 +2477,9 @@ $scope.getContactList = function() {
     };
 
     $scope.verificaFiltro = function(){
-      console.log($scope.loginData) ; 
-        $scope.loginData.login ="ok";
-        console.log($scope.loginData) ; 
+      console.log($rootScope.loginData) ; 
+        $rootScope.loginData.login ="ok";
+        console.log($rootScope.loginData) ; 
              console.log( $scope.filtro.estilo + " --- "+ $scope.filtro.ciudad + "--" + $scope.filtro.mostrarCodigo ) ; 
         if ($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos") {
               if ($scope.filtro.mostrarCodigo === "undefined" || !$scope.filtro.mostrarCodigo ) {

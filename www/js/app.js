@@ -93,25 +93,6 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
 
 })
 
-.factory("informacionData", function($firebaseArray,$http) {
-  var dataink = null;
-  $http.get('https://inkgpsapp.firebaseio.com/data.json')
-              .success(function(data, status, headers, config){
-                //alert("**** SUCCESS ****");
-               // alert(status);
-              })
-              .error(function(data, status, headers, config){
-                console.log("error ===>");
-                console.log(status);
-                console.log(data);
-                console.log(headers);
-                console.log(config);            
-              })
-              .then(function(response){            
-              dataink = response.data;
-         });   
-    return dataink;
-}) 
 
 
 
@@ -708,11 +689,10 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
     })
      .state('app.descubrir', {
       url: "/descubrir",
-     cache : false,
       views: {
         'menuContent': {
           templateUrl: "templates/descubrir.html",
-          controller: 'indexController'
+           controller: 'indexController'
         }
       }
     })
