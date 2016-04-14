@@ -193,7 +193,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             cerrarSesion :"Log out",
             editarUbicacion :"Edit ubication",
             explorar :"Explorar",
-            agendarCita: "Agendar cita"
+            agendarCita: "Agendar cita",
+            editarClave :"Editar clave"
 
 
 
@@ -250,7 +251,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
              cerrarSesion :"Cerrar sesion",
             editarUbicacion :"Editar ubicacion",
             explorar :"Explorar",
-            agendarCita: "Agendar cita"
+            agendarCita: "Agendar cita",
+            editarClave :"Editar clave"
 
 
 
@@ -308,7 +310,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
              cerrarSesion :"Log out",
             editarUbicacion :"Edit ubication",
             explorar :"Explorar",
-            agendarCita: "Agendar cita"
+            agendarCita: "Agendar cita",
+            editarClave :"Editar clave"
 
 
 
@@ -660,6 +663,19 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       views: {
         'menuContent': {
           templateUrl: "templates/editarFotos.html",
+          controller: 'editarArtistaController',
+            params: {
+                      usuario: null,
+                      clave:null
+                  }
+        }
+      }
+    })
+    .state('app.editarClave', {
+      url: "/editarClave/:usuario/:clave",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/editarClave.html",
           controller: 'editarArtistaController',
             params: {
                       usuario: null,

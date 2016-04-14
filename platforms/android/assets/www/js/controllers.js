@@ -1461,7 +1461,29 @@ $http.defaults.useXDomain = true;
 })
 
 .controller('descubrirController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache ) {
-  
+    
+
+    document.addEventListener("deviceready", function () {
+        var device = $cordovaDevice.getDevice();
+        var cordova = $cordovaDevice.getCordova();
+        var model = $cordovaDevice.getModel();
+        var platform = $cordovaDevice.getPlatform();
+        var uuid = $cordovaDevice.getUUID();
+        var version = $cordovaDevice.getVersion();
+
+
+
+      //  alert("device model =>" +device.model);
+        //alert("device manufacturer =>" +device.manufacturer);
+        $rootScope.marca  =  device.manufacturer ; 
+      //  alert("device platform =>" +device.platform);
+      //  alert("cordova =>" +cordova);
+      //  alert("model =>" +model);
+      //  alert("platform =>" +platform);
+      //  alert("uuid =>" +uuid);
+      //  alert("version =>" +version);
+
+        }, false);
 
     $rootScope.loginData = {};
     $rootScope.loginData.login = false;
@@ -1499,7 +1521,7 @@ $http.defaults.useXDomain = true;
       }
  
     $rootScope.artistas = [];
-    $scope.cargaDescubrir =  function (){
+    $rootScope.cargaDescubrir =  function (){
   
 
       
@@ -1533,23 +1555,17 @@ $http.defaults.useXDomain = true;
 
       console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
     }
-    $scope.cargaDescubrir();
+    $rootScope.cargaDescubrir();
 
 })
 
 .controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache ) {
     Scopes.store('indexController', $scope);
     console.log("entra controlador index");
-    $scope.marca = "otro"; 
- $scope.artistaLogueado = {};
+    $rootScope.marca = "otro"; 
+    $scope.artistaLogueado = {};
 
-
-
-   
-   
-    
-
-    document.addEventListener("deviceready", function () {
+  document.addEventListener("deviceready", function () {
         var device = $cordovaDevice.getDevice();
         var cordova = $cordovaDevice.getCordova();
         var model = $cordovaDevice.getModel();
@@ -1561,7 +1577,7 @@ $http.defaults.useXDomain = true;
 
       //  alert("device model =>" +device.model);
         //alert("device manufacturer =>" +device.manufacturer);
-        $scope.marca  =  device.manufacturer ; 
+        $rootScope.marca  =  device.manufacturer ; 
       //  alert("device platform =>" +device.platform);
       //  alert("cordova =>" +cordova);
       //  alert("model =>" +model);
@@ -1570,8 +1586,25 @@ $http.defaults.useXDomain = true;
       //  alert("version =>" +version);
 
         }, false);
-    
-      $rootScope.shuffleArray = function(array) {
+
+    $rootScope.loginData = {};
+    $rootScope.loginData.login = false;
+  console.log("valor usuario " + window.localStorage.getItem('usuario'));
+    if( window.localStorage.getItem('usuario') === "" || 
+         window.localStorage.getItem('clave') === "" 
+          ){
+            $rootScope.loginData.login = false;
+           
+          }
+          else{
+           $rootScope.artistaLogueado = window.localStorage.getItem('artistaLogueado');
+           $rootScope.loginData.login = true;
+
+          }
+
+    var idUsuarioLog = true ; 
+
+   $rootScope.shuffleArray = function(array) {
         var m = array.length, t, i;
 
         // While there remain elements to shuffle
@@ -1589,9 +1622,10 @@ $http.defaults.useXDomain = true;
         return array;
       }
  
-    //$rootScope.artistas = [];
-    $scope.cargaDescubrir =  function (){
-  
+   
+    
+    $rootScope.cargaDescubrir =  function (){
+    primer = 1 ; 
 
       
           //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
@@ -1606,7 +1640,7 @@ $http.defaults.useXDomain = true;
          // alert(angular.toJson(data))
           })
           .then(function(response){
-               
+                $rootScope.artistas = [];
                $rootScope.artistas = response.data;
                for (var i = 0; i <  $rootScope.artistas.length; i++) {
                  $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
@@ -1622,17 +1656,13 @@ $http.defaults.useXDomain = true;
           });
 
 
-      console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
+      //console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
     }
-   
-   
-    
+    if(primer === 0){
+    $rootScope.cargaDescubrir();
+  }
 
-      
-     //$scope.cargaDescubrir();
-     
 
-   
 
 
     $scope.compartir = function(imagen){
@@ -1958,7 +1988,7 @@ $scope.logueado = 0 ;
                       window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
                       window.localStorage.setItem('posicionEnFire' ,  JSON.stringify($rootScope.posicionEnFire));
                      
-                      $rootScope.loginData.login = 1;
+                     
                       idUsuarioLog = true; 
                       $rootScope.loginData.login = true;
 
@@ -2097,8 +2127,7 @@ $scope.scrollTop = function() {//ng-click for back to top button
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
             $state.go('app.'+nombre);
-            $scope.esDescubrir  = false ; 
-            
+            $scope.esDescubrir  = false ;             
             for (var i = 0; i <  $rootScope.artistas.length; i++) {
                  $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
                }
@@ -2106,7 +2135,7 @@ $scope.scrollTop = function() {//ng-click for back to top button
          }else if (nombre === 'artistas'){
             $state.go('app.'+nombre);
             $scope.esDescubrir  = true ;
-            $rootScope.shuffleArray($rootScope.artistas);
+           // $rootScope.shuffleArray($rootScope.artistas);
          }else if (nombre === 'login'){
            // $state.go('app.'+nombre);
             //$scope.esDescubrir  = true ;
@@ -2475,10 +2504,10 @@ $scope.getContactList = function() {
         //$scope.filtro.cargando = true;
 
     };
-
+    
     $scope.verificaFiltro = function(){
       console.log($rootScope.loginData) ; 
-        $rootScope.loginData.login ="ok";
+        
         console.log($rootScope.loginData) ; 
              console.log( $scope.filtro.estilo + " --- "+ $scope.filtro.ciudad + "--" + $scope.filtro.mostrarCodigo ) ; 
         if ($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos") {
@@ -2580,8 +2609,9 @@ $scope.getContactList = function() {
        //$window.location.reload(true);
       $http.defaults.useXDomain = true;
 
+
     //  $http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-        $http.get('https://inkgpsapp.firebaseio.com/data.json')
+   /*     $http.get('https://inkgpsapp.firebaseio.com/data.json')
       .success(function(data, status, headers, config){
       //alert("**** SUCCESS ****");
      // alert(status);
@@ -2591,21 +2621,25 @@ $scope.getContactList = function() {
      // alert(status);
      // alert(angular.toJson(data))
       })
-      .then(function(response){
+      .then(function(response){*/
       //alert("**** THEN ****"+ response.data);
        $scope.filtro.cargando = true;
         
         $scope.resultadoFiltro =[];
      
+          //SI BUSCA TODOS
+        if($scope.filtro.estilo == "Todos" && $scope.filtro.ciudad == "Todos" && $scope.filtro.codigo == "" )
+        {
+            $scope.artistasResultado = $rootScope.artistas; 
 
-        
+        }
 
 
 
 
         //SI BUSCA  POR CODIGO 
         if ($scope.filtro.codigo != "") {
-           $scope.artistasCodigo = response.data;
+           $scope.artistasCodigo = $rootScope.artistas;
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
 
@@ -2627,11 +2661,13 @@ $scope.getContactList = function() {
         {
 
          // alert("tamaño filtro" + $scope.resultadoFiltro.length);
-        $scope.artistas.length =0;
-        $scope.artistas.push($scope.resultadoFiltro);
+        $scope.artistasResultado =[];
+        $scope.artistasResultado.push($scope.resultadoFiltro);
+        $scope.filtro.cargando = false;
         }else{
               //alert("No hay resultados , se mostraran todos los artistas ");
               $scope.mostrarTextoNoEncontroCodigo();
+              $scope.filtro.cargando = false;
           
         }
         
@@ -2643,7 +2679,7 @@ $scope.getContactList = function() {
         //SI BUSCA POR  ESTILO
         if($scope.filtro.estilo != "Todos" && $scope.filtro.ciudad == "Todos" )
         {
-           $scope.artistasCodigo = response.data;
+           $scope.artistasCodigo = $rootScope.artistas;
             $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
@@ -2669,16 +2705,18 @@ $scope.getContactList = function() {
                 {
 
                  //alert("tamaño filtro" + $scope.resultadoFiltro.length);
-                 $scope.artistas.length =0;
+                 $scope.artistasResultado =[];
                   for (var i=0; i<$scope.artistasFiltro.length; i++){
 
-                      $scope.artistas.push($scope.artistasFiltro[i]);
+                      $scope.artistasResultado.push($scope.artistasFiltro[i]);
 
                   }
+                  $scope.filtro.cargando = false;
                }else
                {
               //alert("No hay resultados , se mostraran todos los artistas ");
                $scope.mostrarTextoNoEncontroCodigo();
+               $scope.filtro.cargando = false;
                }
         
        // alert("tamaño" + $scope.artistas.length);
@@ -2691,7 +2729,7 @@ $scope.getContactList = function() {
          //SI BUSCA POR  CIUDAD
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo == "Todos" )
         {
-           $scope.artistasCodigo = response.data;
+           $scope.artistasCodigo = $rootScope.artistas;
            $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.trabajos);
@@ -2717,18 +2755,21 @@ $scope.getContactList = function() {
                 {
 
                  //alert("tamaño filtro" + $scope.resultadoFiltro.length);
-                 $scope.artistas.length =0;
+                $scope.artistasResultado =[];
                   for (var i=0; i<$scope.artistasFiltro.length; i++){
 
-                      $scope.artistas.push($scope.artistasFiltro[i]);
+                      $scope.artistasResultado.push($scope.artistasFiltro[i]);
 
                   }
+                  $scope.filtro.cargando = false;
+               }else{
+                $scope.filtro.cargando = false;
                }
         }
          //SI BUSCA POR  CIUDAD   Y  POR ESTILO 
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo != "Todos")
         {
-            $scope.artistasCodigo = response.data;
+            $scope.artistasCodigo =$rootScope.artistas;
              $rootScope.shuffleArray($scope.artistasCodigo);
            $scope.trabajos = $scope.artistasCodigo[1].trabajos;
            $scope.trabajosjson = JSON.stringify($scope.trabajos);
@@ -2773,16 +2814,18 @@ $scope.getContactList = function() {
                 {
              //       alert("entro a si");
                  //alert("tamaño filtro" + $scope.resultadoFiltro.length);
-                 $scope.artistas.length =0;
+                $scope.artistasResultado =[];
                   for (var i=0; i<$scope.artistasFiltro2.length; i++){
 
-                      $scope.artistas.push($scope.artistasFiltro2[i]);
+                      $scope.artistasResultado.push($scope.artistasFiltro2[i]);
 
                   }
+                  $scope.filtro.cargando = false;
                }else
                {
               //alert("No hay resultados , se mostraran todos los artistas ");
                $scope.mostrarTextoNoEncontroCodigo();
+               $scope.filtro.cargando = false;
                }
         }
 
@@ -2793,92 +2836,13 @@ $scope.getContactList = function() {
           $scope.filtro.nombre = "";
           //$scope.filtro.ciudad = "Todos";
          
-        
-
-          //filtros para el analisis  del tipo de tatuaje que se desea realizar
-           if($scope.filtro.analisis)
-           {
-             $scope.filtro.resultadoEnFiltro = true;
-              $scope.filtro.analisis = false;
-              console.log("entro analisis ==>" +$scope.filtro.zona);
-              //veririfica intensidad de dolor
-             
-              if($scope.filtro.zona == "Cabeza" || $scope.filtro.zona == "Cuello" || $scope.filtro.zona == "Cara" || $scope.filtro.zona == "Abdomen" || $scope.filtro.zona == "Costillas" || $scope.filtro.zona == "Ingle"  || $scope.filtro.zona == "Pie"     ){
-                console.log("entra alta");
-                $scope.filtro.intensidadDeDolor ="Alta" ;
-              }
-              if($scope.filtro.zona == "Espalda" || $scope.filtro.zona == "Pecho" || $scope.filtro.zona == "Mano" || $scope.filtro.zona == "Rodilla" || $scope.filtro.zona == "Pantorrilla"  ){
-                console.log("entra Media");
-                $scope.filtro.intensidadDeDolor ="Media" ;
-              }
-                if($scope.filtro.zona == "Hombro" || $scope.filtro.zona == "Brazo" || $scope.filtro.zona == "Antebrazo" || $scope.filtro.zona == "Pierna" ){
-                console.log("entra Baja");
-                $scope.filtro.intensidadDeDolor ="Baja" ;
-              }
+       
 
 
-              //verifica cantidad de sesiones 
-              $scope.filtro.totalEnCentimetros = $scope.filtro.ancho * $scope.filtro.alto;
-              if($scope.filtro.totalEnCentimetros  <= 256)
-              {
-                console.log("entra 1 sesion");
-                $scope.filtro.cantidadSesiones = 1 ; 
-                if($scope.filtro.totalEnCentimetros  <= 16)
-                {
-                  console.log("entra 1 1 hora");
-                   $scope.filtro.tiempoTotalTatuaje = "1 a 2 Horas";
-
-                }
-                if($scope.filtro.totalEnCentimetros  >= 17 &&  $scope.filtro.totalEnCentimetros  <= 64 ) 
-                {
-                   $scope.filtro.tiempoTotalTatuaje = "2 a 4 Horas";
-
-                }
-                if($scope.filtro.totalEnCentimetros  >= 65 && $scope.filtro.totalEnCentimetros  <= 126 ) 
-                {
-                   $scope.filtro.tiempoTotalTatuaje = "4 a 6 Horas";
-
-                }
-                if($scope.filtro.totalEnCentimetros  > 127)
-                {
-                   $scope.filtro.tiempoTotalTatuaje = "6 a 8 Horas";
-
-                }
-              }
-               if($scope.filtro.totalEnCentimetros  >= 257 &&  $scope.filtro.totalEnCentimetros <= 512)
-              {
-                $scope.filtro.cantidadSesiones = 2 ; 
-                 $scope.filtro.tiempoTotalTatuaje = "1 a 5 Horas";
-              }
-              
-               if($scope.filtro.totalEnCentimetros  >= 513 &&  $scope.filtro.totalEnCentimetros <= 1024)
-              {
-                $scope.filtro.cantidadSesiones = 3; 
-                $scope.filtro.tiempoTotalTatuaje = "1 a 5 Horas";
-              }
-              
-               if($scope.filtro.totalEnCentimetros  >= 1025 &&  $scope.filtro.totalEnCentimetros <= 2024)
-              {
-                $scope.filtro.cantidadSesiones = 4 ; 
-                $scope.filtro.tiempoTotalTatuaje = "1 a 5 Horas";
-              }
-              
-               if($scope.filtro.totalEnCentimetros  >= 2025)
-              {
-                $scope.filtro.cantidadSesiones = 5 ; 
-                $scope.filtro.tiempoTotalTatuaje = "1 a 5 Horas";
-              }
-
-            console.log("entra a analisis" + $scope.filtro.totalEnCentimetros);
-           }else{
-            $scope.filtro.resultadoEnFiltro = false;
-           }
-
-
-     $scope.filtro.cargando = false;
-     })
+    // $scope.filtro.cargando = false;
+     //})
       $scope.closeFiltro(); 
-       $scope.filtro.cargando = true;
+     //  $scope.filtro.cargando = true;
       
   };
 
