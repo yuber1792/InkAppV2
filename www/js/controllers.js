@@ -5,8 +5,6 @@ angular.module('starter.controllers', [])
   console.log("entra controlador appCtrl");
      /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
-        
-        
          //console.log("ir tab index "  +$scope.loginData.usuario ); 
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
