@@ -7,7 +7,9 @@
 var db = null;
 
 
+
 angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase'])
+
 
 
 

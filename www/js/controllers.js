@@ -6,8 +6,10 @@ angular.module('starter.controllers', [])
      /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
+        
          //console.log("ir tab index "  +$scope.loginData.usuario ); 
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
+
 
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
          }else if (nombre === 'descubrir'){
