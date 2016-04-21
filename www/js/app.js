@@ -249,7 +249,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
              loginUsuario:"Login artista",
              editarPerfil :"Editar perfil",
              editarFotos :"Editar fotos",
-             cerrarSesion :"Cerrar sesion",
+             cerrarSesion :"Cerrar sesión",
             editarUbicacion :"Editar ubicacion",
             explorar :"Explorar",
             agendarCita: "Agendar cita",
