@@ -2736,6 +2736,7 @@ $scope.getContactList = function() {
           // console.log("entra");
             
             $scope.artistasResultado = $rootScope.artistas; 
+            $scope.filtro.mostrarCodigo = false;
 
         }
 
@@ -2751,6 +2752,7 @@ $scope.getContactList = function() {
           $scope.filtro.estilo = "Todos";
           $scope.filtro.ciudad = "Todos" 
           $scope.siFiltro  = false;
+          $scope.filtro.mostrarCodigo = false;
              for (var i=0; i<$scope.artistasCodigo.length; i++){
         //alert($scope.artistas[i].id + "   " + $scope.filtro.codigo);
 
