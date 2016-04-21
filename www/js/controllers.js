@@ -1281,11 +1281,22 @@ $http.defaults.useXDomain = true;
                           });
     
     $scope.edicionUbicacionCorrecta();
+     $http.get('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario')+'.json')
+          .success(function(data, status, headers, config){
+         
+          })
+          .error(function(data, status, headers, config){
+        
+          })
+          .then(function(response){
+               $scope.artistaLogueado = response.data;
+          });
  
 
 
   }
   $scope.guardarFotos =function (){
+
        var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario'));
               // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
       objetofotos.update( { 
@@ -1300,6 +1311,16 @@ $http.defaults.useXDomain = true;
                           });
 
       $scope.edicionFotosCorrecta();
+       $http.get('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario')+'.json')
+          .success(function(data, status, headers, config){
+         
+          })
+          .error(function(data, status, headers, config){
+        
+          })
+          .then(function(response){
+               $scope.artistaLogueado = response.data;
+          });
 
       
 
@@ -1419,7 +1440,16 @@ $scope.claves={};
 
     
     $scope.edicionCorrecta();
-
+     $http.get('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario')+'.json')
+          .success(function(data, status, headers, config){
+         
+          })
+          .error(function(data, status, headers, config){
+        
+          })
+          .then(function(response){
+               $scope.artistaLogueado = response.data;
+          });
 
 
   }
