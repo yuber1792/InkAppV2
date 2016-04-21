@@ -214,7 +214,14 @@ hr:nth-child(5n+0) {
 }
 
 .fo {
-background-image:url("../img/fondo.jpg");
+background-image:url("../img/fondoIzquierdo.png");
+ /*background-size: contain;*/
+ background-size: 100% 100%;
+ /*background-repeat: no-repeat;*/
+
+}
+.fo1 {
+background-image:url("../img/fondoDerecho.png");
  /*background-size: contain;*/
  background-size: 100% 100%;
  /*background-repeat: no-repeat;*/

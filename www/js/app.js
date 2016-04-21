@@ -194,7 +194,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             editarUbicacion :"Edit ubication",
             explorar :"Explorar",
             agendarCita: "Agendar cita",
-            editarClave :"Editar clave"
+            editarClave :"Editar clave",
+            proveedores :"Proveedores"
 
 
 
@@ -252,7 +253,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             editarUbicacion :"Editar ubicacion",
             explorar :"Explorar",
             agendarCita: "Agendar cita",
-            editarClave :"Editar clave"
+            editarClave :"Editar clave",
+            proveedores :"Proveedores"
 
 
 
@@ -311,7 +313,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             editarUbicacion :"Edit ubication",
             explorar :"Explorar",
             agendarCita: "Agendar cita",
-            editarClave :"Editar clave"
+            editarClave :"Editar clave",
+            proveedores :"Proveedores"
 
 
 

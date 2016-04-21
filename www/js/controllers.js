@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
     }*/
   $scope.valorfiltro=true;
   $scope.usuarioAutenticado = 0  ;
-  // With the new view caching in Ionic, Controllers are only called
+  // With the new view caching in Ionic, xControllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
 })
 .controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes,$rootScope) {
 Scopes.store('BocetosController', $scope);
-console.log("entra controlador bocetos");
+//console.log("entra controlador bocetos");
 
 
    /* $scope.irTab =  function(nombre){
@@ -157,7 +157,7 @@ $scope.valorfiltro=true;
     .then(function(response){
       $scope.artistas = {};
      $scope.artistas = response.data;*/
-     console.log("id =" + id);
+     //console.log("id =" + id);
      for(var i = 0 ; i <= $rootScope.artistas.length ; i++){
       //  console.log("valor id = " + id+ "vlor 2 = " +$scope.artistas[i].id);
 
@@ -235,7 +235,7 @@ $scope.valorfiltro=true;
 })
 .controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes,$rootScope) {
 Scopes.store('IntroCtrl', $scope);
-console.log("entra controlador intro");
+//console.log("entra controlador intro");
 
     /* $scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
@@ -275,7 +275,7 @@ console.log("entra controlador intro");
 
 .controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes,$rootScope) {
   Scopes.store('MultimediaController', $scope);
-  console.log("entra controlador multimedia ");
+  //console.log("entra controlador multimedia ");
 
   /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
@@ -335,7 +335,7 @@ $scope.valorfiltro=true;
 })
 .controller('PromocionesController', function($scope,$http,$ionicLoading,$state ,$window,Scopes,$rootScope) {
   Scopes.store('PromocionesController', $scope);
-  console.log("entra controlador promo");
+  //console.log("entra controlador promo");
    /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
@@ -390,7 +390,7 @@ $scope.valorfiltro=true;
 })
 .controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes,$rootScope) {
   Scopes.store('EventosController', $scope);
-  console.log("entra controlador eventos");
+ // console.log("entra controlador eventos");
    /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
@@ -457,7 +457,7 @@ $scope.valorfiltro=true;
 
 .controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes) {
   Scopes.store('PublicidadController', $scope);
-  console.log("entra controlador publi");
+//  console.log("entra controlador publi");
      
      /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
@@ -620,7 +620,7 @@ $scope.getContactList = function() {
     $cordovaContacts.find({filter: ''}).then(function(result) {
         $scope.contacts = result;
     }, function(error) {
-        console.log("ERROR: " + error);
+       // console.log("ERROR: " + error);
     });
 }
   
@@ -631,7 +631,7 @@ $scope.getContactList = function() {
 
 
 .controller('PlaylistsCtrl', function($scope,$ionicModal,$state,$window,$ionicPopup,$rootScope) {
-  console.log("entra controlador play");
+  //console.log("entra controlador play");
     /*$scope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
@@ -824,7 +824,7 @@ $scope.getContactList = function() {
                     }
                 ];
     $scope.mostrarTextoEstilo = function(idEstilo) {
-     console.log();
+   
 
        var alertPopup = $ionicPopup.alert({
          title: $scope.estilos[idEstilo].nombre,
@@ -900,7 +900,7 @@ $scope.valorfiltro=true;
 })
 
 .controller('filtroCtrl', function($scope, $ionicModal,$http,Scope) {
-  console.log("entra controlador filtro");
+  //console.log("entra controlador filtro");
   Scopes.store('filtroCtrl', $scope);
    $scope.valorfiltro=true;
       //ventana  fintros
@@ -926,12 +926,12 @@ $scope.valorfiltro=true;
 
 .controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
       Scopes.store('editarArtistaController', $scope);
-      console.log("entra controlador editarArtista");
+    //  console.log("entra controlador editarArtista");
       //$rootScope.loginData = {};
       $rootScope.loginData.usuario = window.localStorage.getItem("usuario");
       $rootScope.loginData.clave = window.localStorage.getItem("clave");
-      console.log("valor");
-      console.log(angular.toJson(window.localStorage.getItem('artistaLogueado')));
+      //console.log("valor");
+      //console.log(angular.toJson(window.localStorage.getItem('artistaLogueado')));
 
 
      // $scope.artistaLogueado = {};
@@ -940,8 +940,8 @@ $scope.valorfiltro=true;
       $scope.artistaLogueado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
      
   
-      console.log("artista loguado");
-      console.log($scope.artistaLogueado);
+     // console.log("artista loguado");
+      //console.log($scope.artistaLogueado);
 
 
       /*  $scope.irTab =  function(nombre){
@@ -972,7 +972,7 @@ $scope.valorfiltro=true;
           };
 
           $cordovaCamera.getPicture(options).then(function(imageUri) {
-            console.log('img', imageUri);
+           // console.log('img', imageUri);
          
             //$scope.images.push(imageUri);
              $scope.artistaLogueado.imagen = "data:image/jpeg;base64," + imageUri;
@@ -1273,19 +1273,20 @@ $http.defaults.useXDomain = true;
   $scope.guardarUbicacion =  function(){
     
 
-     var objetoPosicionEd = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario);
+     var objetoPosicionEd = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario'));
               // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
       objetoPosicionEd.update( { 
                             longitud : $scope.map.getCenter().lng(),
                             latitud : $scope.map.getCenter().lat()
                           });
-
+    
     $scope.edicionUbicacionCorrecta();
+ 
 
 
   }
   $scope.guardarFotos =function (){
-       var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario);
+       var objetofotos = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario'));
               // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
       objetofotos.update( { 
                             trabajos : {
@@ -1299,37 +1300,57 @@ $http.defaults.useXDomain = true;
                           });
 
       $scope.edicionFotosCorrecta();
+
       
 
   }
 $scope.claves={};
   $scope.guardarClave = function(){
-    console.log("clave = " + $scope.artistaLogueado.clave );
 
-        if($scope.claves.claveActual != null ||  $scope.claves.claveActual != ''){
+    //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+          $http.get('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario')+'.json')
+          .success(function(data, status, headers, config){
          
-            if($scope.artistaLogueado.clave === $scope.claves.claveActual){
-            
-              if($scope.claves.claveNueva === $scope.claves.repiteClaveNueva){
-          
-                   var objetoClave = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario);
+          })
+          .error(function(data, status, headers, config){
+        
+          })
+          .then(function(response){
+         
+               $scope.artistaLogueado = response.data;
 
-                    objetoClave.update( { 
-                            clave : $scope.claves.repiteClaveNueva
-                           
-                          });
+               console.log("clave = " + $scope.artistaLogueado.clave );
 
-                      $scope.edicionClaveCorrecta();
-                      $scope.claves.claveActual = "";
-                      $scope.claves.repiteClaveNueva = "";
-                      $scope.claves.claveNueva = "";
-                      return;
-              }
-            }
 
-        }
-        $scope.edicionClaveIncorrecta();
-      
+    
+                console.log(objetoClave);
+                    if($scope.claves.claveActual != null ||  $scope.claves.claveActual != ''){
+                     
+                        if($scope.artistaLogueado.clave === $scope.claves.claveActual){
+                        
+                          if($scope.claves.claveNueva === $scope.claves.repiteClaveNueva){
+                              var objetoClave = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario'));
+                               
+
+                                objetoClave.update( { 
+                                        clave : $scope.claves.repiteClaveNueva
+                                       
+                                      });
+
+                                  $scope.edicionClaveCorrecta();
+                                  $scope.claves.claveActual = "";
+                                  $scope.claves.repiteClaveNueva = "";
+                                  $scope.claves.claveNueva = "";
+                                  return;
+                          }
+                        }
+
+                    }
+             $scope.edicionClaveIncorrecta();
+        });
+
+    
+    
 
   }
   $scope.$watch("artistaLogueado.descripcion", function(newValue, oldValue){
@@ -1378,7 +1399,7 @@ $scope.claves={};
 
 
 
-      var fredNameRef = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario);
+      var fredNameRef = new Firebase('https://inkgpsapp.firebaseio.com/DataId/'+window.localStorage.getItem('usuario'));
               // Modify the 'first' and 'last' children, but leave other data at fredNameRef unchanged
       fredNameRef.update( { 
                             imagen :$scope.artistaLogueado.imagen,
@@ -1398,6 +1419,7 @@ $scope.claves={};
 
     
     $scope.edicionCorrecta();
+
 
 
   }
@@ -1568,9 +1590,13 @@ $scope.claves={};
 
     $rootScope.loginData = {};
     $rootScope.loginData.login = false;
-  console.log("valor usuario " + window.localStorage.getItem('usuario'));
+  //console.log("valor usuario " + window.localStorage.getItem('usuario'));
     if( window.localStorage.getItem('usuario') === "" || 
-         window.localStorage.getItem('clave') === "" 
+        window.localStorage.getItem('usuario') === null  ||
+         window.localStorage.getItem('usuario') === undefined ||
+         window.localStorage.getItem('clave') === ""  ||  
+           window.localStorage.getItem('clave') === undefined  ||  
+         window.localStorage.getItem('clave') === null 
           ){
             $rootScope.loginData.login = false;
            
@@ -1638,9 +1664,9 @@ $scope.claves={};
                }
                
                
-                 console.log("respuesta feed  shuffle=>");
+               //  console.log("respuesta feed  shuffle=>");
                 $rootScope.shuffleArray($rootScope.artistas);
-                console.log($rootScope.artistas);
+               // console.log($rootScope.artistas);
                
           });
 
@@ -1655,7 +1681,7 @@ $scope.claves={};
 
 
     $scope.compartir = function(imagen){
-    console.log("inicia");
+    //console.log("inicia");
          /*$cordovaSocialSharing
           .shareViaFacebook("Artista", imagen, "link")
           .then(function(result) {          
@@ -1710,7 +1736,7 @@ $scope.claves={};
           };
 
           $cordovaCamera.getPicture(options).then(function(imageUri) {
-            console.log('img', imageUri);
+          //  console.log('img', imageUri);
          
             //$scope.images.push(imageUri);
              $scope.agendarCitaData.imagen =  imageUri;
@@ -1750,7 +1776,7 @@ $scope.claves={};
                                   //e.preventDefault();
                                   
                               // Returning a value will cause the promise to resolve with the given value.
-                                 console.log("ok")
+                               //  console.log("ok")
                                   //return scope.data.response;
 
                               }
@@ -1760,7 +1786,7 @@ $scope.claves={};
      });
 
        alertPopup.then(function(res) {
-        console.log('Thank you for not eating my delicious ice cream cone');
+       // console.log('Thank you for not eating my delicious ice cream cone');
        });
     };
   $scope.validarEmailParaEnvio = function(){
@@ -1799,8 +1825,8 @@ $scope.claves={};
       }
 
     }
-    console.log($scope.agendarCitaData.imagen);
-    console.log($scope.agendarCitaData.descripcion);
+   // console.log($scope.agendarCitaData.imagen);
+    //console.log($scope.agendarCitaData.descripcion);
 
     // $scope.agendarCitaData.descripcion  = "<h5>Hola</h5> <br><br> <h2>Mi nombre es "+$scope.agendarCitaData.nombre+", estoy interesado en un "+$scope.agendarCitaData.tipoProcedimiento+", las medidas son ancho:"+$scope.agendarCitaData.ancho+" cm alto:" + $scope.agendarCitaData.alto+" la zona  en la cual lo deseo es " + $scope.agendarCitaData.zona+"</h2>";
     
@@ -1862,7 +1888,7 @@ $scope.claves={};
 
 $scope.logueado = 0 ; 
 
- console.log("valor inicial ==>"  + $rootScope.loginData.usuarioAutenticado  );
+ //console.log("valor inicial ==>"  + $rootScope.loginData.usuarioAutenticado  );
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -1895,7 +1921,7 @@ $scope.logueado = 0 ;
                                   //e.preventDefault();
                                   
                               // Returning a value will cause the promise to resolve with the given value.
-                                  console.log("ok");
+                                 // console.log("ok");
                                   //return scope.data.response;
 
                               }
@@ -1904,7 +1930,7 @@ $scope.logueado = 0 ;
    });
 
    alertPopup.then(function(res) {
-     console.log('cierra mensaje');
+    // console.log('cierra mensaje');
    });
  };
 
@@ -1941,7 +1967,7 @@ $scope.logueado = 0 ;
 
 
       //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-      console.log('https://inkgpsapp.firebaseio.com/dataId/'+$rootScope.loginData.usuario);
+     // console.log('https://inkgpsapp.firebaseio.com/dataId/'+$rootScope.loginData.usuario);
       $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario+'.json')
       .success(function(data, status, headers, config){
       //alert("**** SUCCESS ****");
@@ -1954,8 +1980,8 @@ $scope.logueado = 0 ;
       })
       .then(function(response){
       idUsuarioLog =   $stateParams.idParametro ; 
-      console.log("valor");
-      console.log(response.data);
+      //console.log("valor");
+      //console.log(response.data);
       $scope.obtenido = response.data ;  
       if(response.data === null ){
            $scope.loginIncorrectoMensaje();
@@ -1965,7 +1991,7 @@ $scope.logueado = 0 ;
           if($rootScope.artistaLogueado.clave === $rootScope.loginData.clave){
              
 
-                      console.log('Doing login', $rootScope.loginData);
+                     // console.log('Doing login', $rootScope.loginData);
                       window.localStorage.setItem('usuario' ,  $rootScope.loginData.usuario);
                       window.localStorage.setItem('clave' ,  $rootScope.loginData.clave);
                       window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
@@ -1974,7 +2000,7 @@ $scope.logueado = 0 ;
                       idUsuarioLog = true; 
                       $rootScope.loginData.login = true;
 
-                      console.log('Doing login', $rootScope.loginData);
+                      //console.log('Doing login', $rootScope.loginData);
 
                       $scope.cerrarLogin();
                 
@@ -2104,7 +2130,7 @@ $ionicModal.fromTemplateUrl('./templates/videoArtista.html', {
    });
 
    alertPopup.then(function(res) {
-     console.log('Thank you for not eating my delicious ice cream cone');
+    console.log('Thank you for not eating my delicious ice cream cone');
    });
  };
 
@@ -2140,7 +2166,7 @@ $scope.scrollTop = function() {//ng-click for back to top button
     $rootScope.irTab =  function(nombre){
          //$window.location.href = '#/app/'+nombre;
         
-         console.log("ir tab index "  +$rootScope.loginData.usuario ); 
+       //  console.log("ir tab index "  +$rootScope.loginData.usuario ); 
          if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
             $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
@@ -2345,7 +2371,7 @@ $scope.show1 = function() {
       $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[id].usuarioTwitter;
       $scope.mostrarTwitter  = false;
       $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
-      console.log($scope.artistaSeleccionado.video1);
+    //  console.log($scope.artistaSeleccionado.video1);
       if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
       {
         
@@ -2421,7 +2447,7 @@ $scope.getContactList = function() {
     $cordovaContacts.find({filter: ''}).then(function(result) {
         $scope.contacts = result;
     }, function(error) {
-        console.log("ERROR: " + error);
+      //  console.log("ERROR: " + error);
     });
 }
   
@@ -2527,14 +2553,14 @@ $scope.getContactList = function() {
     };
     
     $scope.verificaFiltro = function(){
-      console.log($rootScope.loginData) ; 
+      //console.log($rootScope.loginData) ; 
         
-        console.log($rootScope.loginData) ; 
-             console.log( $scope.filtro.estilo + " --- "+ $scope.filtro.ciudad + "--" + $scope.filtro.mostrarCodigo ) ; 
+       // console.log($rootScope.loginData) ; 
+         //    console.log( $scope.filtro.estilo + " --- "+ $scope.filtro.ciudad + "--" + $scope.filtro.mostrarCodigo ) ; 
         if ($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos") {
               if ($scope.filtro.mostrarCodigo === "undefined" || !$scope.filtro.mostrarCodigo ) {
-                  console.log("no selecciono filtro  ");
-                   console.log("no hacer nada" + $scope.siFiltrar);
+           //       console.log("no selecciono filtro  ");
+            //       console.log("no hacer nada" + $scope.siFiltrar);
 
                    var confirmPopup = $ionicPopup.confirm({
                        title: 'Información',
@@ -2557,7 +2583,7 @@ $scope.getContactList = function() {
                     });
 
                    confirmPopup.then(function(res) {
-                    console.log("res" + res);
+                   // console.log("res" + res);
                      
                    });
                   
@@ -2579,9 +2605,9 @@ $scope.getContactList = function() {
       $http.get('./templates/estilo.json').success (function(data){
         $scope.estilos = data;
          
-        console.log($scope.estilos);
+       // console.log($scope.estilos);
       });
-          console.log("entra ==" + $scope.estilos);
+         // console.log("entra ==" + $scope.estilos);
 
        var alertPopup = $ionicPopup.alert({
          title: $scope.estilos[2].nombre,
@@ -2645,7 +2671,7 @@ $scope.getContactList = function() {
       $scope.artistaSeleccionado.usuarioTwitter =$scope.artistasResultado[id].usuarioTwitter;
       $scope.mostrarTwitter  = false;
       $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
-      console.log($scope.artistaSeleccionado.video1);
+     // console.log($scope.artistaSeleccionado.video1);
       if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
       {
         
@@ -2707,7 +2733,7 @@ $scope.getContactList = function() {
 
         if($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos" && $scope.filtro.codigo === "" )
         {  
-           console.log("entra");
+          // console.log("entra");
             
             $scope.artistasResultado = $rootScope.artistas; 
 
@@ -2943,7 +2969,7 @@ $scope.identifyUser = function() {
  // Identify your user with the Ionic User Service
  $ionicUser.identify(user).then(function(){
  $scope.identified = true;
- console.log('Identified user ' + user.name + '\n ID ' + user.user_id);
+ //console.log('Identified user ' + user.name + '\n ID ' + user.user_id);
  });
 };
 
@@ -2996,7 +3022,7 @@ $ionicModal.fromTemplateUrl('./templates/terminosCondiciones.html', {
 $scope.insert = function(firstname, lastname) {
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
         $cordovaSQLite.execute(db, query, [firstname, lastname]).then(function(res) {
-            console.log("INSERT ID -> " + res.insertId);
+            //console.log("INSERT ID -> " + res.insertId);
             //alert("INSERT ID -> " + res.insertId);
         }, function (err) {
             console.error(err);
@@ -3009,7 +3035,7 @@ $scope.insert = function(firstname, lastname) {
         var query = "SELECT firstname, lastname FROM people WHERE lastname = ?";
         $cordovaSQLite.execute(db, query, [lastname]).then(function(res) {
             if(res.rows.length > 0) {
-                console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
+           //     console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
                //alert("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
                //modal
                 
@@ -3046,14 +3072,14 @@ $scope.insert = function(firstname, lastname) {
     
     // Triggered in the login modal to close it
     $scope.closeRegla = function () {
-         console.log($scope.valorRegla.val);
+        // console.log($scope.valorRegla.val);
          if($scope.filtro.tipoRegla === 1)
          {
             $scope.filtro.ancho = $scope.valorRegla.val;
          }else{
            $scope.filtro.alto = $scope.valorRegla.val;
          }
-       console.log("valor "+$scope.valorRegla.val);
+       //console.log("valor "+$scope.valorRegla.val);
         $scope.modalRegla.hide();
    
     };

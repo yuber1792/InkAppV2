@@ -38,7 +38,6 @@
     "https://github.com/jcjee/email-composer.git"
   ],
   "cordovaPlatforms": [
-    "ios",
     "android"
   ]
 }

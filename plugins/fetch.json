@@ -2,7 +2,7 @@
     "cordova-plugin-console": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-console@~1.0.2"
+            "id": "cordova-plugin-console"
         },
         "is_top_level": true,
         "variables": {}
@@ -74,7 +74,7 @@
     "cordova-plugin-media-capture": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-media-capture@~1.2.0"
+            "id": "cordova-plugin-media-capture"
         },
         "is_top_level": true,
         "variables": {}
@@ -174,4 +174,5 @@
         "is_top_level": true,
         "variables": {}
     }
+}    }
 }
