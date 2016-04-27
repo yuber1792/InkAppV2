@@ -517,6 +517,7 @@ $scope.valorfiltro=true;
   };
  $scope.show();
   
+
   $http.defaults.useXDomain = true;
   $http.get('http://8-dot-inkdata-1019.appspot.com/inkpublicidad')
     .success(function(data, status, headers, config){
@@ -541,6 +542,9 @@ $scope.valorfiltro=true;
        // alert("la data  2  " + $scope.trabajosjson.toJson);
       $scope.hide();
     })
+
+
+  
 
     $scope.publicidadSeleccionada = {};
     $scope.seleccionarPublicidad = function(id){
@@ -588,9 +592,9 @@ $scope.valorfiltro=true;
         
     }
 
-      $scope.openGeo = function() {
-          $scope.latitude =  $scope.redesCargadas.latitud;
-            $scope.longitude =  $scope.redesCargadas.longitud;
+      $scope.openGeoEstudio = function() {
+          $scope.latitude =   $scope.publicidadSeleccionada.redesCargadas.latitud;
+          $scope.longitude =   $scope.publicidadSeleccionada.redesCargadas.longitud;
           window.open('geo:' + $scope.latitude + ',' + $scope.longitude + '?z=11&q=' + $scope.latitude + ',' + $scope.longitude + '(Treasure)', '_system', 'location=yes');
       }
       $scope.whatsapp = function() {
@@ -613,19 +617,6 @@ $scope.valorfiltro=true;
 })
 
 
-.controller('wasapController', function($scope,$cordovaContacts) {
-$scope.valorfiltro=true;
-   
-$scope.getContactList = function() {
-    $cordovaContacts.find({filter: ''}).then(function(result) {
-        $scope.contacts = result;
-    }, function(error) {
-       // console.log("ERROR: " + error);
-    });
-}
-  
-  
-})
 
 
 
@@ -1590,8 +1581,9 @@ $scope.claves={};
 
 
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject ) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ) {
     Scopes.store('indexController', $scope);
+    $ionicSideMenuDelegate.canDragContent(false);
     console.log("entra controlador index");
     $rootScope.marca = "otro"; 
     $scope.artistaLogueado = {};
@@ -2472,14 +2464,14 @@ $scope.facebook = function() {
     $scope.urlAgendar = "http://goo.gl/forms/nXdfBTX0ea";
     window.open($scope.urlAgendar, '_system', 'location=yes');
  }
-
+/*
 $scope.getContactList = function() {
     $cordovaContacts.find({filter: ''}).then(function(result) {
         $scope.contacts = result;
     }, function(error) {
       //  console.log("ERROR: " + error);
     });
-}
+}*/
   
  $scope.whatsapp = function() {
   //$scope.getContactList();

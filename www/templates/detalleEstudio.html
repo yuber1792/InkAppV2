@@ -67,7 +67,7 @@
                     {{publicidadSeleccionada.redesCargadas.celular}}
                   </a>
 
-                  <a class="item item-avatar"  href="#" ng-click="twitter()"  >
+                  <a class="item item-avatar"  href="#" ng-if="publicidadSeleccionada.redesCargadas.nombreTwitter != 'false'" ng-click="twitter()"  >
                     <img  width="48px" height="48px"  src="./img/twitter.png"  >
                     {{publicidadSeleccionada.redesCargadas.nombreTwitter}}
                   </a>
@@ -80,10 +80,10 @@
                     <img  width="48px" height="48px" src="./img/Instagram.png">
                     {{publicidadSeleccionada.redesCargadas.nombreInstagram}}
                   </a>
-                     <a class="item item-avatar" href="#" ng-click="" >
+                  <!--   <a class="item item-avatar" href="#" ng-if="publicidadSeleccionada.redesCargadas.nombreGoogle != 'false'" ng-click="" >
                     <img  width="48px" height="48px" src="./img/googleplus.png">
                     {{publicidadSeleccionada.redesCargadas.nombreGoogle}}
-                  </a>
+                  </a>-->
 
                 </div>
 
