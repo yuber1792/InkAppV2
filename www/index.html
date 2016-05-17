@@ -16,6 +16,8 @@
      <script src="lib/ionic-service-core/ionic-core.js"></script>
     <script src="lib/ionic-service-push/ionic-push.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="js/indexeddbshim/dist/indexeddbshim.min.js"></script>
+
 
     <!-- cordova script (this will be a 404 during development) -->
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
@@ -36,11 +38,96 @@
     
   </head>
 
-  <body ng-app="starter">
+  <body ng-app="starter" >
     <ion-nav-view></ion-nav-view>
   </body>
   <script>
       var primer = 0 ;
+      var dataBase  = null ;  
+     /* var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+       
+            
+                function startDB() {
+            
+                dataBase = indexedDB.open("artistasData", 1);
+                
+                dataBase.onupgradeneeded = function (e) {
+
+                    active = dataBase.result;
+                    
+                    object = active.createObjectStore("artistas", { keyPath : 'id', autoIncrement : true });
+                    object.createIndex('by_texto', 'texto', { unique : false });
+                    object.createIndex('by_idArtista', 'idArtista', { unique : true });
+                };
+
+                dataBase.onsuccess = function (e) {
+                    alert('Base de datos cargada correctamente');
+                    
+
+
+        
+                };
+        
+                dataBase.onerror = function (e)  {
+                    alert('Error cargando la base de datos');
+                };
+            }*/
+
+           /* function loadAll(){
+                 var active = dataBase.result;
+                    var data = active.transaction(["artistas"], "readwrite");
+                    var object = data.objectStore("artistas");
+
+                    var elements = [];
+
+                      object.openCursor().onsuccess = function (e) {
+
+                          var result = e.target.result;
+
+                          if (result === null) {
+                              return;
+                          }
+
+                          elements.push(result.value);
+
+                          result.continue();
+
+
+                      };
+
+                     alert(elements.length);
+
+                      data.oncomplete = function () {
+
+                          var outerHTML = '';
+                          alert("entra");
+
+                          for (var key in elements) {
+                            $rootScope.artistasLocales.push(angular.toJson(elements[key].texto));
+                             /* outerHTML += '\n\
+                              <tr>\n\
+                                  <td>' + elements[key].dni + '</td>\n\
+                                  <td>' + elements[key].name + '</td>\n\
+                                  <td>\n\
+                                      <button type="button" onclick="load(' + elements[key].id + ')">Details</button>\n\
+                                  </td>\n\
+                              </tr>';Ç*/
+
+                         /* }
+                          console.log("desde base");
+                          alert($rootScope.artistasLocales);
+
+                          //elements = [];
+                         // document.querySelector("#elementsList").innerHTML = outerHTML;
+                      };
+
+            }*/
+
+
+
+
+
+        
 
   </script>
 

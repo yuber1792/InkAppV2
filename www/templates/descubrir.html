@@ -6,7 +6,7 @@
 
        
 
-         <div ng-repeat="artista in artistas | limitTo :25 ">
+         <div ng-repeat="artista in artistas | limitTo :25 track by $index">
             <section ng-include="'templates/artista-card.html'" class="post-card-outer"></section>
         </div>
 

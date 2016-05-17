@@ -1,0 +1,10 @@
+<ion-view   class="feed-view"  view-title="{{'proveedores' | translate}}">
+  <ion-content>
+
+
+ <div ng-repeat="publi in proveedores">
+            <section ng-include="'templates/proveedor-card.html'" class="post-card-outer"></section>
+  </div>
+
+  </ion-content>
+</ion-view>

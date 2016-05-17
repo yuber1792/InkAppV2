@@ -56,7 +56,7 @@
             <!--<div ng-show="publicidadSeleccionada.showRedes">-->
                 <div class="list card">
 
-                <a class="item item-avatar" href="#" ng-click="openGeo()" >
+                <a class="item item-avatar" href="#" ng-click="openGeoEstudio()" >
                     <img  width="48px" height="48px" src="./img/pin.png">
                       <h2>{{publicidadSeleccionada.redesCargadas.ciudad}}, {{publicidadSeleccionada.redesCargadas.direccion}}</h2>  
                     </a>
@@ -76,7 +76,7 @@
                     <img  width="48px" height="48px" src="./img/facebook.png">
                     {{publicidadSeleccionada.redesCargadas.nombreFacebook}}
                   </a>
-                  <a class="item item-avatar" href="#" ng-click="instagram()" >
+                  <a class="item item-avatar" href="#" ng-click="instagram()" ng-if="publicidadSeleccionada.redesCargadas.nombreInstagram != 'false'" >
                     <img  width="48px" height="48px" src="./img/Instagram.png">
                     {{publicidadSeleccionada.redesCargadas.nombreInstagram}}
                   </a>

@@ -8,15 +8,18 @@ var db = null;
 
 
 
+
 angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase'])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {
   $rootScope.appReady = {status:false};
   $ionicPlatform.ready(function() {
-     db = $cordovaSQLite.openDB("my.db");
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+    db = $cordovaSQLite.openDB("my.db");
 
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+    //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS artistas (id integer primary key, idArtista text,texto text)");
+    
     $ionicPlatform.registerBackButtonAction(function () {
       //alert("evento atras");
        $ionicSideMenuDelegate.toggleLeft();
@@ -703,6 +706,16 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
         'menuContent': {
           templateUrl: "templates/artistas.html",
           controller: 'indexController'
+        }
+      }
+    })
+     .state('app.publicidadProveedor', {
+      url: "/publicidadProveedor",
+    //  cache : false,
+      views: {
+        'menuContent': {
+          templateUrl: "templates/publicidadProveedores.html",
+          controller: 'publicidadProveedoresController'
         }
       }
     })

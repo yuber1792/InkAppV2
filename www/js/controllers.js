@@ -145,55 +145,44 @@ $scope.valorfiltro=true;
  
      $scope.cargarSeleccionadoBoceto = function (id) {
     
-      //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
- /* $http.get('https://inkgpsapp.firebaseio.com/data.json')
-    .success(function(data, status, headers, config){
 
-    })
-    .error(function(data, status, headers, config){
-      alert("**** Verificar conexion a internet ****");
-  
-    })
-    .then(function(response){
-      $scope.artistas = {};
-     $scope.artistas = response.data;*/
-     //console.log("id =" + id);
-     for(var i = 0 ; i <= $rootScope.artistas.length ; i++){
-      //  console.log("valor id = " + id+ "vlor 2 = " +$scope.artistas[i].id);
-
-          if(parseInt($rootScope.artistas[i].id) === parseInt(id)){
-             // if(angular.equals(id,$scope.artistas[i].id )){
-              //alert("entra");
-                // var i = id ; 
+        $http.get('https://inkgpsapp.firebaseio.com/DataId/'+id+'.json')
+    
+        .error(function(data, status, headers, config){
+          alert("**** Verificar conexion a internet ****");
+      
+        })
+        .then(function(response){
             $scope.artistaSeleccionado = {};
               
-                 $scope.openDetalleBocetos();
-               
+                $scope.openDetalleBocetos();
+                $scope.artistaUpdate = response.data;               
 
                //  alert( $scope.artistas[id1].id );
               //  $scope.idArtista =  id+1;
-                $scope.artistaSeleccionado.codigo = $rootScope.artistas[i].id; 
-                $scope.artistaSeleccionado.nombre = $rootScope.artistas[i].nombre; 
-                $scope.artistaSeleccionado.estudio= $rootScope.artistas[i].estudio;
-                $scope.artistaSeleccionado.especialidad = $rootScope.artistas[i].especialidad; 
-                $scope.artistaSeleccionado.descripcion = $rootScope.artistas[i].descripcion; 
-                $scope.artistaSeleccionado.imagen = $rootScope.artistas[i].imagen; 
-                $scope.artistaSeleccionado.direccion = $rootScope.artistas[i].direccion; 
-                $scope.artistaSeleccionado.celular = $rootScope.artistas[i].celular; 
-                $scope.artistaSeleccionado.facebook = $rootScope.artistas[i].facebook; 
-                $scope.artistaSeleccionado.twitter = $rootScope.artistas[i].twitter; 
-                $scope.artistaSeleccionado.instagram = $rootScope.artistas[i].instagram; 
-                $scope.artistaSeleccionado.trabajos = $rootScope.artistas[i].trabajos;
-                $scope.artistaSeleccionado.opcionVideo = $rootScope.artistas[i].opcionVideo;
-                $scope.artistaSeleccionado.videos = $rootScope.artistas[i].videos;
-                $scope.artistaSeleccionado.latitud= $rootScope.artistas[i].latitud;
-                $scope.artistaSeleccionado.longitud = $rootScope.artistas[i].longitud;
-                $scope.artistaSeleccionado.ciudad = $rootScope.artistas[i].ciudad;
+              $scope.artistaSeleccionado.id =  $scope.artistaUpdate.id; 
+                $scope.artistaSeleccionado.codigo =  $scope.artistaUpdate.id; 
+                $scope.artistaSeleccionado.nombre =  $scope.artistaUpdate.nombre; 
+                $scope.artistaSeleccionado.estudio=  $scope.artistaUpdate.estudio;
+                $scope.artistaSeleccionado.especialidad =  $scope.artistaUpdate.especialidad; 
+                $scope.artistaSeleccionado.descripcion =  $scope.artistaUpdate.descripcion; 
+                $scope.artistaSeleccionado.imagen =  $scope.artistaUpdate.imagen; 
+                $scope.artistaSeleccionado.direccion = $scope.artistaUpdate.direccion; 
+                $scope.artistaSeleccionado.celular = $scope.artistaUpdate.celular; 
+                $scope.artistaSeleccionado.facebook =  $scope.artistaUpdate.facebook; 
+                $scope.artistaSeleccionado.twitter =  $scope.artistaUpdate.twitter; 
+                $scope.artistaSeleccionado.instagram =  $scope.artistaUpdate.instagram; 
+                $scope.artistaSeleccionado.trabajos =  $scope.artistaUpdate.trabajos;
+                $scope.artistaSeleccionado.opcionVideo =  $scope.artistaUpdate.opcionVideo;
+                $scope.artistaSeleccionado.videos =  $scope.artistaUpdate.videos;
+                $scope.artistaSeleccionado.latitud=  $scope.artistaUpdate.latitud;
+                $scope.artistaSeleccionado.longitud =  $scope.artistaUpdate.longitud;
+                $scope.artistaSeleccionado.ciudad =  $scope.artistaUpdate.ciudad;
                 $scope.allImages = $scope.artistaSeleccionado.trabajos;
-                $scope.artistaSeleccionado.usuarioFacebook = $rootScope.artistas[i].usuarioFacebook;
-                $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[i].usuarioTwitter;
+                $scope.artistaSeleccionado.usuarioFacebook =  $scope.artistaUpdate.usuarioFacebook;
+                $scope.artistaSeleccionado.usuarioTwitter = $scope.artistaUpdate.usuarioTwitter;
                 $scope.mostrarTwitter  = false;
-                $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
+                //$scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
                 //console.log($scope.artistaSeleccionado.video1);
                 //alert($scope.artistaSeleccionado.codigo);
                 if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
@@ -207,7 +196,7 @@ $scope.valorfiltro=true;
                   // alert( $scope.artistaSeleccionado.mostrarTwitter);
                 }
 
-                $scope.artistaSeleccionado.usuarioInstagram = $rootScope.artistas[i].usuarioInstagram;
+                $scope.artistaSeleccionado.usuarioInstagram =  $scope.artistaUpdate.usuarioInstagram;
                 $scope.mostrarInstagram  = false;
                  if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
                 {
@@ -220,9 +209,70 @@ $scope.valorfiltro=true;
                   // alert( $scope.artistaSeleccionado.mostrarTwitter);
                 }    
 
-           }
-      }
 
+                    var active = dataBase.result;
+          var data = active.transaction(["artistas"], "readwrite");
+          var object = data.objectStore("artistas");
+
+            var codigofiltro =   $scope.artistaUpdate.id; 
+
+            object.openCursor().onsuccess = function(event) {
+              var cursor = event.target.result;
+              if(cursor) {
+                if(parseInt(cursor.value.idArtista) === parseInt(codigofiltro)) {
+                  var request = cursor.delete();
+                  request.onsuccess = function() {
+                
+                      $scope.resultadoCodigo =  $scope.artistaSeleccionado ; 
+                     // alert($scope.resultadoCodigo);
+                        
+                               //console.log(  $scope.resultadoCodigo );
+                               //alert( "id" +  $scope.resultadoCodigo.id );
+                                var active = dataBase.result;
+                                var data = active.transaction(["artistas"], "readwrite");
+                                var object = data.objectStore("artistas");
+                                 
+
+                                  var request = object.put({
+                                      texto: $scope.resultadoCodigo,
+                                      idArtista: $scope.resultadoCodigo.id
+                                      
+                                  });
+
+                                  request.onerror = function (e) {
+                                      console.log(request.error.name + '\n\n' + request.error.message);
+                                  };
+
+                                  data.oncomplete = function (e) {
+                                    
+                                      console.log('Objeto agregado correctamente');
+                                       
+
+                                      
+                                     
+                                    
+                                    
+                                };
+                     
+                  };
+                } else {
+                   // console.log('NO ENCONTRO -- ' + cursor.value.idArtista +"- " +  codigofiltro);
+                }
+                cursor.continue();        
+              } else {
+                console.log('Entries displayed.');         
+              }
+            };
+  
+
+
+
+
+
+
+           })
+           
+     
   
    // })
  
@@ -586,7 +636,8 @@ $scope.valorfiltro=true;
         }
         if($scope.publicidad[id].redes != null  || $scope.publicidad[id].redes != undefined  ){
           $scope.publicidadSeleccionada.redesCargadas = $scope.publicidad[id].redes;
-          console.log("entra" +$scope.publicidad[id].redes);
+          console.log("entra"); 
+            console.log($scope.publicidad[id].redes);
            $scope.publicidadSeleccionada.showLeerMas = false;  
         }
         
@@ -911,6 +962,30 @@ $scope.valorfiltro=true;
      // alert("event");
         $scope.modalFiltro.show();
     };
+
+   
+})
+
+.controller('publicidadProveedoresController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  //console.log("entra controlador filtro");
+  Scopes.store('publicidadProveedoresCtrl', $scope);
+    //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
+          $http.get('https://inkgpsapp.firebaseio.com/Proveedores.json')
+        
+          .error(function(data, status, headers, config){
+          //alert("**** Verificar conexion a internet ****");
+         // alert(status);
+         // alert(angular.toJson(data))
+          })
+          .then(function(response){
+            $rootScope.proveedores =[]
+             $rootScope.proveedores =  response.data ;
+            
+        //  alert("entra");
+      
+            console.log($rootScope.proveedores);
+               
+          });
 
    
 })
@@ -1588,6 +1663,27 @@ $scope.claves={};
     $rootScope.marca = "otro"; 
     $scope.artistaLogueado = {};
 
+  $scope.abrirLoading = function() {
+    $ionicLoading.show({
+      template: 'Realizando la configuración inicial...'
+    });
+  };
+   $scope.abrirLoadingPreCargado = function() {
+    $ionicLoading.show({
+      template: 'Cargando artistas...'
+    });
+  };
+
+  $scope.abrirLoadingArtistaSolo = function() {
+    $ionicLoading.show({
+      template: 'Cargando artista.'
+    });
+  };
+
+  $scope.cerrarLoading = function(){
+    $ionicLoading.hide();
+  };
+
   document.addEventListener("deviceready", function () {
         var device = $cordovaDevice.getDevice();
         var cordova = $cordovaDevice.getCordova();
@@ -1648,53 +1744,313 @@ $scope.claves={};
 
         return array;
       }
+
+
  
-   
+      $rootScope.llamaFireBaseActualizar = function (id){
+
+            var active = dataBase.result;
+            var data = active.transaction(["artistas"], "readwrite");
+            var object = data.objectStore("artistas");
+            var codigofiltro = id; 
+
+            object.openCursor().onsuccess = function(event) {
+              var cursor = event.target.result;
+              if(cursor) {
+                if(parseInt(cursor.value.idArtista) === parseInt(codigofiltro)) {
+                  var request = cursor.delete();
+                  request.onsuccess = function() {
+                    //console.log('Deleted' + codigofiltro );
+                      $http.get('https://inkgpsapp.firebaseio.com/DataId/'+codigofiltro+'.json')
+                     //  $http.get('https://inkgpsapp.firebaseio.com/DataId/00.json')
+                
+                      .error(function(data, status, headers, config){
+                        alert("**** Verificar conexion a internet ****");
+                    
+                      })
+                     .then(function(response){
+                               $scope.resultadoCodigo =  response.data ; 
+                   
+                               //console.log(  $scope.resultadoCodigo );
+                               //console.log(  $scope.resultadoCodigo.id );
+                                var active = dataBase.result;
+                                var data = active.transaction(["artistas"], "readwrite");
+                                var object = data.objectStore("artistas");
+                                 
+
+                                  var request = object.put({
+                                      texto: $scope.resultadoCodigo,
+                                      idArtista: $scope.resultadoCodigo.id
+                                      
+                                  });
+
+                                  request.onerror = function (e) {
+                                      console.log(request.error.name + '\n\n' + request.error.message);
+                                  };
+
+                                  data.oncomplete = function (e) {
+                                    
+                                      console.log('Objeto agregado correctamente');                                     
+                                      return;                 
+                                };
+                          
+                      });
+                  };
+                } else {
+                   // console.log('NO ENCONTRO -- ' + cursor.value.idArtista +"- " +  codigofiltro);
+                }
+                cursor.continue();        
+              } else {
+                console.log('Entries displayed.');         
+              }
+            };
+
+              
+
+      }
+      $rootScope.llamaFireBase = function (){
+
+             $http.get('https://vivid-inferno-5389.firebaseio.com/Numeros.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                                    $scope.numeroArray = [];
+                                    $scope.numeroData  =  response.data ; 
+                                    $scope.cantidadNumeros =  $scope.numeroData .split(",");
+                                    //alert($scope.cantidadNumeros.length);
+                                    for (var i = 0; i < $scope.cantidadNumeros.length ; i++) {
+                                      $scope.numeroArray = $scope.numeroArray.concat(
+                                                                                    {
+                                                                                      id:i , 
+                                                                                      codigo:$scope.cantidadNumeros[i]
+                                                                                    }
+                                                                                  );
+                                    }
+                                    console.log($scope.numeroArray);
+                                    $rootScope.shuffleArray( $scope.numeroArray);
+                                    console.log("despues");
+                                    console.log($scope.numeroArray);
+                                    $rootScope.artistas = [];  
+                                   
+
+                                    for (var i = 0; i < 10; i++) {
+
+                                           $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.numeroArray[i].codigo+'.json')
+                          
+                                            .error(function(data, status, headers, config){
+                                            //alert("**** Verificar conexion a internet ****");
+                                           // alert(status);
+                                           // alert(angular.toJson(data))
+                                            })
+                                            .then(function(response){
+                                                      $rootScope.shuffleArray(response.data.trabajos);
+                                                      $rootScope.artistas.push(response.data);
+                                                       $scope.cerrarLoading();
+                                                   
+
+
+                                            });
+
+                                      
+                                    }
+
+
+                                  });
+
+
+
+/*
+
+               $http.get('https://inkgpsapp.firebaseio.com/DataId.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                             
+                                    
+                                    $rootScope.artistasLocales = [];
+                                   //$rootScope.artistas =  response.data ;
+
+                                  
+                                  
+                                  var log = [];
+                                  var i = 0 ; 
+                                    angular.forEach(  response.data, function(value, key) {
+                                     $rootScope.artistas[i] = value;
+                                      i++;
+                                    }, log);
+                            
+                                    
+
+                                     //
+                                     var texto =  "";
+                                       for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                                         $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+                                           texto +=  $rootScope.artistas[i].id+"-"+$rootScope.artistas[i].especialidad+"|" + $rootScope.artistas[i].ciudad+",";
+                                        
+                                          var active = dataBase.result;
+                                          var data = active.transaction(["artistas"], "readwrite");
+                                          var object = data.objectStore("artistas");
+                                           
+
+                                            var request = object.put({
+                                                texto: $rootScope.artistas[i],
+                                                idArtista: $rootScope.artistas[i].id
+                                                
+                                            });
+
+                                            request.onerror = function (e) {
+                                                console.log(request.error.name + '\n\n' + request.error.message);
+                                            };
+
+                                            data.oncomplete = function (e) {
+                                              
+                                                console.log('Objeto agregado correctamente');
+                                            };
+
+                                         
+                                        // $scope.insertDataArtistas($rootScope.artistas[i].id ,$rootScope.artistas[i]); 
+                                       }
+                                       console.log(texto);
+                                        
+                                       
+                                       //  console.log("respuesta feed  shuffle=>");
+                                        $rootScope.shuffleArray($rootScope.artistas);
+
+
+                                          $scope.cerrarLoading();
+                                        //
+                                        //window.localStorage.setItem('dataAlmacenadaArtistas1',JSON.stringify($rootScope.artistasLocales));
+                                        console.log($rootScope.artistasLocales);
+                                         
+                               
+                                 });*/
+
+      }
+
     //;
     $rootScope.cargaDescubrir =  function (){
-    primer = 1 ; 
+     $scope.abrirLoadingPreCargado();   
+    $rootScope.artistas =[];
+    //var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+    var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+    dataBase = indexedDB.open("artistasData", 1);
+                
+                dataBase.onupgradeneeded = function (e) {
 
-      
-          //$http.get('http://8-dot-inkdata-1019.appspot.com/inkfeed')
-          $http.get('https://inkgpsapp.firebaseio.com/DataId.json')
-          .success(function(data, status, headers, config){
-          //alert("**** SUCCESS ****");
-         // alert(status);
-          })
-          .error(function(data, status, headers, config){
-          //alert("**** Verificar conexion a internet ****");
-         // alert(status);
-         // alert(angular.toJson(data))
-          })
-          .then(function(response){
-            $rootScope.artistas =[]
-           //  $rootScope.artistas =  response.data ;
-            
-          
-          var log = [];
-          var i = 0 ; 
-            angular.forEach(  response.data, function(value, key) {
-             $rootScope.artistas[i] = value;
-              i++;
-            }, log);
+                    active = dataBase.result;
+                    
+                    object = active.createObjectStore("artistas", { keyPath : 'id', autoIncrement : true });
+                    object.createIndex('by_texto', 'texto', { unique : false });
+                    object.createIndex('by_idArtista', 'idArtista', { unique : true });
+                };
+
+                dataBase.onsuccess = function (e) {
+                    //alert('Base de datos cargada correctamente');
+                     var active = dataBase.result;
+                    var data = active.transaction(["artistas"], "readonly");
+                    var object = data.objectStore("artistas");
+
+                    var elements = [];
+
+                      object.openCursor().onsuccess = function (e) {
+
+                          var result = e.target.result;
+
+                          if (result === null) {
+                              return;
+                          }
+
+                          elements.push(result.value);
+
+                          result.continue();
+
+
+                      };
+
+                   
+
+                      data.oncomplete = function () {
+
+                          var outerHTML = '';
+                          
+
+                          for (var key in elements) {
+                           // console.log("entra " + elements[key].texto);
+                            $rootScope.artistas.push(elements[key].texto);
+                             /* outerHTML += '\n\
+                              <tr>\n\
+                                  <td>' + elements[key].dni + '</td>\n\
+                                  <td>' + elements[key].name + '</td>\n\
+                                  <td>\n\
+                                      <button type="button" onclick="load(' + elements[key].id + ')">Details</button>\n\
+                                  </td>\n\
+                              </tr>';Ç*/
+
+                          }
+                          console.log("desde base");
+                          
+
+                          elements = [];
+                         
+                          // alert("valor  "+$rootScope.artistas.length);
+                            if($rootScope.artistas.length < 1){
+                               $scope.abrirLoading();
+                               $rootScope.llamaFireBase();
+
+                            }else{
+                               console.log("todos locales");
+                               $rootScope.shuffleArray($rootScope.artistas);
+                               $scope.cerrarLoading();
+                                for (var i = 0; i <  $rootScope.artistas.length; i++) {
+                                  $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
+                                }
+                              // $rootScope.llamaFireBaseActualizar();
+
+                            }
+
+
+                      };
+
+
+        
+                };
+        
+                dataBase.onerror = function (e)  {
+                    alert('Error cargando la base de datos');
+                };
+
+
+                
+
     
+                    
+
+   
+      // window.localStorage.setItem('dataAlmacenadaArtistas',null);
+    primer = 1 ;
+      //$rootScope.artistas = angular.toJson(window.localStorage.getItem('dataAlmacenadaArtistas1')) ; 
+      
+          //if(window.localStorage.getItem('dataAlmacenadaArtistas1') === null ){
+         
+
+           //loadAll();
 
 
-             //
-               for (var i = 0; i <  $rootScope.artistas.length; i++) {
-                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
-               }
-               
-               
-               //  console.log("respuesta feed  shuffle=>");
-                $rootScope.shuffleArray($rootScope.artistas);
-               // console.log($rootScope.artistas);
-               
-          });
-
-
-      //console.log("el valor de los artistas es  1 " + $rootScope.artistas.length );
+        
+      
+      
     }
+
+
+
     if(primer === 0){
        $rootScope.cargaDescubrir();  
     } 
@@ -1889,14 +2245,7 @@ $scope.claves={};
     var idUsuarioLog = true ; */
 
 
-   $scope.abrirLoading = function() {
-    $ionicLoading.show({
-      template: 'Cargando...'
-    });
-  };
-  $scope.cerrarLoading = function(){
-    $ionicLoading.hide();
-  };
+
 
 
 
@@ -2348,11 +2697,7 @@ $scope.show1 = function() {
     //llamar al servicio para cargar estilo
     $http.defaults.useXDomain = true;
   $http.get('http://8-dot-inkdata-1019.appspot.com/estilos')
-    .success(function(data, status, headers, config){
-      //alert("**** SUCCESS ****");
-     // alert(status);
-
-    })
+    
     .error(function(data, status, headers, config){
       alert("**** Verificar conexion a internet ****");
   
@@ -2362,64 +2707,152 @@ $scope.show1 = function() {
       $scope.estilosCargados = response.data;
       
     })
+ var idGlobal = "";
+    $scope.actualizarSeleccionado  = function (id) {
+      alert(id);
+       
 
-
-
+    }
+      
 
      $scope.cargarSeleccionado = function (id) {
+       //$scope.login();
 
-      $scope.login();
+        $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.artistas[id].id+'.json')
+    
+        .error(function(data, status, headers, config){
+          alert("**** Verificar conexion a internet ****");
       
-      $scope.idArtista =  id+1;
-      $scope.artistaSeleccionado.codigo = $rootScope.artistas[id].id; 
-      $scope.artistaSeleccionado.nombre = $rootScope.artistas[id].nombre; 
-      $scope.artistaSeleccionado.estudio= $rootScope.artistas[id].estudio;
-      $scope.artistaSeleccionado.especialidad = $rootScope.artistas[id].especialidad; 
-      $scope.artistaSeleccionado.descripcion = $rootScope.artistas[id].descripcion; 
-      $scope.artistaSeleccionado.imagen = $rootScope.artistas[id].imagen; 
-      $scope.artistaSeleccionado.direccion = $rootScope.artistas[id].direccion; 
-      $scope.artistaSeleccionado.celular = $rootScope.artistas[id].celular; 
-      $scope.artistaSeleccionado.facebook = $rootScope.artistas[id].facebook; 
-      $scope.artistaSeleccionado.twitter = $rootScope.artistas[id].twitter; 
-      $scope.artistaSeleccionado.instagram = $rootScope.artistas[id].instagram; 
-      $scope.artistaSeleccionado.trabajos = $rootScope.artistas[id].trabajos;
-      $scope.artistaSeleccionado.opcionVideo = $rootScope.artistas[id].opcionVideo;
-      $scope.artistaSeleccionado.videos = $rootScope.artistas[id].videos;
-      $scope.artistaSeleccionado.latitud= $rootScope.artistas[id].latitud;
-      $scope.artistaSeleccionado.longitud = $rootScope.artistas[id].longitud;
-      $scope.artistaSeleccionado.ciudad = $rootScope.artistas[id].ciudad;
-      $scope.allImages = $scope.artistaSeleccionado.trabajos;
-      $scope.artistaSeleccionado.usuarioFacebook = $rootScope.artistas[id].usuarioFacebook;
-      $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[id].usuarioTwitter;
-      $scope.mostrarTwitter  = false;
-      $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
-    //  console.log($scope.artistaSeleccionado.video1);
-      if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
-      {
-        
-        $scope.mostrarTwitter  = false;
-        //alert( $scope.artistaSeleccionado.mostrarTwitter);
+        })
+        .then(function(response){
+          $scope.login();
+         
+          $scope.artistaUpdate = response.data;
+          $rootScope.artistas[id] = $scope.artistaUpdate ;
+          $scope.idArtista =  id+1;
+          $rootScope.artistas[id] = $scope.artistaUpdate ; 
+          $scope.artistaSeleccionado.id = $rootScope.artistas[id].id; 
+           $scope.artistaSeleccionado.codigo = $rootScope.artistas[id].id; 
+          $scope.artistaSeleccionado.nombre = $rootScope.artistas[id].nombre; 
+          $scope.artistaSeleccionado.estudio= $rootScope.artistas[id].estudio;
+          $scope.artistaSeleccionado.especialidad = $rootScope.artistas[id].especialidad; 
+          $scope.artistaSeleccionado.descripcion = $rootScope.artistas[id].descripcion; 
+          $scope.artistaSeleccionado.imagen = $rootScope.artistas[id].imagen; 
+          $scope.artistaSeleccionado.direccion = $rootScope.artistas[id].direccion; 
+          $scope.artistaSeleccionado.celular = $rootScope.artistas[id].celular; 
+          $scope.artistaSeleccionado.facebook = $rootScope.artistas[id].facebook; 
+          $scope.artistaSeleccionado.twitter = $rootScope.artistas[id].twitter; 
+          $scope.artistaSeleccionado.instagram = $rootScope.artistas[id].instagram; 
+          $scope.artistaSeleccionado.trabajos = $rootScope.artistas[id].trabajos;
+          $scope.artistaSeleccionado.opcionVideo = $rootScope.artistas[id].opcionVideo;
+          $scope.artistaSeleccionado.videos = $rootScope.artistas[id].videos;
+          $scope.artistaSeleccionado.latitud= $rootScope.artistas[id].latitud;
+          $scope.artistaSeleccionado.longitud = $rootScope.artistas[id].longitud;
+          $scope.artistaSeleccionado.ciudad = $rootScope.artistas[id].ciudad;
+          $scope.allImages = $scope.artistaSeleccionado.trabajos;
+          $scope.artistaSeleccionado.usuarioFacebook = $rootScope.artistas[id].usuarioFacebook;
+          $scope.artistaSeleccionado.usuarioTwitter = $rootScope.artistas[id].usuarioTwitter;
+          $scope.mostrarTwitter  = false;
+         // $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
+        //  console.log($scope.artistaSeleccionado.video1);
+          if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
+          {
+            
+            $scope.mostrarTwitter  = false;
+            //alert( $scope.artistaSeleccionado.mostrarTwitter);
 
-      }else{
-        $scope.mostrarTwitter  = true;
-        // alert( $scope.artistaSeleccionado.mostrarTwitter);
+          }else{
+            $scope.mostrarTwitter  = true;
+            // alert( $scope.artistaSeleccionado.mostrarTwitter);
+          }
+
+          $scope.artistaSeleccionado.usuarioInstagram = $rootScope.artistas[id].usuarioInstagram;
+          $scope.mostrarInstagram  = false;
+           if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
+          {
+            
+            $scope.mostrarInstagram   = false;
+            //alert( $scope.artistaSeleccionado.mostrarTwitter);
+
+          }else{
+            $scope.mostrarInstagram   = true;
+            // alert( $scope.artistaSeleccionado.mostrarTwitter);
+          }
+
+
+
+          console.log($scope.artistaUpdate );
+          var active = dataBase.result;
+          var data = active.transaction(["artistas"], "readwrite");
+          var object = data.objectStore("artistas");
+
+            var codigofiltro =   $rootScope.artistas[id].id ; 
+
+            object.openCursor().onsuccess = function(event) {
+              var cursor = event.target.result;
+              if(cursor) {
+                if(parseInt(cursor.value.idArtista) === parseInt(codigofiltro)) {
+                  var request = cursor.delete();
+                  request.onsuccess = function() {
+                
+                      $scope.resultadoCodigo =  $scope.artistaSeleccionado ; 
+                     // alert($scope.resultadoCodigo);
+                        
+                               //console.log(  $scope.resultadoCodigo );
+                               //console.log(  $scope.resultadoCodigo.id );
+                                var active = dataBase.result;
+                                var data = active.transaction(["artistas"], "readwrite");
+                                var object = data.objectStore("artistas");
+                                 
+
+                                  var request = object.put({
+                                      texto: $scope.resultadoCodigo,
+                                      idArtista: $scope.resultadoCodigo.id
+                                      
+                                  });
+
+                                  request.onerror = function (e) {
+                                      console.log(request.error.name + '\n\n' + request.error.message);
+                                  };
+
+                                  data.oncomplete = function (e) {
+                                    
+                                      console.log('Objeto agregado correctamente');
+                                       
+
+                                      
+                                     
+                                    
+                                    
+                                };
+                     
+                  };
+                } else {
+                   // console.log('NO ENCONTRO -- ' + cursor.value.idArtista +"- " +  codigofiltro);
+                }
+                cursor.continue();        
+              } else {
+                console.log('Entries displayed.');         
+              }
+            };
+
+
+
+
+        
+
+
+          
+
+      });
+
+       
+
+                         
+                                   
+
       }
 
-      $scope.artistaSeleccionado.usuarioInstagram = $rootScope.artistas[id].usuarioInstagram;
-      $scope.mostrarInstagram  = false;
-       if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
-      {
-        
-        $scope.mostrarInstagram   = false;
-        //alert( $scope.artistaSeleccionado.mostrarTwitter);
-
-      }else{
-        $scope.mostrarInstagram   = true;
-        // alert( $scope.artistaSeleccionado.mostrarTwitter);
-      }
-
- 
-    };
 
     $scope.datos = {};   
     $scope.datos.ancho  = "";
@@ -2668,63 +3101,139 @@ $scope.getContactList = function() {
     $scope.cargarSeleccionadoFiltro = function (id) {
      
     
-      $scope.login();
+        $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.artistasResultado[id].id+'.json')
+    
+        .error(function(data, status, headers, config){
+          alert("**** Verificar conexion a internet ****");
       
-      $scope.idArtista =  id+1;
-      $scope.artistaSeleccionado.codigo =$scope.artistasResultado[id].id; 
-      $scope.artistaSeleccionado.nombre = $scope.artistasResultado[id].nombre; 
-      $scope.artistaSeleccionado.estudio= $scope.artistasResultado[id].estudio;
-      $scope.artistaSeleccionado.especialidad = $scope.artistasResultado[id].especialidad; 
-      $scope.artistaSeleccionado.descripcion = $scope.artistasResultado[id].descripcion; 
-      $scope.artistaSeleccionado.imagen = $scope.artistasResultado[id].imagen; 
-      $scope.artistaSeleccionado.direccion = $scope.artistasResultado[id].direccion; 
-      $scope.artistaSeleccionado.celular = $scope.artistasResultado[id].celular; 
-      $scope.artistaSeleccionado.facebook = $scope.artistasResultado[id].facebook; 
-      $scope.artistaSeleccionado.twitter = $scope.artistasResultado[id].twitter; 
-      $scope.artistaSeleccionado.instagram = $scope.artistasResultado[id].instagram; 
-      $scope.artistaSeleccionado.trabajos = $scope.artistasResultado[id].trabajos;
-      $scope.artistaSeleccionado.opcionVideo = $scope.artistasResultado[id].opcionVideo;
-      $scope.artistaSeleccionado.videos = $scope.artistasResultado[id].videos;
-      $scope.artistaSeleccionado.latitud= $scope.artistasResultado[id].latitud;
-      $scope.artistaSeleccionado.longitud = $scope.artistasResultado[id].longitud;
-      $scope.artistaSeleccionado.ciudad = $scope.artistasResultado[id].ciudad;
-      $scope.allImages = $scope.artistasResultado.trabajos;
-      $scope.artistaSeleccionado.usuarioFacebook = $scope.artistasResultado[id].usuarioFacebook;
-      $scope.artistaSeleccionado.usuarioTwitter =$scope.artistasResultado[id].usuarioTwitter;
-      $scope.mostrarTwitter  = false;
-      $scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
-     // console.log($scope.artistaSeleccionado.video1);
-      if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
-      {
-        
-        $scope.mostrarTwitter  = false;
-        //alert( $scope.artistaSeleccionado.mostrarTwitter);
+        })
+        .then(function(response){
+            $scope.login();
+            
+            $scope.idArtista =  id+1;
+            $scope.artistaUpdate = response.data;
+            $scope.artistasResultado[id] = $scope.artistaUpdate ;
+            $scope.artistaSeleccionado.id =$scope.artistasResultado[id].id; 
+            $scope.artistaSeleccionado.codigo =$scope.artistasResultado[id].id; 
+            $scope.artistaSeleccionado.nombre = $scope.artistasResultado[id].nombre; 
+            $scope.artistaSeleccionado.estudio= $scope.artistasResultado[id].estudio;
+            $scope.artistaSeleccionado.especialidad = $scope.artistasResultado[id].especialidad; 
+            $scope.artistaSeleccionado.descripcion = $scope.artistasResultado[id].descripcion; 
+            $scope.artistaSeleccionado.imagen = $scope.artistasResultado[id].imagen; 
+            $scope.artistaSeleccionado.direccion = $scope.artistasResultado[id].direccion; 
+            $scope.artistaSeleccionado.celular = $scope.artistasResultado[id].celular; 
+            $scope.artistaSeleccionado.facebook = $scope.artistasResultado[id].facebook; 
+            $scope.artistaSeleccionado.twitter = $scope.artistasResultado[id].twitter; 
+            $scope.artistaSeleccionado.instagram = $scope.artistasResultado[id].instagram; 
+            $scope.artistaSeleccionado.trabajos = $scope.artistasResultado[id].trabajos;
+            $scope.artistaSeleccionado.opcionVideo = $scope.artistasResultado[id].opcionVideo;
+            $scope.artistaSeleccionado.videos = $scope.artistasResultado[id].videos;
+            $scope.artistaSeleccionado.latitud= $scope.artistasResultado[id].latitud;
+            $scope.artistaSeleccionado.longitud = $scope.artistasResultado[id].longitud;
+            $scope.artistaSeleccionado.ciudad = $scope.artistasResultado[id].ciudad;
+            $scope.allImages = $scope.artistasResultado.trabajos;
+            $scope.artistaSeleccionado.usuarioFacebook = $scope.artistasResultado[id].usuarioFacebook;
+            $scope.artistaSeleccionado.usuarioTwitter =$scope.artistasResultado[id].usuarioTwitter;
+            $scope.mostrarTwitter  = false;
+            //$scope.artistaSeleccionado.video1 = $scope.artistaSeleccionado.videos[0];
+           // console.log($scope.artistaSeleccionado.video1);
+            if($scope.artistaSeleccionado.usuarioTwitter  === 'false')
+            {
+              
+              $scope.mostrarTwitter  = false;
+              //alert( $scope.artistaSeleccionado.mostrarTwitter);
 
-      }else{
-        $scope.mostrarTwitter  = true;
-        // alert( $scope.artistaSeleccionado.mostrarTwitter);
-      }
+            }else{
+              $scope.mostrarTwitter  = true;
+              // alert( $scope.artistaSeleccionado.mostrarTwitter);
+            }
 
-      $scope.artistaSeleccionado.usuarioInstagram = $scope.resultadoFiltro[id].usuarioInstagram;
-      $scope.mostrarInstagram  = false;
-       if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
-      {
-        
-        $scope.mostrarInstagram   = false;
-        //alert( $scope.artistaSeleccionado.mostrarTwitter);
+            $scope.artistaSeleccionado.usuarioInstagram = $scope.artistasResultado[id].usuarioInstagram;
+            $scope.mostrarInstagram  = false;
+             if($scope.artistaSeleccionado.usuarioInstagram  === 'false')
+            {
+              
+              $scope.mostrarInstagram   = false;
+              //alert( $scope.artistaSeleccionado.mostrarTwitter);
 
-      }else{
-        $scope.mostrarInstagram   = true;
-        // alert( $scope.artistaSeleccionado.mostrarTwitter);
-      }
+            }else{
+              $scope.mostrarInstagram   = true;
+              // alert( $scope.artistaSeleccionado.mostrarTwitter);
+            }
+
+
+              var active = dataBase.result;
+          var data = active.transaction(["artistas"], "readwrite");
+          var object = data.objectStore("artistas");
+
+            var codigofiltro =   $scope.artistasResultado[id].id ; 
+
+            object.openCursor().onsuccess = function(event) {
+              var cursor = event.target.result;
+              if(cursor) {
+                if(parseInt(cursor.value.idArtista) === parseInt(codigofiltro)) {
+                  var request = cursor.delete();
+                  request.onsuccess = function() {
+                
+                      $scope.resultadoCodigo =  $scope.artistaSeleccionado ; 
+                     // alert($scope.resultadoCodigo);
+                        
+                               //console.log(  $scope.resultadoCodigo );
+                               //console.log(  $scope.resultadoCodigo.id );
+                                var active = dataBase.result;
+                                var data = active.transaction(["artistas"], "readwrite");
+                                var object = data.objectStore("artistas");
+                                 
+
+                                  var request = object.put({
+                                      texto: $scope.resultadoCodigo,
+                                      idArtista: $scope.resultadoCodigo.id
+                                      
+                                  });
+
+                                  request.onerror = function (e) {
+                                      console.log(request.error.name + '\n\n' + request.error.message);
+                                  };
+
+                                  data.oncomplete = function (e) {
+                                    
+                                      console.log('Objeto agregado correctamente');
+                                       
+
+                                      
+                                     
+                                    
+                                    
+                                };
+                     
+                  };
+                } else {
+                   // console.log('NO ENCONTRO -- ' + cursor.value.idArtista +"- " +  codigofiltro);
+                }
+                cursor.continue();        
+              } else {
+                console.log('Entries displayed.');         
+              }
+            };
+
+
+
+
+
+
+
+
+          });
  
     };
+
+
     
     $scope.filtrar = function () {
 
  
       $scope.filtro.iniciaFiltro =false;
-      $scope.filtro.cargando = true;
+    //  $scope.filtro.cargando = true;
 
       
        //$window.location.reload(true);
@@ -2744,7 +3253,7 @@ $scope.getContactList = function() {
       })
       .then(function(response){*/
       //alert("**** THEN ****"+ response.data);
-       $scope.filtro.cargando = true;
+      // $scope.filtro.cargando = true;
         
         $scope.resultadoFiltro =[];
      
@@ -2755,10 +3264,74 @@ $scope.getContactList = function() {
 
         if($scope.filtro.estilo === "Todos" && $scope.filtro.ciudad === "Todos" && $scope.filtro.codigo === "" )
         {  
+             $scope.abrirLoading();
           // console.log("entra");
-            
-            $scope.artistasResultado = $rootScope.artistas; 
-            $scope.filtro.mostrarCodigo = false;
+          /*
+            var active = dataBase.result;
+            var data = active.transaction(["artistas"], "readwrite");
+            var object = data.objectStore("artistas");
+            var objectStoreRequest = object.clear();
+
+            objectStoreRequest.onsuccess = function(event) {
+              // report the success of our clear operation
+              $scope.abrirLoadingPreCargado();
+              $rootScope.llamaFireBase();
+              $scope.artistasResultado = $rootScope.artistas; 
+              $scope.filtro.mostrarCodigo = false;
+            };
+            */
+              $http.get('https://vivid-inferno-5389.firebaseio.com/Numeros.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                                    $scope.numeroArray = [];
+                                    $scope.numeroData  =  response.data ; 
+                                    $scope.cantidadNumeros =  $scope.numeroData .split(",");
+                                    //alert($scope.cantidadNumeros.length);
+                                    for (var i = 0; i < $scope.cantidadNumeros.length; i++) {
+                                      $scope.numeroArray = $scope.numeroArray.concat(
+                                                                                    {
+                                                                                      id:i , 
+                                                                                      codigo:$scope.cantidadNumeros[i]
+                                                                                    }
+                                                                                  );
+                                    }
+                                    console.log($scope.numeroArray);
+                                    $rootScope.shuffleArray( $scope.numeroArray);
+                                   // alert("despues");
+                                    console.log($scope.numeroArray);
+                                     
+                                   $scope.artistasResultado = [];
+
+                                    for (var i = 0; i < $scope.numeroArray.length; i++) {
+
+                                           $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.numeroArray[i].codigo+'.json')
+                          
+                                            .error(function(data, status, headers, config){
+                                            //alert("**** Verificar conexion a internet ****");
+                                           // alert(status);
+                                           // alert(angular.toJson(data))
+                                            })
+                                            .then(function(response){
+                                                $rootScope.shuffleArray(response.data.trabajos);
+                                                       $scope.artistasResultado.push(response.data);
+                                                      
+                                                   
+
+
+                                            });
+
+                                      
+                                    }
+                                     $scope.cerrarLoading();
+
+
+                         });
+
 
         }
 
@@ -2767,40 +3340,142 @@ $scope.getContactList = function() {
 
           //SI BUSCA  POR CODIGO 
         if ($scope.filtro.codigo != "") {
-           $scope.artistasCodigo = $rootScope.artistas;
-           //$scope.trabajos = $scope.artistasCodigo[1].trabajos;
-           $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
+           $scope.abrirLoadingArtistaSolo();
 
-          $scope.filtro.estilo = "Todos";
-          $scope.filtro.ciudad = "Todos" 
-          $scope.siFiltro  = false;
-          $scope.filtro.mostrarCodigo = false;
-             for (var i=0; i<$scope.artistasCodigo.length; i++){
-        //alert($scope.artistas[i].id + "   " + $scope.filtro.codigo);
 
-              if(parseInt($scope.artistasCodigo[i].id) === parseInt($scope.filtro.codigo))
-                {
-                 
-                  $scope.resultadoFiltro = $scope.artistasCodigo[i];
-                  $scope.siFiltro = true;
-                }
-            }  
-        //alert("tamaño fin" + $scope.artistas.length);
-        if($scope.siFiltro)
-        {
+            $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.filtro.codigo+'.json')
+                     //  $http.get('https://inkgpsapp.firebaseio.com/DataId/00.json')
+                
+                      .error(function(data, status, headers, config){
+                        $scope.cerrarLoading();
+                        $scope.mostrarTextoNoEncontroCodigo();
+                        alert("**** Verificar conexion a internet ****");
+                    
+                      })
+                     .then(function(response){
+                     
+                      $scope.resultadoCodigo =  response.data ; 
+                      //alert($scope.resultadoCodigo);
+                          if($scope.resultadoCodigo === null){
+                                  $scope.cerrarLoading();
+                                 $scope.mostrarTextoNoEncontroCodigo();
+                                 return;
 
-         // alert("tamaño filtro" + $scope.resultadoFiltro.length);
-        $scope.artistasResultado =[];
-        $scope.artistasResultado.push($scope.resultadoFiltro);
-        $scope.filtro.cargando = false;
-        }else{
-              //alert("No hay resultados , se mostraran todos los artistas ");
-              $scope.mostrarTextoNoEncontroCodigo();
-              $scope.filtro.cargando = false;
-          
-        }
+                          }else{
+                           
+                              $rootScope.shuffleArray(response.data.trabajos);
+
+                                        $scope.filtro.estilo = "Todos";
+                                        $scope.filtro.ciudad = "Todos" 
+                                        $scope.siFiltro  = false;
+                                        $scope.filtro.mostrarCodigo = false;
+                                 
+                                             //  alert("entra if");
+                                        $scope.resultadoFiltro = $scope.resultadoCodigo;
+                                        $scope.siFiltro = true;
+                                        $scope.artistasResultado =[];
+                                        $scope.artistasResultado.push($scope.resultadoFiltro);
+                                        $scope.filtro.cargando = false;
+                                        $scope.cerrarLoading();
         
-       // alert("tamaño" + $scope.artistas.length);
+                          }
+                      });
+
+/*
+
+            var active = dataBase.result;
+            var data = active.transaction(["artistas"], "readwrite");
+            var object = data.objectStore("artistas");
+            var codigofiltro =  $scope.filtro.codigo ; 
+           // alert("entra evento" + codigofiltro);
+            object.openCursor().onsuccess = function(event) {
+              var cursor = event.target.result;
+              //alert(cursor);
+              if(cursor) {
+
+                if(parseInt(cursor.value.idArtista) === parseInt(codigofiltro)) {
+                  var request = cursor.delete();
+                  request.onsuccess = function() {
+                    //console.log('Deleted' + codigofiltro );
+                      $http.get('https://inkgpsapp.firebaseio.com/DataId/'+codigofiltro+'.json')
+                     //  $http.get('https://inkgpsapp.firebaseio.com/DataId/00.json')
+                
+                      .error(function(data, status, headers, config){
+                        alert("**** Verificar conexion a internet ****");
+                    
+                      })
+                     .then(function(response){
+                      $scope.resultadoCodigo =  response.data ; 
+                      //alert($scope.resultadoCodigo);
+                          if($scope.resultadoCodigo === null){
+                                 $scope.mostrarTextoNoEncontroCodigo();
+                                 return;
+
+                          }else{
+                               //console.log(  $scope.resultadoCodigo );
+                               //console.log(  $scope.resultadoCodigo.id );
+                                var active = dataBase.result;
+                                var data = active.transaction(["artistas"], "readwrite");
+                                var object = data.objectStore("artistas");
+                                 
+
+                                  var request = object.put({
+                                      texto: $scope.resultadoCodigo,
+                                      idArtista: $scope.resultadoCodigo.id
+                                      
+                                  });
+
+                                  //alert(request);
+
+                                  request.onerror = function (e) {
+                                      console.log(request.error.name + '\n\n' + request.error.message);
+                                  };
+
+                                  data.oncomplete = function (e) {
+                                    
+                                      console.log('Objeto agregado correctamente');
+                                        $scope.artistasCodigo = $rootScope.artistas;
+                                         //$scope.trabajos = $scope.artistasCodigo[1].trabajos;
+                                         $scope.trabajosjson = JSON.stringify($scope.artistasCodigo);
+
+                                        $scope.filtro.estilo = "Todos";
+                                        $scope.filtro.ciudad = "Todos" 
+                                        $scope.siFiltro  = false;
+                                        $scope.filtro.mostrarCodigo = false;
+                                           for (var i=0; i<$scope.artistasCodigo.length; i++){
+                                      //alert($scope.artistas[i].id + "   " + $scope.filtro.codigo);
+
+                                            if(parseInt($scope.artistasCodigo[i].id) === parseInt(codigofiltro))
+                                              {
+                                             //  alert("entra if");
+                                                $scope.resultadoFiltro = $scope.artistasCodigo[i];
+                                                $scope.siFiltro = true;
+                                                $scope.artistasResultado =[];
+                                                $scope.artistasResultado.push($scope.resultadoFiltro);
+                                                $scope.filtro.cargando = false;
+                                                 $scope.cerrarLoading();
+                                                return;
+                                              }
+                                          }  
+                                          return;
+
+                                      //alert("tamaño fin" + $scope.artistas.length);
+                                     
+                                    
+                                    
+                                };
+                          }
+                      });
+                  };
+                } else {
+                    //console.log('NO ENCONTRO -- ' + cursor.value.idArtista +"- " +  codigofiltro);
+                }
+                cursor.continue();        
+              } else {
+                console.log('finalizo');         
+              }
+            };*/
+
        
         }
 
@@ -2808,6 +3483,70 @@ $scope.getContactList = function() {
         //SI BUSCA POR  ESTILO
         if($scope.filtro.estilo != "Todos" && $scope.filtro.ciudad == "Todos" )
         {
+
+             $http.get('https://vivid-inferno-5389.firebaseio.com/Estilos.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                                    $scope.numeroArray = [];
+                                    $scope.numeroData  =  response.data ; 
+                                    $scope.cantidadNumeros =  $scope.numeroData.split(",");
+
+                                    //alert($scope.cantidadNumeros.length);
+                                    for (var i = 0; i < $scope.cantidadNumeros.length; i++) {
+                                      $scope.tempData  = $scope.cantidadNumeros[i].split("-");
+                                      $scope.tempId = $scope.tempData[0];
+                                      $scope.tempEstilo = $scope.tempData[1];
+                                     
+                                      $scope.numeroArray = $scope.numeroArray.concat(
+                                                                                    {
+                                                                                      id:i , 
+                                                                                      codigo: $scope.tempId,
+                                                                                      estilo : $scope.tempEstilo
+                                                                                    }
+                                                                                  );
+                                      
+                                    }
+                                    console.log($scope.numeroArray);
+                                    $rootScope.shuffleArray( $scope.numeroArray);
+                                    //alert("despues 1");
+                                    console.log($scope.numeroArray);
+                                    //$rootScope.artistas = [];  
+                                   $scope.artistasResultado = [];
+
+                                    for (var i = 0; i < $scope.numeroArray.length; i++) {
+
+                                        if($scope.filtro.estilo === $scope.numeroArray[i].estilo ){
+                                           $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.numeroArray[i].codigo+'.json')
+                          
+                                            .error(function(data, status, headers, config){
+                                            //alert("**** Verificar conexion a internet ****");
+                                           // alert(status);
+                                           // alert(angular.toJson(data))
+                                            })
+                                            .then(function(response){
+                                              $rootScope.shuffleArray(response.data.trabajos);
+                                                       $scope.artistasResultado.push(response.data);
+                                                      
+
+                                            });
+                                        }
+
+                                      
+                                    }
+                                     $scope.cerrarLoading();
+
+
+               });
+
+
+
+/*
+
            $scope.artistasCodigo = $rootScope.artistas;
             $rootScope.shuffleArray($scope.artistasCodigo);
           // $scope.trabajos = $scope.artistasCodigo[1].trabajos;
@@ -2850,7 +3589,7 @@ $scope.getContactList = function() {
         
        // alert("tamaño" + $scope.artistas.length);
 
-        
+        */
 
 
         }
@@ -2858,6 +3597,71 @@ $scope.getContactList = function() {
          //SI BUSCA POR  CIUDAD
         if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo == "Todos" )
         {
+
+             $http.get('https://vivid-inferno-5389.firebaseio.com/Ciudades.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                                    $scope.numeroArray = [];
+                                    $scope.numeroData  =  response.data ; 
+                                    $scope.cantidadNumeros =  $scope.numeroData.split(",");
+
+                                    //alert($scope.cantidadNumeros.length);
+                                    for (var i = 0; i < $scope.cantidadNumeros.length; i++) {
+                                      $scope.tempData  = $scope.cantidadNumeros[i].split("-");
+                                      $scope.tempId = $scope.tempData[0];
+                                      $scope.tempCiudad = $scope.tempData[1];
+                                     
+                                      $scope.numeroArray = $scope.numeroArray.concat(
+                                                                                    {
+                                                                                      id:i , 
+                                                                                      codigo: $scope.tempId,
+                                                                                      ciudad : $scope.tempCiudad
+                                                                                    }
+                                                                                  );
+                                      
+                                    }
+                                    console.log($scope.numeroArray);
+                                    $rootScope.shuffleArray( $scope.numeroArray);
+                                    //alert("despues 1");
+                                    console.log($scope.numeroArray);
+                                   // $rootScope.artistas = [];  
+                                   $scope.artistasResultado = [];
+
+                                    for (var i = 0; i < $scope.numeroArray.length; i++) {
+
+                                        if($scope.filtro.ciudad === $scope.numeroArray[i].ciudad ){
+                                           $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.numeroArray[i].codigo+'.json')
+                          
+                                            .error(function(data, status, headers, config){
+                                            //alert("**** Verificar conexion a internet ****");
+                                           // alert(status);
+                                           // alert(angular.toJson(data))
+                                            })
+                                            .then(function(response){
+                                                $rootScope.shuffleArray(response.data.trabajos);
+                                                       $scope.artistasResultado.push(response.data);
+                                                      
+
+                                            });
+                                        }
+
+                                        
+                                    }
+                                     $scope.cerrarLoading();
+
+
+               }) 
+
+
+
+
+/*
+
            $scope.artistasCodigo = $rootScope.artistas;
            $rootScope.shuffleArray($scope.artistasCodigo);
         //   $scope.trabajos = $scope.artistasCodigo[1].trabajos;
@@ -2895,9 +3699,87 @@ $scope.getContactList = function() {
                 $scope.filtro.cargando = false;
                }
         }
+          */}
          //SI BUSCA POR  CIUDAD   Y  POR ESTILO 
-        if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo != "Todos")
+        if($scope.filtro.ciudad != "Todos" && $scope.filtro.estilo != "Todos" && $scope.filtro.codigo === "")
         {
+
+                  $http.get('https://vivid-inferno-5389.firebaseio.com/EstiloCiudad.json')
+                          
+                                  .error(function(data, status, headers, config){
+                                  //alert("**** Verificar conexion a internet ****");
+                                 // alert(status);
+                                 // alert(angular.toJson(data))
+                                  })
+                                  .then(function(response){
+                                    $scope.numeroArray = [];
+                                    $scope.numeroData  =  response.data ; 
+                                    $scope.cantidadNumeros =  $scope.numeroData.split(",");
+
+                                    //alert($scope.cantidadNumeros.length);
+                                    for (var i = 0; i < $scope.cantidadNumeros.length ; i++) {
+                                      $scope.tempData  = $scope.cantidadNumeros[i].split("-");
+                                      $scope.tempId = $scope.tempData[0];
+                                      console.log("id == " + $scope.tempData[1]);
+                                      if($scope.tempData[1] != undefined){
+                                        $scope.tempData2 = $scope.tempData[1].split("@");
+                                      console.log("ESTI LO == " + $scope.tempData2[0]);
+                                      console.log("CIUDAD == " + $scope.tempData2[1]);
+                                        //alert($scope.tempData2);
+                                      $scope.tempEstilo  = $scope.tempData2[0];
+                                      $scope.tempCiudad  = $scope.tempData2[1];
+                                    
+                                     
+                                      $scope.numeroArray = $scope.numeroArray.concat(
+                                                                                    {
+                                                                                      id:i , 
+                                                                                      codigo: $scope.tempId,
+                                                                                      ciudad : $scope.tempCiudad,
+                                                                                      estilo : $scope.tempEstilo
+                                                                                    }
+                                                                                  );
+                                      }
+                                      
+                                      
+                                    }
+                                    console.log($scope.numeroArray);
+                                    $rootScope.shuffleArray( $scope.numeroArray);
+                                    //alert("despues 1");
+                                    console.log($scope.numeroArray);
+                                    //$rootScope.artistas = [];  
+                                   $scope.artistasResultado = [];
+
+                                    for (var i = 0; i < $scope.numeroArray.length; i++) {
+
+                                        if($scope.filtro.ciudad === $scope.numeroArray[i].ciudad && $scope.filtro.estilo === $scope.numeroArray[i].estilo ){
+                                           $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$scope.numeroArray[i].codigo+'.json')
+                          
+                                            .error(function(data, status, headers, config){
+                                            //alert("**** Verificar conexion a internet ****");
+                                           // alert(status);
+                                           // alert(angular.toJson(data))
+                                            })
+                                            .then(function(response){
+                                                $rootScope.shuffleArray(response.data.trabajos);
+                                                       $scope.artistasResultado.push(response.data);
+                                                      
+
+                                            });
+                                        }
+
+                                        
+                                    }
+                                     $scope.cerrarLoading();
+
+
+               }) 
+
+
+
+
+
+/*
+
             $scope.artistasCodigo =$rootScope.artistas;
              $rootScope.shuffleArray($scope.artistasCodigo);
           // $scope.trabajos = $scope.artistasCodigo[1].trabajos;
@@ -2956,7 +3838,11 @@ $scope.getContactList = function() {
                $scope.mostrarTextoNoEncontroCodigo();
                $scope.filtro.cargando = false;
                }
-        }
+
+*/
+
+
+        }//CIERRA IF
 
 
 
@@ -2972,6 +3858,7 @@ $scope.getContactList = function() {
      //})
       $scope.closeFiltro(); 
      //  $scope.filtro.cargando = true;
+   
       
   };
 
@@ -3043,6 +3930,43 @@ $ionicModal.fromTemplateUrl('./templates/terminosCondiciones.html', {
 
     };
 
+    $scope.insertDataArtistas = function ( idArtista, texto ){
+        var queryArtista = "INSERT INTO artistas (idArtista,texto) VALUES (?,?)";
+        $cordovaSQLite.execute(db, queryArtista, [idArtista,texto]).then(function(res) {
+            //console.log("INSERT ID -> " + res.insertId);
+            //alert("INSERT ID -> " + res.insertId);
+        }, function (err) {
+            console.error(err);
+            alert(err);
+        });
+
+    }
+
+      $scope.selectArtistas = function(idArtista) {
+     //$scope.openTerminos();  
+        //var query = "SELECT texto  FROM artistas WHERE idArtista = ?";
+          var query = "SELECT texto  FROM artistas";
+        $cordovaSQLite.execute(db, query, [idArtista]).then(function(res) {
+           alert("tamaño del select" + res.rows.length );
+            if(res.rows.length > 0) {
+           //     console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
+               //alert("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
+               //modal
+                
+            } else {
+              //$scope.openTerminos();
+               // console.log("No results found");
+               // $scope.insert("OTRO2","SIRVIOINFO");
+
+               // alert("No results found");
+                
+            }
+        }, function (err) {
+            console.error(err);
+            alert(err);
+        });
+    }
+
 $scope.insert = function(firstname, lastname) {
         var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
         $cordovaSQLite.execute(db, query, [firstname, lastname]).then(function(res) {
@@ -3077,7 +4001,7 @@ $scope.insert = function(firstname, lastname) {
             alert(err);
         });
     }
-   // $scope.insert("OTRO2","SIRVIOINFO");
+   // $scope.insert("OTRO2","SIRVIOINFO"); 
    // $scope.select("SIRVIOINFO");
    $scope.closeTerminosok = function () {
      $scope.insert("OTRO2","SIRVIOINFO");

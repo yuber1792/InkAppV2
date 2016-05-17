@@ -3,6 +3,7 @@
      
   <ion-content has-bouncing='false' class="profile-content" delegate-handle="profile-scroll">
  <button class="button button-icon button-clear icon  ion-arrow-left-c blanco" style="color: white;" ng-click="closeLogin()"></button>
+
     <div class="row profile-data">
  
       <div class="col">
@@ -100,7 +101,7 @@
     <img  width="48px" height="48px" src="./img/facebook.png">
     {{artistaSeleccionado.facebook}}
   </a>
-  <a class="item item-avatar" href="#" ng-click="instagram()" ng-show="mostrarInstagram">
+  <a class="item item-avatar" href="#" ng-click="instagram()" ng-if="artistaSeleccionado.instagram != 'false'">
     <img  width="48px" height="48px" src="./img/Instagram.png">
     {{artistaSeleccionado.instagram}}
   </a></ion-nav-view>
