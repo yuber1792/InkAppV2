@@ -227,6 +227,11 @@ background-image:url("../img/fondoDerecho.png");
  /*background-repeat: no-repeat;*/
 
 }
+
+.imagenCarrusel {
+   background-size: 75% 75%;
+   background-repeat: no-repeat;
+}
 .transparente {
  background-color: transparent;
   border-color: transparent;

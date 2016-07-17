@@ -6,13 +6,21 @@
                     </pre-img>
                   </div>
 
-                  <!-- HOLA  <i ng-if="post.liked" class="post-like-action clicked icon ion-ios-heart"></i>-->
-                  <!--<i ng-if="!post.liked" class="post-like-action icon ion-ios-heart-outline"></i>-->
+               
+                       
+                    
+                        <i ng-if="artista.verificado != 'false'" class="post-like-action clicked icon ion-ios-checkmark"></i>
+                        <i ng-if="artista.verificado != 'false'" class="post-like-action icon ion-ios-checkmark-outline"></i>
+                    
+
+
+                 
+               
 
                   <div class="item item-body">
                     <h4 class="card-title">{{artista.nombre}}</h4>
                     <p class="card-description">
-                      <a class="card-user-name" ui-sref="app.profile.posts({userId:post.userId})">{{artista.especialidad}}
+                      <a class="card-user-name" ui-sref="app.profile.posts({userId:post.userId})">{{artista.ciudad}}
                       </a>
                     </p>
                     <span class="card-moment-posted" am-time-ago="post.date"></span>
