@@ -1,0 +1,33 @@
+<ion-modal-view >
+  <ion-header-bar class="fondoRojo" >
+    <h1 class="title letraBlanca">Registro cliente</h1>
+    <div class="buttons letraBlanca">
+      <!--button class="button button-clear letraBlanca" ng-click="closeLogin()">Close</button-->
+    </div>
+  </ion-header-bar>
+  <ion-content >
+
+
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">email</span>
+          <input type="text" ng-model="registroData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Clave</span>
+          <input type="password" ng-model="registroData.clave">
+        </label>
+         
+         <label class="item item-input">
+          <span class="input-label">Repetir Clave</span>
+          <input type="password" ng-model="registroData.reclave">
+        </label>
+        
+       
+      </div>
+
+       <button class="btn tema button button-full button-assertive button-outline" ng-click="registrarUsuario()" >Registrarme</button>
+        <button class="btn tema button button-full button-assertive button-outline" ng-click="cerrarLogin()">Cerrar</button>
+    
+  </ion-content>
+</ion-modal-view>

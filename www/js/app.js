@@ -9,7 +9,7 @@ var db = null;
 
 
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth'])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {
@@ -198,7 +198,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             explorar :"Explorar",
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
-            proveedores :"Proveedores"
+            proveedores :"Proveedores",
+            loginCliente:"Login cliente"
 
 
 
@@ -257,7 +258,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             explorar :"Explorar",
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
-            proveedores :"Proveedores"
+            proveedores :"Proveedores",
+              loginCliente:"Login cliente"
 
 
 
@@ -317,7 +319,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             explorar :"Explorar",
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
-            proveedores :"Proveedores"
+            proveedores :"Proveedores",
+              loginCliente:"Login cliente"
 
 
 
@@ -545,8 +548,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
     url: "/push",
     views: {
       'menuContent': {
-        templateUrl: "templates/push.html",
-        controller: 'indexController'
+        templateUrl: "templates/push.html"
       }
     }
   })

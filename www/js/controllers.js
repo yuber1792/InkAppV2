@@ -31,6 +31,7 @@ angular.module('starter.controllers', [])
   
 
 })
+
 .controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes,$rootScope) {
 Scopes.store('BocetosController', $scope);
 //console.log("entra controlador bocetos");
@@ -1638,10 +1639,51 @@ $scope.claves={};
 
 
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ,$firebaseArray,$firebaseAuth,$cordovaOauth) {
     Scopes.store('indexController', $scope);
     $ionicSideMenuDelegate.canDragContent(false);
     console.log("entra controlador index");
+
+
+
+
+
+      //var ref = firebase.database().ref().child("DataId");
+  //var otro  = ref.orderByChild("especialidad").equalTo("Nueva escuela");
+  //var db = firebase.database();
+  
+  /* 
+  db.ref('metadata1').set({
+   app: 'inkgps',
+   ver: '0.0.3s'
+   }).then(function() {
+            console.log('dato almacenado correctamente');
+        })
+        .catch(function(error) {
+            console.log('detectado un error', error);
+        });
+*/
+
+
+    //var ref =  firebase.database().ref() ; 
+    /*
+    db.ref().child("nombreApp").on("value", function(snapshot){
+      console.log("cambios");
+      console.log(snapshot.val());
+      
+    });
+    */
+
+
+   // var artistasFireBase  = db.ref().child("Artistas");
+
+  // download the data into a local object
+    //$scope.dataFirebaseTest = $firebaseObject(ref); 
+   //$scope.dataFirebaseTest = $firebaseArray(artistasFireBase);
+  //console.log($scope.dataFirebaseTest);
+
+
+
     $rootScope.marca = "otro"; 
     $scope.artistaLogueado = {};
 
@@ -2126,6 +2168,168 @@ $scope.claves={};
   //$scope.startVideo = function() {
   //  $state.go('app.videos');
  // };
+ $scope.registroData = {};
+  $scope.registrarUsuario = function(){
+    console.log($scope.registroData.email);
+    console.log($scope.registroData.clave);
+    if($scope.registroData.email != null  ){
+      if($scope.registroData.clave === $scope.registroData.reclave){
+         var ref = firebase.database().ref();
+          firebase.auth().createUserWithEmailAndPassword($scope.registroData.email, $scope.registroData.clave).then(function(userResponse) {
+            alert($scope.registroData.email +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+            $scope.cerrarRegistro();
+            }, function(error){
+            console.log(error);
+          });
+      }
+    }
+
+   
+  }
+  
+
+  $scope.dataClienteRegistrado = {};
+ // var fb = new Firebase("https://ink360-b7047.firebaseio.com");
+
+  var auth = $firebaseAuth(authF);
+  $scope.registroFacebook = function(){
+ 
+     $cordovaOauth.facebook("968981486540678", ["email"]).then(function(result) {
+           //alert(result);
+           //$scope.resultado =  result ; 
+          //alert("obtiene  token referencia CREDENCIAL: " + result.access_token );
+          var credential = new firebase.auth.FacebookAuthProvider.credential(result.access_token);
+
+          authF.signInWithCredential(credential).then(function(user) {
+            console.log("Sign In Success", user);
+            console.log(user);
+            console.log(JSON.stringify(user));
+
+            $scope.dataClienteRegistrado = user; 
+            console.log($scope.dataClienteRegistrado.displayName);
+            alert($scope.dataClienteRegistrado.displayName +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+            $scope.cerrarLoginCliente();
+
+          
+          }, function(error) {
+            console.log("Sign In Error", error);
+          });
+      
+
+        }, function(error) {
+            console.log("ERROR: " + error);
+            alert("ERROR: " + error);
+        });   
+
+   /*
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('user_friends');
+    var authService = firebase.auth();
+    alert("inicia llamado redirect");
+   
+    authService.signInWithRedirect(provider);
+    authService.getRedirectResult().then(function(result) {
+      console.log(result);
+      if (result.credential) {
+       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+        // ...
+        }
+      // The signed-in user info.
+       var user = result.user;
+      }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            alert(errorMessage);
+            // ...
+        });
+    */
+    /*authService.signInWithPopup(provider)
+        .then(function(result) {
+            //todo correcto
+            console.log('autenticado usuario ', result.user);
+            console.log(result);
+            alert("nombre en redes :" + result.user.displayName);
+            alert("email : " + result.user.email);
+           
+
+
+        })
+        .catch(function(error) {
+            // error de login
+            alert("error");
+            alert(error);
+            console.log('Detectado un error:', error);
+        });
+    */
+
+  }
+ $scope.loginClienteData  = {};
+ $scope.loginCliente = function (){
+   
+  console.log($scope.loginClienteData.email);
+    console.log($scope.loginClienteData.clave);
+   firebase.auth().signInWithEmailAndPassword($scope.loginClienteData.email, $scope.loginClienteData.clave).then(function(pasa) {
+      // Handle Errors here.
+     console.log("log exitoso");
+     alert("registro exitoso");
+
+      // ...
+    })
+   .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+
+ } 
+
+$ionicModal.fromTemplateUrl('templates/RegistroCliente.html', {
+    scope: $scope
+  }).then(function(modalRegistro) {
+    $scope.modalRegistro = modalRegistro;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.cerrarRegistro = function() {
+    $scope.modalRegistro.hide();
+  };
+
+  // Open the login modal
+  $scope.abrirRegistro = function() {
+
+    $scope.modalRegistro.show();
+  };
+
+  $ionicModal.fromTemplateUrl('templates/loginCliente.html', {
+    scope: $scope
+  }).then(function(modalClienteLog) {
+    $scope.modalClienteLog = modalClienteLog;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.cerrarLoginCliente= function() {
+    $scope.modalClienteLog.hide();
+  };
+
+  // Open the login modal
+  $scope.abrirLoginCliente = function() {
+   
+    $scope.modalClienteLog.show();
+  };
+
+$scope.abrirVentanaRegistro = function(){
+$scope.cerrarLoginCliente();
+$scope.abrirRegistro();
+
+}
+
 
 $scope.logueado = 0 ; 
 
@@ -2425,6 +2629,13 @@ $scope.scrollTop = function() {//ng-click for back to top button
            // $state.go('app.'+nombre);
             //$scope.esDescubrir  = true ;
             $scope.abrirLogin();
+            //$rootScope.shuffleArray($rootScope.artistas);
+         }
+         else if (nombre === 'loginCliente'){
+           // $state.go('app.'+nombre);
+            //$scope.esDescubrir  = true ;
+           
+            $scope.abrirLoginCliente();
             //$rootScope.shuffleArray($rootScope.artistas);
          }
          else{
@@ -3263,6 +3474,10 @@ $scope.getContactList = function() {
         //SI BUSCA POR  ESTILO
         if($scope.filtro.estilo != "Todos" && $scope.filtro.ciudad == "Todos" )
         {
+
+
+
+ 
 
              $http.get('https://vivid-inferno-5389.firebaseio.com/Estilos.json')
                           

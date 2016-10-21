@@ -29,10 +29,15 @@
    
      <script src="js/services.js"></script>
      <script src="js/ng-cordova.min.js"></script>
-     <!-- Firebase -->
-<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+      <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+
 <!-- AngularFire -->
-<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
  <script src="js/controllers.js"></script>
      
     
@@ -44,91 +49,23 @@
   <script>
       var primer = 0 ;
       var dataBase  = null ;  
-     /* var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-       
-            
-                function startDB() {
-            
-                dataBase = indexedDB.open("artistasData", 1);
-                
-                dataBase.onupgradeneeded = function (e) {
+           // Initialize the Firebase SDK
+      var configFire = {
+        apiKey: "AIzaSyAFsavrm9jQAumqLWxDZgEQYeqkbvV6Ta8",
+        authDomain: "ink360-b7047.firebaseapp.com",
+        databaseURL: "https://ink360-b7047.firebaseio.com",
+        storageBucket: "ink360-b7047.appspot.com",
+        messagingSenderId: "399106165518"
+      };
 
-                    active = dataBase.result;
-                    
-                    object = active.createObjectStore("artistas", { keyPath : 'id', autoIncrement : true });
-                    object.createIndex('by_texto', 'texto', { unique : false });
-                    object.createIndex('by_idArtista', 'idArtista', { unique : true });
-                };
-
-                dataBase.onsuccess = function (e) {
-                    alert('Base de datos cargada correctamente');
-                    
-
-
-        
-                };
-        
-                dataBase.onerror = function (e)  {
-                    alert('Error cargando la base de datos');
-                };
-            }*/
-
-           /* function loadAll(){
-                 var active = dataBase.result;
-                    var data = active.transaction(["artistas"], "readwrite");
-                    var object = data.objectStore("artistas");
-
-                    var elements = [];
-
-                      object.openCursor().onsuccess = function (e) {
-
-                          var result = e.target.result;
-
-                          if (result === null) {
-                              return;
-                          }
-
-                          elements.push(result.value);
-
-                          result.continue();
-
-
-                      };
-
-                     alert(elements.length);
-
-                      data.oncomplete = function () {
-
-                          var outerHTML = '';
-                          alert("entra");
-
-                          for (var key in elements) {
-                            $rootScope.artistasLocales.push(angular.toJson(elements[key].texto));
-                             /* outerHTML += '\n\
-                              <tr>\n\
-                                  <td>' + elements[key].dni + '</td>\n\
-                                  <td>' + elements[key].name + '</td>\n\
-                                  <td>\n\
-                                      <button type="button" onclick="load(' + elements[key].id + ')">Details</button>\n\
-                                  </td>\n\
-                              </tr>';Ç*/
-
-                         /* }
-                          console.log("desde base");
-                          alert($rootScope.artistasLocales);
-
-                          //elements = [];
-                         // document.querySelector("#elementsList").innerHTML = outerHTML;
-                      };
-
-            }*/
-
-
-
-
-
-        
-
+      firebase.initializeApp(configFire);
+      var dbF = firebase.database();
+      
+       var authF = firebase.auth();
+     // var fb = new Firebase("https://ink360-b7047.firebaseio.com") //facebook  login 
+      var artistasFireBase  = dbF.ref().child("Artistas");
+      
+  
   </script>
 
    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCm5s0Dtef93SrfuO5cuht7wFofqjYk2_U&sensor=true"></script>
