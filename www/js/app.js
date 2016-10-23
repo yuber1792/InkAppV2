@@ -9,7 +9,7 @@ var db = null;
 
 
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography'])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {
@@ -142,6 +142,10 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
 .config(function($ionicConfigProvider) {
      $ionicConfigProvider.backButton.previousTitleText(false).text(' ');
 })
+
+.config(['$cryptoProvider', function($cryptoProvider){
+    $cryptoProvider.setCryptographyKey('ABCD123');
+  }])
 
  .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         $translateProvider.translations('en', {

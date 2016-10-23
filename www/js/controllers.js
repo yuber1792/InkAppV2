@@ -1639,12 +1639,36 @@ $scope.claves={};
 
 
 
-.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ,$firebaseArray,$firebaseAuth,$cordovaOauth) {
+.controller('indexController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ,$firebaseArray,$firebaseAuth,$cordovaOauth,$cordovaBarcodeScanner,$crypto) {
     Scopes.store('indexController', $scope);
     $ionicSideMenuDelegate.canDragContent(false);
     console.log("entra controlador index");
 
+    $scope.encriptar  = function (){
+       var encrypted = $crypto.encrypt('steven castro');
+       var decrypted = $crypto.decrypt(encrypted);
+       console.log("texto encriptado = " + encrypted);
+       console.log("texto desencriptado = " + decrypted);
+    }
 
+    $scope.encriptarTexto  = function (texto){
+      console.log("texto encriptado = " + $crypto.encrypt(texto));
+      return $crypto.encrypt(texto);
+    }
+
+
+    $scope.scanBarcode = function() {
+
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            alert(imageData.text);
+            console.log("Barcode Format -> " + imageData.format);
+            console.log("Cancelled -> " + imageData.cancelled);
+        }, function(error) {
+            console.log("An error happened -> " + error);
+        });
+      
+
+    };
 
 
 
@@ -2176,7 +2200,10 @@ $scope.claves={};
       if($scope.registroData.clave === $scope.registroData.reclave){
          var ref = firebase.database().ref();
           firebase.auth().createUserWithEmailAndPassword($scope.registroData.email, $scope.registroData.clave).then(function(userResponse) {
+            $rootScope.loginData.login = true;
+            $rootScope.loginData.isClient = true;
             alert($scope.registroData.email +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+
             $scope.cerrarRegistro();
             }, function(error){
             console.log(error);
@@ -2207,6 +2234,8 @@ $scope.claves={};
 
             $scope.dataClienteRegistrado = user; 
             console.log($scope.dataClienteRegistrado.displayName);
+            $rootScope.loginData.login = true;
+            $rootScope.loginData.isClient = true;
             alert($scope.dataClienteRegistrado.displayName +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
             $scope.cerrarLoginCliente();
 
@@ -2443,6 +2472,7 @@ $scope.logueado = 0 ;
                     
                       idUsuarioLog = true; 
                       $rootScope.loginData.login = true;
+                      $rootScope.loginData.isClient = false;
 
                       //console.log('Doing login', $rootScope.loginData);
 

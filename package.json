@@ -38,7 +38,10 @@
     "https://github.com/gitawego/cordova-screenshot.git",
     "https://github.com/katzer/cordova-plugin-email-composer.git",
     "https://github.com/jcjee/email-composer.git",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "https://github.com/wildabeast/BarcodeScanner.git",
+    "https://github.com/phonegap/phonegap-plugin-barcodescanner.git",
+    "https://github.com/apache/cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
     "android",

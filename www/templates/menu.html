@@ -79,10 +79,7 @@
          <i class="icon ion-medkit icono"></i>
             {{"recuperacion" | translate}}
         </ion-item>
-         <!-- <ion-item class="menuInkGps" menu-close ng-click="irTab('recuperacion')">
-         <i class="icon ion-medkit icono"></i>
-            {{"recuperacion" | translate}}   
-        </ion-item>-->
+
          <ion-item class="menuInkGps"  ng-if="!loginData.login" menu-close ng-click="irTab('login')">
          <i class="icon ion-person icono"></i>
             {{"loginUsuario" | translate}}
@@ -140,27 +137,49 @@
         <!--<ion-item menu-close ng-click="login()">
           Login  
         </ion-item>-->
-    <ion-item class="menuInkGps" menu-close  ng-click="irTab('editarArtista')">
-          <i class="icon ion-edit icono"></i>
-          {{"editarPerfil" | translate}} 
-    </ion-item>
-    <ion-item class="menuInkGps" menu-close ng-click="irTab('editarFotos')">
-          <i class="icon ion-images icºono"></i>
-          {{"editarFotos" | translate}}
-    </ion-item>
-      <ion-item class="menuInkGps" menu-close ng-click="irTab('editarClave')">
-          <i class="icon ion-lock-combination icono"></i>
-          {{"editarClave" | translate}}
-    <!--</ion-item>
-          <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
-          <i class="icon ion-ios-people icono"></i>
-           {{"proveedores" | translate}}
-    </ion-item>-->
-    </ion-item>
-          <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
-          <i class="icon ion-log-out icono"></i>
-           {{"cerrarSesion" | translate}}
-    </ion-item>
+        <!-- OPCIONES DE MENU ARTISTA-->
+            <ion-item class="menuInkGps" menu-close   ng-show="!loginData.isClient" ng-click="irTab('editarArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  {{"editarPerfil" | translate}} 
+            </ion-item>
+            <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="irTab('editarFotos')">
+                  <i class="icon ion-images icºono"></i>
+                  {{"editarFotos" | translate}}
+            </ion-item>
+              <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"   ng-click="irTab('editarClave')">
+                  <i class="icon ion-lock-combination icono"></i>
+                  {{"editarClave" | translate}}
+            <!--</ion-item>
+                  <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
+                  <i class="icon ion-ios-people icono"></i>
+                   {{"proveedores" | translate}}
+            </ion-item>-->
+            </ion-item>
+            <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="cerrarSesion()">
+                  <i class="icon ion-log-out icono"></i>
+                   {{"cerrarSesion" | translate}}
+            </ion-item>
+            <!-- OPCIONES DE MENU ARTISTA-->
+            <!-- OPCIONES DE MENU CLIENTE-->
+             <ion-item class="menuInkGps" menu-close   ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  Ganar InkPoints
+            </ion-item>
+              <ion-item class="menuInkGps" menu-close  ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  Comprar InkPoints
+            </ion-item>
+              <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  Canjear  InkPoints
+            </ion-item>
+            </ion-item>
+                  <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="cerrarSesion()">
+                  <i class="icon ion-log-out icono"></i>
+                   {{"cerrarSesion" | translate}}
+            </ion-item>
+
+            <!-- OPCIONES DE MENU CLIENTE-->
    
       </ion-list>
        
