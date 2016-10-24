@@ -146,6 +146,7 @@
                   <i class="icon ion-images icºono"></i>
                   {{"editarFotos" | translate}}
             </ion-item>
+
               <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"   ng-click="irTab('editarClave')">
                   <i class="icon ion-lock-combination icono"></i>
                   {{"editarClave" | translate}}
@@ -155,19 +156,23 @@
                    {{"proveedores" | translate}}
             </ion-item>-->
             </ion-item>
-            <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="cerrarSesion()">
+            <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="irTab('recargarInkPointsArtista')">
+                  <i class="icon ion-log-out icono"></i>
+                   {{"recargarInkPonints" | translate}}
+            </ion-item>
+              <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="cerrarSesion()">
                   <i class="icon ion-log-out icono"></i>
                    {{"cerrarSesion" | translate}}
             </ion-item>
             <!-- OPCIONES DE MENU ARTISTA-->
             <!-- OPCIONES DE MENU CLIENTE-->
-             <ion-item class="menuInkGps" menu-close   ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+             <ion-item class="menuInkGps" menu-close   ng-show="loginData.isClient" ng-click="irTab('perfilCliente')">
                   <i class="icon ion-edit icono"></i>
-                  Ganar InkPoints
+                  Perfil cliente
             </ion-item>
-              <ion-item class="menuInkGps" menu-close  ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+              <ion-item class="menuInkGps" menu-close  ng-show="loginData.isClient" ng-click="irTab('recargarInkPoints')">
                   <i class="icon ion-edit icono"></i>
-                  Comprar InkPoints
+                  Recargar InkPoints
             </ion-item>
               <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
                   <i class="icon ion-edit icono"></i>

@@ -9,7 +9,7 @@ var db = null;
 
 
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography','monospaced.qrcode'])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {
@@ -203,7 +203,10 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
             proveedores :"Proveedores",
-            loginCliente:"Login cliente"
+            loginCliente:"Login cliente",
+            perfilCliente:"Perfil cliente",
+            recargaInkPoints: "Recarga de InkPoints"
+
 
 
 
@@ -263,7 +266,9 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
             proveedores :"Proveedores",
-              loginCliente:"Login cliente"
+              loginCliente:"Login cliente",
+              perfilCliente:"Perfil cliente",
+              recargaInkPoints: "Recarga de InkPoints"
 
 
 
@@ -324,7 +329,10 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
             proveedores :"Proveedores",
-              loginCliente:"Login cliente"
+              loginCliente:"Login cliente",
+              perfilCliente:"Perfil cliente",
+              recargaInkPoints: "Recarga de InkPoints"
+
 
 
 
@@ -670,6 +678,37 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
         }
       }
     })
+
+      .state('app.perfilCliente', {
+      url: "/perfilCliente",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/perfilCliente.html",
+          controller: 'perfilClienteController'
+        }
+      }
+    })
+
+      .state('app.recargarInkPoints', {
+      url: "/recargarInkPoints",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/recargarInkPoints.html",
+          controller: 'recargarInkPointsController'
+        }
+      }
+    })
+
+      .state('app.recargarInkPointsArtista', {
+      url: "/recargarInkPointsArtista",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/recargarInkPointsArtistas.html",
+          controller: 'recargarInkPointsArtistaController'
+        }
+      }
+    })
+     
     .state('app.editarFotos', {
       url: "/editarFotos/:usuario/:clave",
       views: {

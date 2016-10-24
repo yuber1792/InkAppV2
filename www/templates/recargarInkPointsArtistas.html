@@ -1,0 +1,43 @@
+<ion-view  class="feed-view" view-title="{{'recargaInkPoints' | translate}}">
+
+
+      <ion-content  on-scroll="getScrollPosition()">   
+
+          <div class="list ">
+
+          <button class="button button-full button-stable  letraBlanca" ng-click="scanCodigoCliente()">
+              Escanear codigo de cliente
+          </button>
+            
+
+          
+            
+            <center>
+            <label class="item item-stacked-label letraBlanca">
+             {{infoCliRecarga.nombre}}
+            </label><br>
+              <label class="item item-stacked-label letraBlanca">
+             {{infoCliRecarga.uid}}
+            </label>
+           <label class="item item-stacked-label">
+              <span class="input-label letraBlanca">Cantidad de InkPoints</span>
+              <input  ng-model="infoCliRecarga.inkPoints" type="text" style="width: 100%;" placeholder="">
+            </label>
+            </cemter>
+            
+               
+          <button class="button button-full button-stable  letraBlanca" ng-click="generarQrRecargar()">
+              Generar  Codigo
+          </button> 
+
+          <qrcode  data="{{infoCliRecarga.qr}}" size="250"></qrcode>
+        
+          </div>
+
+      </ion-content>
+      
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

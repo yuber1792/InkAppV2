@@ -12,13 +12,17 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-<script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
-     <script src="lib/ionic-service-core/ionic-core.js"></script>
+    <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+    <script src="lib/ionic-service-core/ionic-core.js"></script>
     <script src="lib/ionic-service-push/ionic-push.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="js/indexeddbshim/dist/indexeddbshim.min.js"></script>
-     <script src="lib/cryptojslib/rollups/aes.js"></script>
-      <script src="lib/angular-cryptography/mdo-angular-cryptography.js"></script>
+    <script src="lib/cryptojslib/rollups/aes.js"></script>
+    <script src="lib/angular-cryptography/mdo-angular-cryptography.js"></script>
+     <script src="lib/angular-qrcode/angular-qrcode.js"></script>
+     <script src="lib/qrcode-generator/js/qrcode.js"></script>
+
+
 
 
     <!-- cordova script (this will be a 404 during development) -->
@@ -66,6 +70,7 @@
        var authF = firebase.auth();
      // var fb = new Firebase("https://ink360-b7047.firebaseio.com") //facebook  login 
       var artistasFireBase  = dbF.ref().child("Artistas");
+      var clientesFireBase  = dbF.ref().child("PuntosCliente");
       
   
   </script>

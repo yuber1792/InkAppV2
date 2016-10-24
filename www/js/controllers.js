@@ -948,6 +948,165 @@ $scope.valorfiltro=true;
    
 })
 
+
+.controller('perfilClienteController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  //console.log("entra controlador filtro");
+  Scopes.store('perfilClienteController', $scope);
+    
+
+  $scope.ganarInkPoints =  function (){
+     alert("proximanente");
+  }
+
+  $scope.recargaInkPoints = function (){
+    console.log("entra llamado 1");
+    $state.go('app.recargarInkPoints');
+   // $rootScope.irTab('recargarInkPoints');
+  }
+  $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+    var ref =  firebase.database().ref() ;
+   // alert($rootScope.dataClienteRegistrado.uid);
+  
+    var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
+          //  alert(refUser);
+            $scope.datosClientes  = {};
+            refUser.child("puntos").on("value", function(datos){
+                console.log("datos");
+                $rootScope.dataClienteRegistrado.puntos = "";
+              
+                $rootScope.dataClienteRegistrado.puntos  = datos.val();
+                console.log( $rootScope.dataClienteRegistrado.puntos );
+                // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
+                
+                
+    });
+
+
+   
+})
+
+.controller('recargarInkPointsController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes,$cordovaBarcodeScanner){
+  //console.log("entra controlador filtro");
+  Scopes.store('recargarInkPointsController', $scope);
+ // alert("entro recarga f");
+
+  $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+ $rootScope.dataClienteRegistrado.infoClienteQr = $rootScope.dataClienteRegistrado.displayName  +"/"+ $rootScope.dataClienteRegistrado.uid; 
+ 
+
+
+  $scope.scanCodigoRecarga = function() {
+$scope.infoCliRecarga = {};
+
+/*
+    $scope.texto = "DFSFD/FVDFB/400";
+          $scope.infoClienteRecarga  = $scope.texto.split("/");
+            //alert("nombre cliente" + $scope.infoClienteRecarga[0] );
+            //alert("uid cliente" + $scope.infoClienteRecarga[1] );
+            alert("Felicidades has recargado " + $scope.infoClienteRecarga[2] );
+             $scope.infoCliRecarga.nombre  = $scope.infoClienteRecarga[0];
+             $scope.infoCliRecarga.uid  = $scope.infoClienteRecarga[1];
+
+             var ref =  firebase.database().ref() ;           
+             alert(ref);
+            var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
+            alert(refUser);
+
+
+           
+            $scope.datosClientes  = {};
+            refUser.child("puntos").on("value", function(datos){
+                console.log("datos");
+                $rootScope.dataClienteRegistrado.puntos  = datos.val();
+                console.log( $rootScope.dataClienteRegistrado.puntos );
+
+              });
+           
+             $scope.nuevosPuntos = parseInt($rootScope.dataClienteRegistrado.puntos) + parseInt($scope.infoClienteRecarga[2]);
+                  alert("nuevos puntos a recargar " + $scope.nuevosPuntos  )
+    
+           
+              refUser.set({
+                  puntos:  $scope.nuevosPuntos ,
+                  tipoUsuario:"cliente"
+              });
+           
+
+    */
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            alert(imageData.text);
+            $scope.infoClienteRecarga  = imageData.text.split("/");
+            
+             $scope.infoCliRecarga.nombre  = $scope.infoClienteRecarga[0];
+             $scope.infoCliRecarga.uid  = $scope.infoClienteRecarga[1];
+
+             var ref =  firebase.database().ref() ;           
+            // alert(ref);
+            var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
+            //alert(refUser);
+
+            $scope.datosClientes  = {};
+            refUser.child("puntos").on("value", function(datos){
+                console.log("datos");
+                $rootScope.dataClienteRegistrado.puntos  = datos.val();
+                console.log( $rootScope.dataClienteRegistrado.puntos );
+
+              });
+           
+             $scope.nuevosPuntos = parseInt($rootScope.dataClienteRegistrado.puntos) + parseInt($scope.infoClienteRecarga[2]);
+//                  alert("nuevos puntos a recargar " + $scope.nuevosPuntos  )
+    
+           
+              refUser.set({
+                  puntos:  $scope.nuevosPuntos ,
+                  tipoUsuario:"cliente"
+              });
+
+              alert("Felicidades has recargado " + $scope.infoClienteRecarga[2] );
+
+
+            console.log("Barcode Format -> " + imageData.format);
+            console.log("Cancelled -> " + imageData.cancelled);
+        }, function(error) {
+            console.log("An error happened -> " + error);
+        });
+      
+    };
+
+})
+
+.controller('recargarInkPointsArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes,$cordovaBarcodeScanner){
+  //console.log("entra controlador filtro");
+  Scopes.store('recargarInkPointsArtistaController', $scope);
+ // alert("entro recarga f");
+ $scope.infoCliRecarga = {};
+ $scope.scanCodigoCliente = function() {
+    
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            alert(imageData.text);
+            $scope.infoClienteRecarga  = imageData.text.split("/");
+            alert("nombre cliente" + $scope.infoClienteRecarga[0] );
+            alert("uid cliente" + $scope.infoClienteRecarga[1] );
+             $scope.infoCliRecarga.nombre  = $scope.infoClienteRecarga[0];
+             $scope.infoCliRecarga.uid  = $scope.infoClienteRecarga[1];
+            console.log("Barcode Format -> " + imageData.format);
+            console.log("Cancelled -> " + imageData.cancelled);
+        }, function(error) {
+            console.log("An error happened -> " + error);
+        });
+      
+
+    };
+
+    $scope.generarQrRecargar = function (){
+      $scope.infoCliRecarga.qr = $scope.infoCliRecarga.nombre  + "/" + $scope.infoCliRecarga.uid + "/"+ $scope.infoCliRecarga.inkPoints ;  
+
+    }
+  //$rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+  //$rootScope.dataClienteRegistrado.infoClienteQr = $rootScope.dataClienteRegistrado.displayName  +"/"+ $rootScope.dataClienteRegistrado.uid; 
+
+})
+
 .controller('editarArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
       Scopes.store('editarArtistaController', $scope);
     //  console.log("entra controlador editarArtista");
@@ -1644,6 +1803,8 @@ $scope.claves={};
     $ionicSideMenuDelegate.canDragContent(false);
     console.log("entra controlador index");
 
+
+
     $scope.encriptar  = function (){
        var encrypted = $crypto.encrypt('steven castro');
        var decrypted = $crypto.decrypt(encrypted);
@@ -1756,6 +1917,8 @@ $scope.claves={};
 
     $rootScope.loginData = {};
     $rootScope.loginData.login = false;
+   // window.localStorage.setItem('clienteLogueado',null);
+
   //console.log("valor usuario " + window.localStorage.getItem('usuario'));
     if( window.localStorage.getItem('usuario') === "" || 
         window.localStorage.getItem('usuario') === null  ||
@@ -1765,6 +1928,15 @@ $scope.claves={};
          window.localStorage.getItem('clave') === null 
           ){
             $rootScope.loginData.login = false;
+            if(window.localStorage.getItem('clienteLogueado') != undefined){
+              $rootScope.loginData.login = true;
+               $rootScope.loginData.isClient = true;
+               //console.log(window.localStorage.getItem('clienteLogueado'));
+              $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+              console.log("cliente logueado ");
+              console.log(JSON.stringify(JSON.parse(window.localStorage.getItem('clienteLogueado'))));
+              console.log(JSON.stringify($rootScope.dataClienteRegistrado));
+            }
            
           }
           else{
@@ -1772,6 +1944,7 @@ $scope.claves={};
            $rootScope.loginData.login = true;
 
           }
+
 
     var idUsuarioLog = true ; 
 
@@ -2202,8 +2375,15 @@ $scope.claves={};
           firebase.auth().createUserWithEmailAndPassword($scope.registroData.email, $scope.registroData.clave).then(function(userResponse) {
             $rootScope.loginData.login = true;
             $rootScope.loginData.isClient = true;
-            alert($scope.registroData.email +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
-
+            console.log(userResponse);
+            alert($scope.registroData.email +", Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+            var ref =  firebase.database().ref() ;
+            var refUser = ref.child("PuntosCliente").child(userResponse.uid);
+             console.log(refUser);
+              refUser.set({
+                  puntos: 20,
+                  tipoUsuario:"cliente"
+              });
             $scope.cerrarRegistro();
             }, function(error){
             console.log(error);
@@ -2215,7 +2395,7 @@ $scope.claves={};
   }
   
 
-  $scope.dataClienteRegistrado = {};
+  
  // var fb = new Firebase("https://ink360-b7047.firebaseio.com");
 
   var auth = $firebaseAuth(authF);
@@ -2232,11 +2412,38 @@ $scope.claves={};
             console.log(user);
             console.log(JSON.stringify(user));
 
-            $scope.dataClienteRegistrado = user; 
-            console.log($scope.dataClienteRegistrado.displayName);
+            $rootScope.dataClienteRegistrado = user; 
+            console.log($rootScope.dataClienteRegistrado.displayName);
+           
+                    
+            idUsuarioLog = true; 
             $rootScope.loginData.login = true;
             $rootScope.loginData.isClient = true;
-            alert($scope.dataClienteRegistrado.displayName +" Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+            alert($scope.dataClienteRegistrado.displayName +",Gracias por tu registro muy pronto nos pondremos en contacto contigo !!!");
+          
+           
+            var ref =  firebase.database().ref() ;           
+            var refUser = ref.child("PuntosCliente").child(user.uid);
+           
+            $scope.datosClientes  = {};
+            refUser.child("puntos").on("value", function(datos){
+                console.log("datos");
+                $rootScope.dataClienteRegistrado.puntos  = datos.val();
+                console.log( $rootScope.dataClienteRegistrado.puntos );
+                 window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
+              });
+              
+              if( $rootScope.dataClienteRegistrado.puntos < 20){
+                console.log("usuario nuevo");
+                refUser.set({
+                  puntos: 20,
+                  tipoUsuario:"cliente"
+                });
+              }else{
+                console.log("usuario existente no se recarga");
+              }
+           
+              
             $scope.cerrarLoginCliente();
 
           
