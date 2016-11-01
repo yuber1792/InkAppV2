@@ -2,58 +2,17 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$state ,Scopes ,$rootScope) {
   Scopes.store('AppCtrl', $scope);
-  //console.log("entra controlador appCtrl");
-     /*$scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-         //console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
-
-
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-            for (var i = 0; i <  $rootScope.artistas.length; i++) {
-                 $rootScope.shuffleArray($rootScope.artistas[i].trabajos);
-               }
-             $rootScope.shuffleArray($rootScope.artistas);
-         }else{
-           $state.go('app.'+nombre);
-         }     
-    }*/
+  
   $scope.valorfiltro=true;
   $scope.usuarioAutenticado = 0  ;
-  // With the new view caching in Ionic, xControllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  
   
 
 })
 
 .controller('BocetosController', function($scope,$http,$ionicLoading,$ionicModal,$state,$window,Scopes,$rootScope) {
 Scopes.store('BocetosController', $scope);
-//console.log("entra controlador bocetos");
 
-
-   /* $scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-        
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
-
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-             $rootScope.shuffleArray($rootScope.artistas);
-            
-         }else{
-
-           $state.go('app.'+nombre);
-         }
-     
-    }*/
 
    $ionicModal.fromTemplateUrl('./templates/detalleArtistaBocetos.html', {
         scope: $scope
@@ -89,9 +48,7 @@ $scope.facebook = function() {
 
  
  $scope.whatsapp = function() {
-  //$scope.getContactList();
- // alert($scope.contacts);
-    //cordova.plugins.Whatsapp.send("+573102683586");
+ 
    cordova.plugins.Whatsapp.send($scope.artistaSeleccionado.celular);
 
  }
@@ -218,20 +175,8 @@ $scope.valorfiltro=true;
 
             var codigofiltro =   $scope.artistaUpdate.id; 
 
-  
-              
-
-
-
-
-
            })
-           
-     
   
-   // })
- 
-     
 
  
     };
@@ -240,26 +185,7 @@ $scope.valorfiltro=true;
 })
 .controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate ,Scopes,$rootScope) {
 Scopes.store('IntroCtrl', $scope);
-//console.log("entra controlador intro");
 
-    /* $scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-        
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
-
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-            $rootScope.shuffleArray($rootScope.artistas);
-
-         }else{
-
-           $state.go('app.'+nombre);
-         }
-     
-    }*/
-  // Called to navigate to the main app
   $scope.startApp = function() {
     $state.go('app.ayuda');
   };
@@ -280,24 +206,7 @@ Scopes.store('IntroCtrl', $scope);
 
 .controller('MultimediaController', function($scope,$http,$ionicLoading,$sce ,$state,Scopes,$rootScope) {
   Scopes.store('MultimediaController', $scope);
-  //console.log("entra controlador multimedia ");
 
-  /*$scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-        
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
-
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-            $rootScope.shuffleArray($rootScope.artistas);
-         }else{
-
-           $state.go('app.'+nombre);
-         }
-     
-    }*/
  $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   }
@@ -395,24 +304,7 @@ $scope.valorfiltro=true;
 })
 .controller('EventosController', function($scope,$http,$ionicLoading,$cordovaSQLite,$window,$state,Scopes,$rootScope) {
   Scopes.store('EventosController', $scope);
- // console.log("entra controlador eventos");
-   /*$scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-        
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-             $rootScope.shuffleArray($rootScope.artistas);
-            
-         }else{
-
-           $state.go('app.'+nombre);
-         }
-     
-    }*/
     
 $scope.ir = function(url){
    
@@ -445,14 +337,9 @@ $scope.valorfiltro=true;
   
     })
     .then(function(response){
-      //alert("**** THEN ****"+ response.data);
-      //$scope.artistas = response.data;
-      //$scope.trabajos = $scope.artistas[1].trabajos;
-      //$scope.trabajosjson = JSON.stringify($scope.trabajos);
+   
       $scope.eventos = response.data;
-     // alert("la data es" + $scope.trabajos);
-      //alert("la data 1   " + $scope.trabajosjson);
-       // alert("la data  2  " + $scope.trabajosjson.toJson);
+    
       $scope.hide();
     })
   //alert("entra");
@@ -462,25 +349,7 @@ $scope.valorfiltro=true;
 
 .controller('PublicidadController', function($window,$scope,$http,$ionicLoading,$cordovaSQLite,$ionicModal,$sce,$state,Scopes,$rootScope) {
   Scopes.store('PublicidadController', $scope);
-//  console.log("entra controlador publi");
-     
-     /*$scope.irTab =  function(nombre){
-         //$window.location.href = '#/app/'+nombre;
-        
-         console.log("ir tab index "  +$scope.loginData.usuario ); 
-         if(nombre === 'editarArtista' || nombre === 'editarFotos'){
 
-            $state.go('app.'+nombre , {'usuario' : window.localStorage.getItem("usuario") ,'clave' : window.localStorage.getItem("clave")});
-         }else if (nombre === 'descubrir'){
-            $state.go('app.'+nombre);
-            $rootScope.shuffleArray($rootScope.artistas);
-            
-         }else{
-
-           $state.go('app.'+nombre);
-         }
-     
-    }*/
  $ionicModal.fromTemplateUrl('./templates/detalleEstudio.html', {
         scope: $scope
     }).then(function (modalpubli) {
@@ -948,6 +817,388 @@ $scope.valorfiltro=true;
    
 })
 
+.controller('cambiarInkPointsController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$firebaseArray,$firebaseObject){
+   console.log("entra controlador canjear ref ");
+   $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+    var ref =  firebase.database().ref() ;
+   // alert($rootScope.dataClienteRegistrado.uid);
+  
+    var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
+          //  alert(refUser);
+            $scope.datosClientes  = {};
+            refUser.child("puntos").on("value", function(datos){
+                console.log("datos actual");
+                
+              
+                $rootScope.dataClienteRegistrado.puntos  = datos.val();
+                console.log( $rootScope.dataClienteRegistrado.puntos );
+                // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
+                
+                
+    });
+            
+   var refD =  firebase.database().ref() ;
+   var artistasFirebase = refD.child("ArtistasData");     
+   refD.child("ArtistasData").on("value", function(datos){
+              console.log("datos artistas 1");
+                
+              //$scope.dataFirebaseArtistas = JSON.stringify(datos.val());
+              $scope.dataFirebaseArtistas =datos.val();
+             
+              //$rootScope.dataClienteRegistrado.puntos  = datos.val();
+              console.log("Asigna imagen");
+              angular.forEach($scope.dataFirebaseArtistas, function(user,key) {
+                      console.log("nombre"+ $scope.dataFirebaseArtistas[key].Nombre);
+                      console.log(JSON.stringify(user));
+                      var storage = firebase.storage();
+                      var pathReference = storage.ref(user.uid+'/logo.png');
+                       pathReference.getDownloadURL().then(function(url) {
+                        console.log("descarga archivo "); 
+                        console.log(url);
+                        $scope.dataFirebaseArtistas[key].photoURL = url ; 
+                         console.log(JSON.stringify( $scope.dataFirebaseArtistas[key].photoURL));
+                        
+                        }).catch(function(error) {
+                          switch (error.code) {
+                            case 'storage/object_not_found':
+                              // File doesn't exist
+                              break;
+
+                            case 'storage/unauthorized':
+                              // User doesn't have permission to access the object
+                              break;
+
+                            case 'storage/canceled':
+                              // User canceled the upload
+                              break;
+
+                            case 'storage/unknown':
+                              // Unknown error occurred, inspect the server response
+                              break;
+                          }
+                        });
+              });
+
+
+                // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));         
+    });
+
+  // download the data into a local object
+    //$scope.dataFirebaseTest = $firebaseObject(ref); 
+   //$scope.dataFirebaseTest = $firebaseArray(artistasFireBase);
+  //console.log($scope.dataFirebaseArtistas);
+
+
+
+
+   
+})
+
+.controller('misSolicitudesController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  console.log("mis solicitudes ");
+   $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+    var ref =  firebase.database().ref() ;
+   // alert($rootScope.dataClienteRegistrado.uid);
+   //$scope.mostrarInfo = false ;
+   console.log(JSON.stringify($rootScope.dataClienteRegistrado));
+    var refSolicitudes = ref.child("SolicitudesCliente");
+    var refArtistas= ref.child("ArtistasData");
+    var dataCliente = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);        
+          //  alert(refUser);
+    $scope.solicitudesCliente = [];
+    
+    refSolicitudes.child($rootScope.dataClienteRegistrado.uid).on("value", function(datos){
+     
+        console.log("Solciitudes cliente");
+        $scope.solicitudesCliente  = datos.val();
+              
+          dataCliente.child("puntos").on("value", function(datos){
+            console.log("puntos cliente");
+            $rootScope.dataClienteRegistrado.puntos  = datos.val();
+           
+            console.log( $rootScope.dataClienteRegistrado.puntos );     
+          });
+
+          dataCliente.child("puntosEnCanje").on("value", function(datos){
+            console.log("puntos en canje  cliente");
+          
+            $rootScope.dataClienteRegistrado.puntosEnCanje  = datos.val();
+            console.log( $rootScope.dataClienteRegistrado.puntosEnCanje );     
+          });
+
+        //console.log(  JSON.stringify($scope.solicitudesCliente ));
+          angular.forEach($scope.solicitudesCliente, function(user,key) {
+           
+               refArtistas.child($scope.solicitudesCliente[key].uidArtista).on("value", function(datos){
+                  $scope.dataArtista = datos.val();
+                  $scope.solicitudesCliente[key].nombreArtista = $scope.dataArtista.Nombre;
+                  $scope.solicitudesCliente[key].especialidad = $scope.dataArtista.Especialidad;
+                  $scope.solicitudesCliente[key].mostrarInfo = false ;
+                  
+               });
+                 
+          });
+          
+          
+        // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
+    });
+   
+
+    $scope.cambiarEstadoSolicitud = function(estadoNuevo,idArtista ,inkPoints){
+
+      console.log("estado  = " + estadoNuevo);
+      console.log("uidArtista  = " + idArtista);
+     
+        var ref =  firebase.database().ref() ;
+         var refSolicitudes = ref.child("SolicitudesCliente").child($rootScope.dataClienteRegistrado.uid);
+         var refSolicitudesArtista = ref.child("SolicitudesArtista").child(idArtista);
+         //refSolicitudes.child(idArtista).on("value", function(datos){
+           // console.log(JSON.stringify(datos.val()));
+            refSolicitudes.child(idArtista).update({
+              estado: estadoNuevo
+            });
+            refSolicitudesArtista.child($rootScope.dataClienteRegistrado.uid).update({
+              estado: estadoNuevo
+            });
+            if(estadoNuevo === 'ConfirmadaCliente'){
+               console.log("confirma cita asigna 50  inkpoints");
+               
+                $scope.datosArtista = {};
+               var dataArtista = ref.child("ArtistasData").child(idArtista);
+               dataArtista.child("CupoUsado").on("value", function(datos){
+                console.log("cupo usado artista " );
+                $scope.datosArtista.puntos  = datos.val();
+                console.log(  $scope.datosArtista.puntos );
+                 $scope.datosArtista.puntos =  $scope.datosArtista.puntos  + 50;
+                console.log(  $scope.datosArtista.puntos);
+               });
+
+               dataArtista.child("Cupo").on("value", function(datos){
+                console.log("cupo artista " );
+                $scope.datosArtista.cupo  = datos.val();
+                console.log(  $scope.datosArtista.cupo );
+                 $scope.datosArtista.cupo =   $scope.datosArtista.cupo  - 50;
+                console.log(  $scope.datosArtista.cupo);
+               });
+              
+
+               dataArtista.update({
+                  Cupo:$scope.datosArtista.cupo ,
+                  CupoUsado:$scope.datosArtista.puntos
+                });
+
+               $rootScope.dataClienteRegistrado.puntos  =  $rootScope.dataClienteRegistrado.puntos  - inkPoints;
+                console.log( $rootScope.dataClienteRegistrado.puntos);
+                $scope.puntosCanjeSumar = inkPoints - 50;
+                $rootScope.dataClienteRegistrado.puntosEnCanje = $rootScope.dataClienteRegistrado.puntosEnCanje +$scope.puntosCanjeSumar ;
+                dataCliente.update({
+                  puntos:  $rootScope.dataClienteRegistrado.puntos,
+                  puntosEnCanje  : $rootScope.dataClienteRegistrado.puntosEnCanje 
+                });
+
+            }
+
+            if(estadoNuevo === 'RechazadaClienteDevolucionPuntos'){
+              console.log("entra devolucion puntos ");
+                $scope.cantidadDevolver   = inkPoints - 50;
+                $rootScope.dataClienteRegistrado.puntos = $rootScope.dataClienteRegistrado.puntos +  $scope.cantidadDevolver 
+                $rootScope.dataClienteRegistrado.puntosEnCanje =  $rootScope.dataClienteRegistrado.puntosEnCanje -  $scope.cantidadDevolver ; 
+               console.log("puntos nuevos " +   $rootScope.dataClienteRegistrado.puntos );
+               console.log("puntos nuevos en canje  " +   $rootScope.dataClienteRegistrado.puntosEnCanje );
+                dataCliente.update({
+                  puntos:  $rootScope.dataClienteRegistrado.puntos ,
+                  puntosEnCanje  : $rootScope.dataClienteRegistrado.puntosEnCanje 
+                });
+
+            }
+         
+    }
+
+
+  
+
+    $scope.mostrarInfoSolicitud = function(index){
+   
+        $scope.contadorDatos = 0 ; 
+       angular.forEach($scope.solicitudesCliente, function(user,key) {
+       // console.log("for" + index + " - " +  $scope.contadorDatos );
+                if(index ===  $scope.contadorDatos){
+                      if( $scope.solicitudesCliente[key].mostrarInfo){
+                          $scope.solicitudesCliente[key].mostrarInfo = false ;
+                      }else{
+                          $scope.solicitudesCliente[key].mostrarInfo = true ;
+                      }
+                }
+               // console.log(JSON.stringify($scope.solicitudesCliente));  
+               $scope.contadorDatos = $scope.contadorDatos  + 1 ; 
+
+        });
+
+   }
+   
+})
+
+.controller('misSolicitudesArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaBarcodeScanner){
+  console.log("mis solicitudes artista  ");
+
+
+  
+  // $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+    $rootScope.dataArtistaRegistrado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
+    var ref =  firebase.database().ref() ;
+   // alert($rootScope.dataClienteRegistrado.uid);
+  
+    var refSolicitudes = ref.child("SolicitudesArtista");
+    var refClientes= ref.child("PuntosCliente");
+    var dataArtista= ref.child("ArtistasData").child($rootScope.dataArtistaRegistrado.uid);
+          //  alert(refUser);
+    $scope.solicitudesArtista = {};
+    refSolicitudes.child($rootScope.dataArtistaRegistrado.uid).on("value", function(datos){
+         dataArtista.child("CupoUsado").on("value", function(datos){
+            console.log("cupo usado artista");
+            $rootScope.dataArtistaRegistrado.CupoUsado  = datos.val();
+            console.log( $rootScope.dataArtistaRegistrado.CupoUsado );     
+          });
+         dataArtista.child("Cupo").on("value", function(datos){
+            console.log("cupo artista");
+          
+            $rootScope.dataArtistaRegistrado.Cupo  = datos.val();
+            console.log( $rootScope.dataArtistaRegistrado.Cupo);     
+          });
+
+
+        console.log("Solciitudes artista");
+        $scope.solicitudesArtista  = datos.val();
+        console.log(  JSON.stringify($scope.solicitudesArtista ));
+          angular.forEach($scope.solicitudesArtista, function(user,key) {
+               refClientes.child($scope.solicitudesArtista[key].uidCliente).on("value", function(datos){
+                  $scope.dataCliente = datos.val();
+                  console.log(JSON.stringify($scope.dataCliente));
+                  $scope.solicitudesArtista[key].tipoUsuario = $scope.dataCliente.tipoUsuario;
+                  $scope.solicitudesArtista[key].mostrarInfo = false;
+                  $scope.solicitudesArtista[key].fechaPropuesta = $scope.solicitudesArtista[key].fechaCita;
+               });
+                console.log(JSON.stringify($scope.solicitudesArtista));  
+
+          });
+        
+        // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
+    
+    });
+
+
+    $scope.cambiarEstadoSolicitud = function(estadoNuevo,idCliente ,inkPoints , fechaPropuesta){
+
+      console.log("estado  = " + estadoNuevo);
+      console.log("uidCliente  = " + idCliente);
+     
+        var ref =  firebase.database().ref() ;
+         var refSolicitudes = ref.child("SolicitudesCliente").child(idCliente);
+         var refSolicitudesArtista = ref.child("SolicitudesArtista").child($rootScope.dataArtistaRegistrado.uid);
+         //refSolicitudes.child(idArtista).on("value", function(datos){
+           // console.log(JSON.stringify(datos.val()));
+            refSolicitudes.child($rootScope.dataArtistaRegistrado.uid).update({
+              estado: estadoNuevo
+            });
+
+            refSolicitudesArtista.child(idCliente).update({
+              estado: estadoNuevo
+            });
+            $scope.dataPuntosCliente = {};
+            if(estadoNuevo === 'TatuajeFinalizado'){
+               var dataCliente = ref.child("PuntosCliente").child(idCliente);  
+               $scope.dataPuntosCliente.valorNuevo  = inkPoints - 50 ; 
+               dataCliente.child("puntosEnCanje").on("value", function(datos){
+                  console.log("puntos en canje  cliente");
+                
+                  $scope.dataPuntosCliente.puntosEnCanje  = datos.val();
+                  console.log( $scope.dataPuntosCliente.puntosEnCanje );     
+                });
+                 $scope.dataPuntosCliente.puntosEnCanje  =  $scope.dataPuntosCliente.puntosEnCanje - $scope.dataPuntosCliente.valorNuevo ;  
+                dataCliente.update({
+                  puntosEnCanje:  $scope.dataPuntosCliente.puntosEnCanje
+                });
+                var dataArtista = ref.child("ArtistasData").child($rootScope.dataArtistaRegistrado.uid);
+                 
+                 $rootScope.dataArtistaRegistrado.CupoUsado  = $rootScope.dataArtistaRegistrado.CupoUsado  +  $scope.dataPuntosCliente.valorNuevo;
+                 $rootScope.dataArtistaRegistrado.Cupo = $rootScope.dataArtistaRegistrado.Cupo - $scope.dataPuntosCliente.valorNuevo ; 
+                 dataArtista.update({
+                  CupoUsado: $rootScope.dataArtistaRegistrado.CupoUsado,
+                  Cupo :  $rootScope.dataArtistaRegistrado.Cupo
+                });
+
+            }
+         
+    }
+
+     $scope.mostrarInfoSolicitud = function(index){
+   
+      $scope.contadorDatos = 0 ; 
+       angular.forEach($scope.solicitudesArtista, function(user,key) {
+       // console.log("for" + index + " - " +  $scope.contadorDatos );
+                if(index ===  $scope.contadorDatos){
+                      if( $scope.solicitudesArtista[key].mostrarInfo){
+                          $scope.solicitudesArtista[key].mostrarInfo = false ;
+                      }else{
+                          $scope.solicitudesArtista[key].mostrarInfo = true ;
+                      }
+                }
+               // console.log(JSON.stringify($scope.solicitudesCliente));  
+               $scope.contadorDatos = $scope.contadorDatos  + 1 ; 
+
+        });
+
+    }
+
+    $scope.scanearCodigoCliente = function (){
+
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            alert(imageData.text);
+            $scope.cambiarEstadoSolicitud("Tatuandome" ,imageData.text,0,null);
+            console.log("Barcode Format -> " + imageData.format);
+            console.log("Cancelled -> " + imageData.cancelled);
+        }, function(error) {
+            console.log("An error happened -> " + error);
+        });
+    }
+   
+})
+
+.controller('perfilArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  console.log("entra controlador perfil artista ");
+    $rootScope.dataArtistaRegistrado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
+    
+    var storage = firebase.storage();
+    var pathReference = storage.ref($rootScope.dataArtistaRegistrado.uid+'/logo.png');
+     pathReference.getDownloadURL().then(function(url) {
+      console.log("descarga archivo "); 
+      console.log(url);
+
+      $rootScope.dataArtistaRegistrado.photoURL = url ; 
+       console.log(JSON.stringify($rootScope.dataArtistaRegistrado));
+      
+      }).catch(function(error) {
+        switch (error.code) {
+          case 'storage/object_not_found':
+            // File doesn't exist
+            break;
+
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+          case 'storage/unknown':
+            // Unknown error occurred, inspect the server response
+            break;
+        }
+      });
+
+   
+})
 
 .controller('perfilClienteController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
   //console.log("entra controlador filtro");
@@ -971,14 +1222,12 @@ $scope.valorfiltro=true;
           //  alert(refUser);
             $scope.datosClientes  = {};
             refUser.child("puntos").on("value", function(datos){
-                console.log("datos");
-                $rootScope.dataClienteRegistrado.puntos = "";
+                console.log("datos actual");
+                
               
                 $rootScope.dataClienteRegistrado.puntos  = datos.val();
                 console.log( $rootScope.dataClienteRegistrado.puntos );
-                // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
-                
-                
+                // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));          
     });
 
 
@@ -996,43 +1245,8 @@ $scope.valorfiltro=true;
 
 
   $scope.scanCodigoRecarga = function() {
-$scope.infoCliRecarga = {};
+     $scope.infoCliRecarga = {};
 
-/*
-    $scope.texto = "DFSFD/FVDFB/400";
-          $scope.infoClienteRecarga  = $scope.texto.split("/");
-            //alert("nombre cliente" + $scope.infoClienteRecarga[0] );
-            //alert("uid cliente" + $scope.infoClienteRecarga[1] );
-            alert("Felicidades has recargado " + $scope.infoClienteRecarga[2] );
-             $scope.infoCliRecarga.nombre  = $scope.infoClienteRecarga[0];
-             $scope.infoCliRecarga.uid  = $scope.infoClienteRecarga[1];
-
-             var ref =  firebase.database().ref() ;           
-             alert(ref);
-            var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
-            alert(refUser);
-
-
-           
-            $scope.datosClientes  = {};
-            refUser.child("puntos").on("value", function(datos){
-                console.log("datos");
-                $rootScope.dataClienteRegistrado.puntos  = datos.val();
-                console.log( $rootScope.dataClienteRegistrado.puntos );
-
-              });
-           
-             $scope.nuevosPuntos = parseInt($rootScope.dataClienteRegistrado.puntos) + parseInt($scope.infoClienteRecarga[2]);
-                  alert("nuevos puntos a recargar " + $scope.nuevosPuntos  )
-    
-           
-              refUser.set({
-                  puntos:  $scope.nuevosPuntos ,
-                  tipoUsuario:"cliente"
-              });
-           
-
-    */
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             alert(imageData.text);
             $scope.infoClienteRecarga  = imageData.text.split("/");
@@ -1805,6 +2019,7 @@ $scope.claves={};
 
 
 
+
     $scope.encriptar  = function (){
        var encrypted = $crypto.encrypt('steven castro');
        var decrypted = $crypto.decrypt(encrypted);
@@ -1916,10 +2131,43 @@ $scope.claves={};
         }, false);
 
     $rootScope.loginData = {};
-    $rootScope.loginData.login = false;
+   
    // window.localStorage.setItem('clienteLogueado',null);
 
+    $rootScope.dataClienteRegistrado =[];
+    $rootScope.loginData.login = false;
+    
+    $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+    $rootScope.dataArtistaRegistrado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
+     console.log("data");
+     //console.log(window.localStorage.getItem('clienteLogueado'));
+    console.log(JSON.stringify(JSON.parse(window.localStorage.getItem('clienteLogueado'))));
+    
+    if(JSON.stringify(JSON.parse(window.localStorage.getItem('clienteLogueado'))) != "null" ){
+      $rootScope.loginData.login = true;
+       $rootScope.loginData.isClient = true;
+       //console.log(window.localStorage.getItem('clienteLogueado'));
+     
+      console.log("cliente logueado ");
+      //console.log(JSON.stringify(JSON.parse(window.localStorage.getItem('clienteLogueado'))));
+      //console.log(JSON.stringify($rootScope.dataClienteRegistrado));
+    }else{
+      console.log("No se encontro ningun cliente logueado.");
+      if(JSON.stringify(JSON.parse(window.localStorage.getItem('artistaLogueado'))) != "null" ){
+         console.log("artisla logueado");
+         console.log(JSON.stringify(JSON.parse(window.localStorage.getItem('artistaLogueado'))));
+           $rootScope.loginData.login = true;
+           $rootScope.loginData.isClient = false;
+
+      }else{
+        console.log("No se encontro ningun artista logueado.");
+      }
+
+    }
+
+
   //console.log("valor usuario " + window.localStorage.getItem('usuario'));
+    /*
     if( window.localStorage.getItem('usuario') === "" || 
         window.localStorage.getItem('usuario') === null  ||
          window.localStorage.getItem('usuario') === undefined ||
@@ -1927,16 +2175,7 @@ $scope.claves={};
            window.localStorage.getItem('clave') === undefined  ||  
          window.localStorage.getItem('clave') === null 
           ){
-            $rootScope.loginData.login = false;
-            if(window.localStorage.getItem('clienteLogueado') != undefined){
-              $rootScope.loginData.login = true;
-               $rootScope.loginData.isClient = true;
-               //console.log(window.localStorage.getItem('clienteLogueado'));
-              $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
-              console.log("cliente logueado ");
-              console.log(JSON.stringify(JSON.parse(window.localStorage.getItem('clienteLogueado'))));
-              console.log(JSON.stringify($rootScope.dataClienteRegistrado));
-            }
+           
            
           }
           else{
@@ -1944,7 +2183,7 @@ $scope.claves={};
            $rootScope.loginData.login = true;
 
           }
-
+    */
 
     var idUsuarioLog = true ; 
 
@@ -2336,35 +2575,6 @@ $scope.claves={};
     }
 
 
-    /*$scope.loginData = {};
-    $scope.loginData.login = false;
-  console.log("valor usuario " + window.localStorage.getItem('usuario'));
-    if( window.localStorage.getItem('usuario') === "" || 
-         window.localStorage.getItem('clave') === "" 
-          ){
-            $scope.loginData.login = false;
-           
-          }
-          else{
-           $rootScope.artistaLogueado = window.localStorage.getItem('artistaLogueado');
-           $scope.loginData.login = true;
-
-          }
-
-    var idUsuarioLog = true ; */
-
-
-
-
-
-
-
-
-//eventos  wizard videos
-// Called to navigate to the main app
-  //$scope.startVideo = function() {
-  //  $state.go('app.videos');
- // };
  $scope.registroData = {};
   $scope.registrarUsuario = function(){
     console.log($scope.registroData.email);
@@ -2393,13 +2603,44 @@ $scope.claves={};
 
    
   }
-  
+   $scope.loginDataArtista= {};
+ 
+  $scope.loginArtistaEmail = function() {
 
+    // console.log($scope.loginDataArtista.email);
+     //console.log($scope.loginDataArtista.clave);
+     firebase.auth().signInWithEmailAndPassword($scope.loginDataArtista.email, $scope.loginDataArtista.clave).then(function(pasa) {
+      // Handle Errors here.
+     console.log("log exitoso");
+     alert("registro exitoso");
+     $rootScope.loginData.login = true;
+     $rootScope.loginData.isClient = false;
+     console.log(pasa.uid);
+ 
+     window.localStorage.setItem('artistaLogueado',JSON.stringify(pasa));
+    
+   
+
+     $scope.cerrarLogin();
+
+
+      // ...
+    })
+   .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(error.message);
+      // ...
+    });
+
+
+  }
   
  // var fb = new Firebase("https://ink360-b7047.firebaseio.com");
 
   var auth = $firebaseAuth(authF);
-  $scope.registroFacebook = function(){
+  $scope.ingresoYregistroFacebook = function(){
  
      $cordovaOauth.facebook("968981486540678", ["email"]).then(function(result) {
            //alert(result);
@@ -2408,7 +2649,7 @@ $scope.claves={};
           var credential = new firebase.auth.FacebookAuthProvider.credential(result.access_token);
 
           authF.signInWithCredential(credential).then(function(user) {
-            console.log("Sign In Success", user);
+            console.log("Sign In Success");
             console.log(user);
             console.log(JSON.stringify(user));
 
@@ -2426,22 +2667,26 @@ $scope.claves={};
             var refUser = ref.child("PuntosCliente").child(user.uid);
            
             $scope.datosClientes  = {};
+            $rootScope.dataClienteRegistrado.puntos = 0 ;
             refUser.child("puntos").on("value", function(datos){
-                console.log("datos");
+              
                 $rootScope.dataClienteRegistrado.puntos  = datos.val();
-                console.log( $rootScope.dataClienteRegistrado.puntos );
+                 console.log("puntos = " + $rootScope.dataClienteRegistrado.puntos  );
+                  if( $rootScope.dataClienteRegistrado.puntos < 20 ){
+                    console.log("usuario nuevo");
+                    refUser.set({
+                      puntos: 20,
+                      tipoUsuario:"cliente",
+                      puntosEnCanje : 0 
+                    });
+
+                  }else{
+                    console.log("usuario existente no se recarga");
+                  }
+                 
                  window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));
               });
               
-              if( $rootScope.dataClienteRegistrado.puntos < 20){
-                console.log("usuario nuevo");
-                refUser.set({
-                  puntos: 20,
-                  tipoUsuario:"cliente"
-                });
-              }else{
-                console.log("usuario existente no se recarga");
-              }
            
               
             $scope.cerrarLoginCliente();
@@ -2571,7 +2816,7 @@ $scope.logueado = 0 ;
 
  //console.log("valor inicial ==>"  + $rootScope.loginData.usuarioAutenticado  );
   // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
+  $ionicModal.fromTemplateUrl('templates/loginArtista.html', {
     scope: $scope
   }).then(function(modalLogin) {
     $scope.modalLogin = modalLogin;
@@ -2622,38 +2867,9 @@ $scope.logueado = 0 ;
   $scope.informacion={};
   $scope.informacion.mostrarLogin =false;
   $scope.autentica = function() {
-
-     
-    /*console.log('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas');
-    $http.defaults.useXDomain = true;
-    $http.get('http://inkgps.ingeniosoft.com.co/Artistas.svc/artistas')
-      .success(function(data, status, headers, config){
-      //alert("**** SUCCESS ****");
-     // alert(status);
-      })
-      .error(function(data, status, headers, config){
-      //alert("**** Verificar conexion a internet ****");
-     // alert(status);
-     // alert(angular.toJson(data))
-     console.log("No correcto");
-      })
-      .then(function(response){
-
-        console.log("correcto");
-        $scope.ArtistaLogueado = response.data ; 
-            console.log(response.data);
-      });  */
        $http.defaults.useXDomain = true;
-
-
-
-      //$http.get('http://8-dot-inkdata-1019.appspot.com/inkdata')
-     // console.log('https://inkgpsapp.firebaseio.com/dataId/'+$rootScope.loginData.usuario);
       $http.get('https://inkgpsapp.firebaseio.com/DataId/'+$rootScope.loginData.usuario+'.json')
-      .success(function(data, status, headers, config){
-      //alert("**** SUCCESS ****");
-     // alert(status);
-      })
+      
       .error(function(data, status, headers, config){
       //alert("**** Verificar conexion a internet ****");
      // alert(status);
@@ -2661,8 +2877,7 @@ $scope.logueado = 0 ;
       })
       .then(function(response){
       idUsuarioLog =   $stateParams.idParametro ; 
-      //console.log("valor");
-      //console.log(response.data);
+  
       $scope.obtenido = response.data ;  
       if(response.data === null ){
            $scope.loginIncorrectoMensaje();
@@ -2688,75 +2903,20 @@ $scope.logueado = 0 ;
 
           }else{
                $scope.loginIncorrectoMensaje();
-          }
-                   
-      }
-      
-   
-       // console.log("llama servicio usuario  id  ==>" + $scope.loginData);
-          // $scope.resultadoArtistas  =  response.data;
-        
-            
-         
-         /*
-            for (var i = 0 ; i < $rootScope.artistasPosicionOriginal.length; i++) {
-             //console.log($scope.resultadoArtistas[i].id);
-                if(parseInt($rootScope.artistasPosicionOriginal[i].id) === parseInt($rootScope.loginData.usuario)){
-                  //if(parseInt($scope.resultadoArtistas[i].id) === parseInt(idUsuarioLog)){
-                    $rootScope.artistaLogueado = $rootScope.artistasPosicionOriginal[i] ; 
-                    $rootScope.posicionEnFire = i ; 
-
-                      console.log('Doing login', $rootScope.loginData);
-                      window.localStorage.setItem('usuario' ,  $rootScope.loginData.usuario);
-                      window.localStorage.setItem('clave' ,  $rootScope.loginData.clave);
-                      window.localStorage.setItem('artistaLogueado' ,  JSON.stringify($rootScope.artistaLogueado));
-                      //window.localStorage.setItem('posicionEnFire' ,  JSON.stringify($rootScope.posicionEnFire));
-                     
-                     
-                      idUsuarioLog = true; 
-                      $rootScope.loginData.login = true;
-
-                      console.log('Doing login', $rootScope.loginData);
-
-                      $scope.cerrarLogin();
-                      console.log("posicion en fire " + $rootScope.posicionEnFire);
-                      return;
-                }
-            }
-
-            $scope.loginIncorrectoMensaje();
-
-          */  
-          
+          }        
+       }       
      });
-
-  
-
-   
-      /*$http.get('http://8-dot-inkdata-1019.appspot.com/inkbocetos')
-    .success(function(data, status, headers, config){
-
-    })
-    .error(function(data, status, headers, config){
-      alert("**** Verificar conexion a internet ****");
-  
-    })
-    .then(function(response){
-      $scope.bocetos = response.data;
-      $scope.hide();
-    })*/
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-  
   };
 
   $scope.cerrarSesion = function (){
        $rootScope.loginData.login = false;
-       window.localStorage.setItem('usuario' , "");
-       window.localStorage.setItem('clave' ,  "");
-       window.localStorage.setItem('artistaLogueado' ,  "");
-       window.localStorage.setItem('posicionEnFire' ,"");
+      // window.localStorage.setItem('usuario' , "");
+      // window.localStorage.setItem('clave' ,  "");
+      // window.localStorage.setItem('artistaLogueado' ,  "");
+      // window.localStorage.setItem('posicionEnFire' ,"");
+      
+       window.localStorage.setItem('clienteLogueado' , "null");
+       window.localStorage.setItem('artistaLogueado' , "null");
        $state.go("app.descubrir");
   }
 

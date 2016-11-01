@@ -4,7 +4,8 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="select('SIRVIOINFO')">
+        <!--<button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="select('SIRVIOINFO')">-->
+           <button class="button button-icon button-clear ion-navicon" menu-toggle="left" >
         </button>
       </ion-nav-buttons>
      
@@ -85,7 +86,7 @@
             {{"loginUsuario" | translate}}
         </ion-item>
 
-        <ion-item class="menuInkGps"  menu-close ng-click="irTab('loginCliente')">
+        <ion-item class="menuInkGps"  ng-if="!loginData.login" menu-close ng-click="irTab('loginCliente')">
          <i class="icon ion-ios-body icono"></i>
             {{"loginCliente" | translate}}
         </ion-item>
@@ -138,6 +139,8 @@
           Login  
         </ion-item>-->
         <!-- OPCIONES DE MENU ARTISTA-->
+           
+   <!--
             <ion-item class="menuInkGps" menu-close   ng-show="!loginData.isClient" ng-click="irTab('editarArtista')">
                   <i class="icon ion-edit icono"></i>
                   {{"editarPerfil" | translate}} 
@@ -150,15 +153,19 @@
               <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"   ng-click="irTab('editarClave')">
                   <i class="icon ion-lock-combination icono"></i>
                   {{"editarClave" | translate}}
-            <!--</ion-item>
-                  <ion-item class="menuInkGps" menu-close ng-click="cerrarSesion()">
-                  <i class="icon ion-ios-people icono"></i>
-                   {{"proveedores" | translate}}
-            </ion-item>-->
+            </ion-item>
+ -->
+            <ion-item class="menuInkGps" menu-close   ng-show="!loginData.isClient" ng-click="irTab('perfilArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  {{"Mi perfil" | translate}} 
             </ion-item>
             <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="irTab('recargarInkPointsArtista')">
                   <i class="icon ion-log-out icono"></i>
                    {{"recargarInkPonints" | translate}}
+            </ion-item>
+             <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient" ng-click="irTab('misSolicitudesArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  Mis solicitudes artista
             </ion-item>
               <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="cerrarSesion()">
                   <i class="icon ion-log-out icono"></i>
@@ -174,9 +181,13 @@
                   <i class="icon ion-edit icono"></i>
                   Recargar InkPoints
             </ion-item>
-              <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('editarArtista')">
+              <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('cambiarInkPoints')">
                   <i class="icon ion-edit icono"></i>
                   Canjear  InkPoints
+            </ion-item>
+            <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('misSolicitudes')">
+                  <i class="icon ion-edit icono"></i>
+                  Mis solicitudes
             </ion-item>
             </ion-item>
                   <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="cerrarSesion()">

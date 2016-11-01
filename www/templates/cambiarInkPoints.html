@@ -1,0 +1,25 @@
+<ion-view  class="feed-view" view-title="{{'Cambiar ink points' | translate}}">
+
+
+      <ion-content  on-scroll="getScrollPosition()">   
+         <center><label class="letraBlanca" > Mis  InkPoints: {{dataClienteRegistrado.puntos}} </label></center>
+          <div class="list">
+
+              <a ng-repeat="artista in dataFirebaseArtistas" class="item item-thumbnail-left" href="#">
+                <img src="{{artista.photoURL}}">
+                <h2>{{artista.Nombre}}</h2>
+                <p> {{artista.Especialidad}}</p>
+                <p>Sesion: {{artista.puntosXsesion}} inkpoints</p>
+                <button style="color:green;" ng-show="dataClienteRegistrado.puntos >= artista.puntosXsesion ">Puntos suficientes para agendar</button>
+              </a>
+
+              
+          </div>
+
+      </ion-content>
+      
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

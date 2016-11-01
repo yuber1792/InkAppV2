@@ -194,7 +194,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             algoSobreMi:"About me",
             portafolio:"portfolio",
             contacto:"Contact",
-            loginUsuario:"User login",
+            loginUsuario:"Artist login",
             editarPerfil :"Edit profile",
             editarFotos :"Edit photos",
             cerrarSesion :"Log out",
@@ -257,7 +257,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             algoSobreMi:"Algo sobre mi",
              portafolio:"Portafolio",
              contacto:"Contacto",
-             loginUsuario:"Login artista",
+             loginUsuario:"Ingreso artista",
              editarPerfil :"Editar perfil",
              editarFotos :"Editar fotos",
              cerrarSesion :"Cerrar sesión",
@@ -266,7 +266,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             agendarCita: "Agendar cita",
             editarClave :"Editar clave",
             proveedores :"Proveedores",
-              loginCliente:"Login cliente",
+              loginCliente:"Ingreso clientes",
               perfilCliente:"Perfil cliente",
               recargaInkPoints: "Recarga de InkPoints"
 
@@ -699,12 +699,53 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       }
     })
 
+        .state('app.misSolicitudes', {
+      url: "/misSolicitudes",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/misSolicitudes.html",
+          controller: 'misSolicitudesController'
+        }
+      }
+    })
+
+
+      .state('app.misSolicitudesArtista', {
+      url: "/misSolicitudesArtista",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/misSolicitudesArtista.html",
+          controller: 'misSolicitudesArtistaController'
+        }
+      }
+    })  
+
       .state('app.recargarInkPointsArtista', {
       url: "/recargarInkPointsArtista",
       views: {
         'menuContent': {
           templateUrl: "templates/recargarInkPointsArtistas.html",
           controller: 'recargarInkPointsArtistaController'
+        }
+      }
+    })
+
+       .state('app.cambiarInkPoints', {
+      url: "/cambiarInkPoints",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/cambiarInkPoints.html",
+          controller: 'cambiarInkPointsController'
+        }
+      }
+    })
+
+        .state('app.perfilArtista', {
+      url: "/perfilArtista",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/perfilArtista.html",
+          controller: 'perfilArtistaController'
         }
       }
     })
