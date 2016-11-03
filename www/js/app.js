@@ -9,7 +9,7 @@ var db = null;
 
 
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography','monospaced.qrcode'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography','monospaced.qrcode' ,'ion-datetime-picker'])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {

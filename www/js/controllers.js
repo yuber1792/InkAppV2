@@ -836,6 +836,49 @@ $scope.valorfiltro=true;
                 
                 
     });
+
+    $scope.crearSolicitud = function (uidArtista , fechaSolicitud ,puntos){
+      console.log("uid artista " +  uidArtista) ; 
+      console.log("fecha solicitud" +  fechaSolicitud) ; 
+     var refSolicitudesCliente = ref.child("SolicitudesCliente");
+     var refSolicitudesArtista= ref.child("SolicitudesArtista");
+      var cliente  =  refSolicitudesCliente.child($rootScope.dataClienteRegistrado.uid);
+      var  fecha = new Date();
+       refSolicitudesCliente.child($rootScope.dataClienteRegistrado.uid).child(uidArtista).set({
+                                    estado: 'EnviadaArtista',
+                                    fechaCita : fechaSolicitud.toString(), 
+                                    fechaCreacion: fecha.toString(),
+                                    inkPoints : puntos ,
+                                    uidArtista: uidArtista
+                                }
+                                ).then(function(result){
+                                  console.log(result);
+
+                                });
+        refSolicitudesArtista.child(uidArtista).child($rootScope.dataClienteRegistrado.uid).set({
+                                    estado: 'EnviadaArtista',
+                                    fechaCita : fechaSolicitud.toString(), 
+                                    fechaCreacion: fecha.toString(),
+                                    inkPoints : puntos ,
+                                    uidCliente: $rootScope.dataClienteRegistrado.uid
+                                }
+                                );
+
+       alert("felicidades a creado una solicitud !!!") ; 
+        
+   /*
+estado: 'EnviadaArtista',
+ fechaCita : fechaSolicitud , 
+    fechaCreacion: new Date(),
+ puntosEnCanje : puntos ,
+  uidArtista: uidArtista
+   */
+    
+
+
+    }  
+
+  
             
    var refD =  firebase.database().ref() ;
    var artistasFirebase = refD.child("ArtistasData");     
@@ -856,6 +899,7 @@ $scope.valorfiltro=true;
                         console.log("descarga archivo "); 
                         console.log(url);
                         $scope.dataFirebaseArtistas[key].photoURL = url ; 
+                         $scope.dataFirebaseArtistas[key].mostrarInfo = false ; 
                          console.log(JSON.stringify( $scope.dataFirebaseArtistas[key].photoURL));
                         
                         }).catch(function(error) {
@@ -882,6 +926,24 @@ $scope.valorfiltro=true;
 
                 // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));         
     });
+
+     $scope.mostrarInfoSolicitud = function(index){
+       console.log("entra" + index );
+     $scope.contadorDatos = 0 ;
+       angular.forEach($scope.dataFirebaseArtistas, function(user,key) {
+       // console.log("for" + index + " - " +  $scope.contadorDatos );
+                if(index ===  $scope.contadorDatos){
+                      if( $scope.dataFirebaseArtistas[key].mostrarInfo){
+                          $scope.dataFirebaseArtistas[key].mostrarInfo = false ;
+                      }else{
+                          $scope.dataFirebaseArtistas[key].mostrarInfo = true ;
+                      }
+                }
+                 $scope.contadorDatos = $scope.contadorDatos  + 1  ;
+               // console.log(JSON.stringify($scope.solicitudesCliente));  
+        });
+
+   }
 
   // download the data into a local object
     //$scope.dataFirebaseTest = $firebaseObject(ref); 
@@ -1019,7 +1081,7 @@ $scope.valorfiltro=true;
 
     $scope.mostrarInfoSolicitud = function(index){
    
-        $scope.contadorDatos = 0 ; 
+      $scope.contadorDatos = 0 ; 
        angular.forEach($scope.solicitudesCliente, function(user,key) {
        // console.log("for" + index + " - " +  $scope.contadorDatos );
                 if(index ===  $scope.contadorDatos){
@@ -1126,6 +1188,17 @@ $scope.valorfiltro=true;
                   CupoUsado: $rootScope.dataArtistaRegistrado.CupoUsado,
                   Cupo :  $rootScope.dataArtistaRegistrado.Cupo
                 });
+            }
+            if(estadoNuevo === 'AceptadaArtistaFechaDiferente'){
+              console.log("entra artista fecha diferente ");
+               refSolicitudes.child($rootScope.dataArtistaRegistrado.uid).update({
+                  fechaCita: fechaPropuesta.toString()
+                });
+
+                refSolicitudesArtista.child(idCliente).update({
+                  fechaCita: fechaPropuesta.toString()
+                });
+
 
             }
          
@@ -1216,6 +1289,9 @@ $scope.valorfiltro=true;
   }
   $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
     var ref =  firebase.database().ref() ;
+    /* ref.child("puntosPorRegistro").on("value", function(datos){
+                console.log("puntos x registro " + datos.val());
+             });*/
    // alert($rootScope.dataClienteRegistrado.uid);
   
     var refUser = ref.child("PuntosCliente").child($rootScope.dataClienteRegistrado.uid);
@@ -2665,8 +2741,15 @@ $scope.claves={};
            
             var ref =  firebase.database().ref() ;           
             var refUser = ref.child("PuntosCliente").child(user.uid);
-           
+            
+            
+
             $scope.datosClientes  = {};
+
+             ref.child("puntosPorRegistro").on("value", function(datos){
+                console.log("puntos x registro " + datos.val());
+                $scope.datosClientes.puntosRegistro  = datos.val() ; 
+             });
             $rootScope.dataClienteRegistrado.puntos = 0 ;
             refUser.child("puntos").on("value", function(datos){
               
@@ -2675,7 +2758,7 @@ $scope.claves={};
                   if( $rootScope.dataClienteRegistrado.puntos < 20 ){
                     console.log("usuario nuevo");
                     refUser.set({
-                      puntos: 20,
+                      puntos: $scope.datosClientes.puntosRegistro,
                       tipoUsuario:"cliente",
                       puntosEnCanje : 0 
                     });

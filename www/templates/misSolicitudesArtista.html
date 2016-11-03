@@ -25,6 +25,10 @@
                     <span class="input-label">cambiar fecha</span>
                     <input type="date" ng-model="solicitud.fechaPropuesta">
                   </label>
+
+                   <div class="item" ion-datetime-picker am-pm ng-model="solicitud.fechaPropuesta">
+                    {{solicitud.fechaPropuesta | date: "yyyy-MM-dd H:mm:ss a"}}
+                </div>
                   </br>
                    <button ng-click="cambiarEstadoSolicitud('AceptadaArtistaFechaDiferente',solicitud.uidCliente,solicitud.inkPoints,solicitud.fechaPropuesta)"> Confirmar</button>
 
