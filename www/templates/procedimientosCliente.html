@@ -1,0 +1,29 @@
+<ion-view  class="feed-view" view-title="{{'procedimientosRealizados' | translate}}">
+
+
+      <ion-content  on-scroll="getScrollPosition()">   
+         <center><label class="letraBlanca" > Procedimientos cliente </label></center>
+        
+          <div class="list">
+              <div ng-repeat="solicitud in dataTotalProcedimientos" >
+                <a class="item item-thumbnail-left" ng-click="mostrarInfoSolicitud($index)">
+                  <img src="{{solicitud.photoURL}}">
+                  <h2>{{solicitud.tipoUsuario}}</h2>
+                  <p>Fecha: {{solicitud.fecha | date: "yyyy-MM-dd H:mm:ss a" }} </p>
+                  <p>Estado: {{solicitud.estado}} </p>
+                  <p>InkPoints: {{solicitud.inkPoints}} </p>
+                   <p>Calificacion artista: {{solicitud.calificacionArtista}} </p>
+                   <p>Calificacion cliente: {{solicitud.calificacionCliente}} </p>
+                  <button style="color:green;" ng-show="dataClienteRegistrado.puntos >= artista.puntosXsesion ">Puntos suficientes para agendar</button>
+                </a>
+            
+              </div>
+          </div>
+
+      </ion-content>
+      
+
+ <div  class="scrollToTop" ng-click="scrollTop()"></div>
+ </div>
+</ion-view>
+

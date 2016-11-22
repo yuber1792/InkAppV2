@@ -10,21 +10,19 @@
                 <a class="item item-thumbnail-left" ng-click="mostrarInfoSolicitud($index)">
                   <img src="{{solicitud.photoURL}}">
                   <h2>{{solicitud.tipoUsuario}}</h2>
-                  <p>Fecha: {{solicitud.fechaCita}} </p>
+                  <p>Fecha: {{solicitud.fechaPropuesta  | date: "yyyy-MM-dd H:mm:ss a" }} </p>
                   <p>Estado: {{solicitud.estado}} </p>
                   <p>InkPoints: {{solicitud.inkPoints}} </p>
                   <button style="color:green;" ng-show="dataClienteRegistrado.puntos >= artista.puntosXsesion ">Puntos suficientes para agendar</button>
                 </a>
+                
               <div ng-show="solicitud.mostrarInfo">
                  <div ng-show="solicitud.estado == 'EnviadaArtista'">
                     el cliente desea una cita para {{solicitud.fechaCita}} 
                     </br>
                    <button ng-click="cambiarEstadoSolicitud( 'AceptadaArtista',solicitud.uidCliente,solicitud.inkPoints , 'n')"> Confirmar</button>
                     </br>
-                    <label class="item item-input">
-                    <span class="input-label">cambiar fecha</span>
-                    <input type="date" ng-model="solicitud.fechaPropuesta">
-                  </label>
+                   
 
                    <div class="item" ion-datetime-picker am-pm ng-model="solicitud.fechaPropuesta">
                     {{solicitud.fechaPropuesta | date: "yyyy-MM-dd H:mm:ss a"}}
@@ -35,7 +33,7 @@
 
                  </div>
                  <div ng-show="solicitud.estado == 'AceptadaArtista'">
-                  Falta que el cliente confirme la cita, al confirmarla recibiras 50 inkpoint a manera de reserva de cita.
+                  Falta que el cliente confirme la cita, al confirmarla recibiras {{solicitud.puntosXcita}} inkpoint a manera de reserva de cita.
                  </div>
                   <div ng-show="solicitud.estado == 'FechaModificadaArtista'">
                    El artista no puede el dia que le indicas pero te ofrece el dia  {{solicitud.fechaCita}}
@@ -48,7 +46,8 @@
                  </div>
                   <div ng-show="solicitud.estado == 'ConfirmadaCliente'">
                    Escanea el codigo que el cliente de suministrara                      
-                     <button ng-click="scanearCodigoCliente()"> Escanear codigo </button>
+                     <button ng-click="scanearCodigoCliente('Tatuandome',solicitud.uidCliente,solicitud.inkPoints,solicitud.fechaPropuesta)"> Escanear codigo </button>
+                      <button ng-click="cambiarEstadoSolicitud('RechazadaArtistaDevolucion',solicitud.uidCliente,solicitud.inkPoints,solicitud.fechaPropuesta)"> cancellar cita</button>
                      </center>
                  </div>
                   <div ng-show="solicitud.estado  == 'InactivaPuntos'" >
@@ -56,6 +55,18 @@
                  </div>
                   <div ng-show="solicitud.estado == 'Tatuandome'">
                     Si ya finalizaste presion el boton  
+                      <div class="input-label">
+                        Calificar
+                      </div>
+
+                      <select ng-model="infoCalificacion.calificacion" >
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+
+                      </select>
                      <button ng-click="cambiarEstadoSolicitud('TatuajeFinalizado',solicitud.uidCliente,solicitud.inkPoints,solicitud.fechaCita)"> finalizar procedimiento </button>
                  </div>
                   <div ng-show="solicitud.estado == 'TatuajeFinalizado'">

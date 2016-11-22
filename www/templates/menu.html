@@ -40,7 +40,8 @@
           <i class="icon ion-eye icono"></i>
           {{"explorar" | translate}} 
     </ion-item>
-    <ion-item class="menuInkGps" menu-close ng-click="irTab('artistas')">
+    
+      <ion-item class="menuInkGps" menu-close ng-click="irTab('artistas')">
           <i class="ion-ios-search-strong icono"></i>
           {{"buscarArtistas" | translate}} 
     </ion-item>
@@ -167,6 +168,10 @@
                   <i class="icon ion-edit icono"></i>
                   Mis solicitudes artista
             </ion-item>
+             <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient" ng-click="irTab('procedimientosArtista')">
+                  <i class="icon ion-edit icono"></i>
+                  Procedimientos Artista
+            </ion-item>
               <ion-item class="menuInkGps" menu-close ng-show="!loginData.isClient"  ng-click="cerrarSesion()">
                   <i class="icon ion-log-out icono"></i>
                    {{"cerrarSesion" | translate}}
@@ -176,6 +181,10 @@
              <ion-item class="menuInkGps" menu-close   ng-show="loginData.isClient" ng-click="irTab('perfilCliente')">
                   <i class="icon ion-edit icono"></i>
                   Perfil cliente
+            </ion-item>
+            <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('calificar')">
+              <i class="ion-ios-search-strong icono"></i>
+                {{"Calificar" | translate}} 
             </ion-item>
               <ion-item class="menuInkGps" menu-close  ng-show="loginData.isClient" ng-click="irTab('recargarInkPoints')">
                   <i class="icon ion-edit icono"></i>
@@ -188,6 +197,10 @@
             <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('misSolicitudes')">
                   <i class="icon ion-edit icono"></i>
                   Mis solicitudes
+            </ion-item>
+              <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="irTab('procedimientosCliente')">
+                  <i class="icon ion-edit icono"></i>
+                  Procedimientos clientes
             </ion-item>
             </ion-item>
                   <ion-item class="menuInkGps" menu-close ng-show="loginData.isClient" ng-click="cerrarSesion()">

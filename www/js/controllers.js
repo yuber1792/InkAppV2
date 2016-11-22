@@ -956,6 +956,75 @@ estado: 'EnviadaArtista',
    
 })
 
+
+.controller('procedimientosArtistaController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  console.log("procedimientos  artista  ");
+  $rootScope.dataArtistaRegistrado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
+  var ref =  firebase.database().ref() ;
+  var refProcedimientosArtista = ref.child("ProcedimientosArtista");
+
+   $scope.dataProcedimientosArtista = [];
+   $scope.dataTotalProcedimientos = [];
+
+  refProcedimientosArtista.child($rootScope.dataArtistaRegistrado.uid).on("value", function(datos){
+     
+        $scope.dataProcedimientosArtista  = datos.val();
+        $scope.dataProcedimientosArtistaJSON  = JSON.stringify($scope.dataProcedimientosArtista);
+        console.log("procedimientos data  ");
+        console.log(JSON.stringify($scope.dataProcedimientosArtista));
+        console.log("sale procedimiento :" +$scope.dataProcedimientosArtistaJSON.length);
+
+        angular.forEach($scope.dataProcedimientosArtista, function(user,key) {
+           console.log("Entra foreach " + key);
+            console.log(JSON.stringify($scope.dataProcedimientosArtista[key]));
+                angular.forEach($scope.dataProcedimientosArtista[key], function(user1,key1) {
+                  console.log("foreach 2 ");
+                  console.log(JSON.stringify($scope.dataProcedimientosArtista[key][key1]));
+                   $scope.dataTotalProcedimientos.push($scope.dataProcedimientosArtista[key][key1]);
+
+
+                });            
+
+        });
+    });
+
+   
+})
+
+.controller('procedimientosClienteController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
+  console.log("procedimientos  cliente  ");
+  $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
+  var ref =  firebase.database().ref() ;
+  var refProcedimientosCliente = ref.child("ProcedimientosCliente");
+
+   $scope.dataProcedimientosCliente = [];
+   $scope.dataTotalProcedimientos = [];
+
+  refProcedimientosCliente.child($rootScope.dataClienteRegistrado.uid).on("value", function(datos){
+     
+        $scope.dataProcedimientosCliente  = datos.val();
+        $scope.dataProcedimientosArtistaJSON  = JSON.stringify($scope.dataProcedimientosCliente);
+        //console.log("procedimientos data cliente  ");
+        //console.log(JSON.stringify($scope.dataProcedimientosCliente));
+        //console.log("sale procedimiento :" +$scope.dataProcedimientosArtistaJSON.length);
+
+        angular.forEach($scope.dataProcedimientosCliente, function(user,key) {
+           //console.log("Entra foreach " + key);
+           // console.log(JSON.stringify($scope.dataProcedimientosCliente[key]));
+                angular.forEach($scope.dataProcedimientosCliente[key], function(user1,key1) {
+                  //console.log("foreach 2 ");
+                  console.log(JSON.stringify($scope.dataProcedimientosCliente[key][key1]));
+                   $scope.dataTotalProcedimientos.push($scope.dataProcedimientosCliente[key][key1]);
+
+
+                });            
+
+        });
+    });
+
+   
+})
+
 .controller('misSolicitudesController' ,function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes){
   console.log("mis solicitudes ");
    $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
@@ -988,6 +1057,7 @@ estado: 'EnviadaArtista',
             console.log( $rootScope.dataClienteRegistrado.puntosEnCanje );     
           });
 
+
         //console.log(  JSON.stringify($scope.solicitudesCliente ));
           angular.forEach($scope.solicitudesCliente, function(user,key) {
            
@@ -996,7 +1066,8 @@ estado: 'EnviadaArtista',
                   $scope.solicitudesCliente[key].nombreArtista = $scope.dataArtista.Nombre;
                   $scope.solicitudesCliente[key].especialidad = $scope.dataArtista.Especialidad;
                   $scope.solicitudesCliente[key].mostrarInfo = false ;
-                  
+                  $scope.solicitudesCliente[key].fechaPropuesta = new Date(Date.parse($scope.solicitudesCliente[key].fechaCita));
+                  $scope.solicitudesCliente[key].puntosXcita = $scope.dataArtista.puntosXcita;
                });
                  
           });
@@ -1022,16 +1093,25 @@ estado: 'EnviadaArtista',
             refSolicitudesArtista.child($rootScope.dataClienteRegistrado.uid).update({
               estado: estadoNuevo
             });
+
+            $scope.datosArtista = {};
+             var dataArtista = ref.child("ArtistasData").child(idArtista);
+             dataArtista.child("puntosXcita").on("value", function(datos){
+                console.log("puntos por cita  " );
+                $scope.datosArtista.puntosXcita  = datos.val();
+                console.log(  $scope.datosArtista.puntosXcita );
+                 
+               });
+           
             if(estadoNuevo === 'ConfirmadaCliente'){
-               console.log("confirma cita asigna 50  inkpoints");
-               
-                $scope.datosArtista = {};
-               var dataArtista = ref.child("ArtistasData").child(idArtista);
+               console.log("confirma cita asigna  inkpoints");
+             
+            
                dataArtista.child("CupoUsado").on("value", function(datos){
                 console.log("cupo usado artista " );
                 $scope.datosArtista.puntos  = datos.val();
                 console.log(  $scope.datosArtista.puntos );
-                 $scope.datosArtista.puntos =  $scope.datosArtista.puntos  + 50;
+                 $scope.datosArtista.puntos =  $scope.datosArtista.puntos  +  $scope.datosArtista.puntosXcita;
                 console.log(  $scope.datosArtista.puntos);
                });
 
@@ -1039,7 +1119,7 @@ estado: 'EnviadaArtista',
                 console.log("cupo artista " );
                 $scope.datosArtista.cupo  = datos.val();
                 console.log(  $scope.datosArtista.cupo );
-                 $scope.datosArtista.cupo =   $scope.datosArtista.cupo  - 50;
+                 $scope.datosArtista.cupo =   $scope.datosArtista.cupo  -  $scope.datosArtista.puntosXcita;
                 console.log(  $scope.datosArtista.cupo);
                });
               
@@ -1050,8 +1130,10 @@ estado: 'EnviadaArtista',
                 });
 
                $rootScope.dataClienteRegistrado.puntos  =  $rootScope.dataClienteRegistrado.puntos  - inkPoints;
-                console.log( $rootScope.dataClienteRegistrado.puntos);
-                $scope.puntosCanjeSumar = inkPoints - 50;
+                console.log("puntos cliente  : " +  $rootScope.dataClienteRegistrado.puntos);
+                console.log("puntos por cita " + $scope.datosArtista.puntosXcita) ; 
+                $scope.puntosCanjeSumar = inkPoints -  $scope.datosArtista.puntosXcita;
+                console.log( "puntos canje : " +$scope.puntosCanjeSumar) ; 
                 $rootScope.dataClienteRegistrado.puntosEnCanje = $rootScope.dataClienteRegistrado.puntosEnCanje +$scope.puntosCanjeSumar ;
                 dataCliente.update({
                   puntos:  $rootScope.dataClienteRegistrado.puntos,
@@ -1062,7 +1144,9 @@ estado: 'EnviadaArtista',
 
             if(estadoNuevo === 'RechazadaClienteDevolucionPuntos'){
               console.log("entra devolucion puntos ");
-                $scope.cantidadDevolver   = inkPoints - 50;
+               
+         
+                $scope.cantidadDevolver   = inkPoints -  $scope.datosArtista.puntosXcita;
                 $rootScope.dataClienteRegistrado.puntos = $rootScope.dataClienteRegistrado.puntos +  $scope.cantidadDevolver 
                 $rootScope.dataClienteRegistrado.puntosEnCanje =  $rootScope.dataClienteRegistrado.puntosEnCanje -  $scope.cantidadDevolver ; 
                console.log("puntos nuevos " +   $rootScope.dataClienteRegistrado.puntos );
@@ -1108,7 +1192,17 @@ estado: 'EnviadaArtista',
   // $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
     $rootScope.dataArtistaRegistrado = JSON.parse(window.localStorage.getItem('artistaLogueado'));
     var ref =  firebase.database().ref() ;
+    var porcentajeXTattoo =0;
+    var regalosPorSesion = 0  ; 
    // alert($rootScope.dataClienteRegistrado.uid);
+
+   ref.child("porcentajeXTattoo").once("value").then(function(snapshot) {
+                   console.log("Porcentaje de puntos a asginar es:"+ snapshot.val());
+                   porcentajeXTattoo = snapshot.val();
+                   console.log(porcentajeXTattoo);
+                
+                    // ...
+    });
   
     var refSolicitudes = ref.child("SolicitudesArtista");
     var refClientes= ref.child("PuntosCliente");
@@ -1138,9 +1232,12 @@ estado: 'EnviadaArtista',
                   console.log(JSON.stringify($scope.dataCliente));
                   $scope.solicitudesArtista[key].tipoUsuario = $scope.dataCliente.tipoUsuario;
                   $scope.solicitudesArtista[key].mostrarInfo = false;
-                  $scope.solicitudesArtista[key].fechaPropuesta = $scope.solicitudesArtista[key].fechaCita;
+                  $scope.solicitudesArtista[key].fechaPropuesta = new Date(Date.parse($scope.solicitudesArtista[key].fechaCita));
+                
+
                });
-                console.log(JSON.stringify($scope.solicitudesArtista));  
+                //console.log(JSON.stringify($scope.solicitudesArtista));  
+
 
           });
         
@@ -1148,13 +1245,28 @@ estado: 'EnviadaArtista',
     
     });
 
-
+    $scope.infoCalificacion = {} ; 
+    $scope.infoCalificacion.calificacion = 5  ;
+    
     $scope.cambiarEstadoSolicitud = function(estadoNuevo,idCliente ,inkPoints , fechaPropuesta){
 
+      $scope.dataPuntosCliente = {};
+      $scope.datosArtista = {};
       console.log("estado  = " + estadoNuevo);
       console.log("uidCliente  = " + idCliente);
      
         var ref =  firebase.database().ref() ;
+       
+
+
+        var dataArtista = ref.child("ArtistasData").child($rootScope.dataArtistaRegistrado.uid);
+        dataArtista.child("puntosXcita").on("value", function(datos){
+          console.log("puntos por cita 1  " );
+          $scope.datosArtista.puntosXcita  = datos.val();
+          console.log(  $scope.datosArtista.puntosXcita );
+           
+         });
+
          var refSolicitudes = ref.child("SolicitudesCliente").child(idCliente);
          var refSolicitudesArtista = ref.child("SolicitudesArtista").child($rootScope.dataArtistaRegistrado.uid);
          //refSolicitudes.child(idArtista).on("value", function(datos){
@@ -1166,28 +1278,109 @@ estado: 'EnviadaArtista',
             refSolicitudesArtista.child(idCliente).update({
               estado: estadoNuevo
             });
-            $scope.dataPuntosCliente = {};
+          
+             
             if(estadoNuevo === 'TatuajeFinalizado'){
-               var dataCliente = ref.child("PuntosCliente").child(idCliente);  
-               $scope.dataPuntosCliente.valorNuevo  = inkPoints - 50 ; 
-               dataCliente.child("puntosEnCanje").on("value", function(datos){
-                  console.log("puntos en canje  cliente");
+
                 
-                  $scope.dataPuntosCliente.puntosEnCanje  = datos.val();
-                  console.log( $scope.dataPuntosCliente.puntosEnCanje );     
-                });
-                 $scope.dataPuntosCliente.puntosEnCanje  =  $scope.dataPuntosCliente.puntosEnCanje - $scope.dataPuntosCliente.valorNuevo ;  
-                dataCliente.update({
-                  puntosEnCanje:  $scope.dataPuntosCliente.puntosEnCanje
-                });
-                var dataArtista = ref.child("ArtistasData").child($rootScope.dataArtistaRegistrado.uid);
+                  console.log("calificacion : " +$scope.infoCalificacion.calificacion) ;
+                  
+                
+
+                dataArtista.child("puntosXcita").on("value", function(datos){
+                console.log("puntos por cita  2 " );
+                $scope.dataPuntosCliente.puntosXcita  = datos.val();
+                console.log(  $scope.dataPuntosCliente.puntosXcita );
+                var dataCliente = ref.child("PuntosCliente").child(idCliente);  
+                console.log("puntos por cita");
+                console.log($scope.datosArtista.puntosXcita );
+                $scope.dataPuntosCliente.valorNuevo  = inkPoints - $scope.datosArtista.puntosXcita ; 
+                console.log("valor nuevo " +   $scope.dataPuntosCliente.valorNuevo );
+               
+                    dataCliente.child("puntosEnCanje").on("value", function(datos){
+                        console.log("puntos en canje  cliente");
+                        $scope.dataPuntosCliente.puntosEnCanje  = datos.val();
+                        console.log( $scope.dataPuntosCliente.puntosEnCanje );     
+                      });
+                      $scope.dataPuntosCliente.puntosEnCanje  =  $scope.dataPuntosCliente.puntosEnCanje - $scope.dataPuntosCliente.valorNuevo ;  
+                      dataCliente.update({
+                        puntosEnCanje:  $scope.dataPuntosCliente.puntosEnCanje
+                      });
+                      var dataArtista = ref.child("ArtistasData").child($rootScope.dataArtistaRegistrado.uid);
+                       
+                       $rootScope.dataArtistaRegistrado.CupoUsado  = $rootScope.dataArtistaRegistrado.CupoUsado  +  $scope.dataPuntosCliente.valorNuevo;
+                       $rootScope.dataArtistaRegistrado.Cupo = $rootScope.dataArtistaRegistrado.Cupo - $scope.dataPuntosCliente.valorNuevo ; 
+                       dataArtista.update({
+                        CupoUsado: $rootScope.dataArtistaRegistrado.CupoUsado,
+                        Cupo :  $rootScope.dataArtistaRegistrado.Cupo
+                      });
+                  //insert  registro tatuajes 
+                
+              });
+
+                  dataArtista.child("puntosXsesion").on("value", function(datos){
+                      console.log("puntos artista" +   datos.val());
+                      regalosPorSesion  = (porcentajeXTattoo *   datos.val() ) / 100 ; 
+                      console.log("puntos de regalo por sesion" + regalosPorSesion ) ; 
+                         var fecha = new Date();
+                         console.log("id cliente "  +idCliente) ;
+                         console.log("id artista " +$rootScope.dataArtistaRegistrado.uid) ; 
+                        ref.child("ProcedimientosCliente").child(idCliente).child($rootScope.dataArtistaRegistrado.uid).push({
+                                            estado: 'TatuajeFinalizado',                            
+                                            fecha: fecha.toString(),
+                                            inkPoints : inkPoints ,
+                                            uidArtista: $rootScope.dataArtistaRegistrado.uid,
+                                            calificacionArtista : 5 ,
+                                            calificacionCliente :  parseInt($scope.infoCalificacion.calificacion) ,
+                                            porcentajeInkPoints :  regalosPorSesion
+                                    }
+                          ).then(function(result){
+                            console.log("inserto procedimientos  cliente ");
+                            console.log(result);
+
+                          });
+
+                        ref.child("ProcedimientosArtista").child($rootScope.dataArtistaRegistrado.uid).child(idCliente).push({
+                                            estado: 'TatuajeFinalizado',                            
+                                            fecha: fecha.toString(),
+                                            inkPoints : inkPoints ,
+                                            uidCliente: idCliente,
+                                            calificacionArtista : 5 ,
+                                            calificacionCliente : parseInt($scope.infoCalificacion.calificacion),
+                                            porcentajeInkPoints : regalosPorSesion
+                                    }
+                          ).then(function(result){
+                            console.log("inserto procedimientos  artista ");
+                            console.log(result);
+
+                              $scope.datosClientes  = {};
+                              var refUser = ref.child("PuntosCliente").child(idCliente);
+                              refUser.child("puntos").on("value", function(datos){
+                                  console.log("puntos cliente para cargar ");
+                                  $scope.datosClientes.puntos  = datos.val();
+                                  console.log(   $scope.datosClientes.puntos  );
+
+                                });
+                               
+                               $scope.nuevosPuntos = parseInt($scope.datosClientes.puntos) + parseInt(regalosPorSesion);
+                                   console.log("nuevos puntos a recargar " + $scope.nuevosPuntos  );
+                      
+                              
+                                refUser.update({
+                                    puntos:  $scope.nuevosPuntos 
+                                });
+
+                          });
+
+                  });
+
                  
-                 $rootScope.dataArtistaRegistrado.CupoUsado  = $rootScope.dataArtistaRegistrado.CupoUsado  +  $scope.dataPuntosCliente.valorNuevo;
-                 $rootScope.dataArtistaRegistrado.Cupo = $rootScope.dataArtistaRegistrado.Cupo - $scope.dataPuntosCliente.valorNuevo ; 
-                 dataArtista.update({
-                  CupoUsado: $rootScope.dataArtistaRegistrado.CupoUsado,
-                  Cupo :  $rootScope.dataArtistaRegistrado.Cupo
-                });
+
+
+              
+
+
+
             }
             if(estadoNuevo === 'AceptadaArtistaFechaDiferente'){
               console.log("entra artista fecha diferente ");
@@ -1198,8 +1391,33 @@ estado: 'EnviadaArtista',
                 refSolicitudesArtista.child(idCliente).update({
                   fechaCita: fechaPropuesta.toString()
                 });
+            }
+            if(estadoNuevo === 'RechazadaArtistaDevolucion'){
+               var dataCliente = ref.child("PuntosCliente").child(idCliente);  
+               dataCliente.child("puntosEnCanje").on("value", function(datos){
+                  console.log("puntos en canje  cliente");
+                
+                  $scope.dataPuntosCliente.puntosEnCanje  = datos.val();
+                  console.log( $scope.dataPuntosCliente.puntosEnCanje );     
+                });
+               dataCliente.child("puntos").on("value", function(datos){
+                  console.log("puntos  cliente");
+                
+                  $scope.dataPuntosCliente.puntos  = datos.val();
+                  console.log( $scope.dataPuntosCliente.puntos );     
+                });
+                $scope.dataPuntosCliente.valorEnCanje = parseInt(inkPoints) -  parseInt($scope.datosArtista.puntosXcita) ; 
+                $scope.dataPuntosCliente.nuevoEnCanje  = parseInt($scope.dataPuntosCliente.puntosEnCanje) - parseInt($scope.dataPuntosCliente.valorEnCanje);
+                $scope.dataPuntosCliente.puntos =  $scope.dataPuntosCliente.puntos + inkPoints ; 
 
-
+                console.log("cancelalad  por el artista, se le devuelven todos los puntos");
+                console.log("nuevo puntos en canje " +  $scope.dataPuntosCliente.nuevoEnCanje ) ; 
+                console.log("nuevos inkpoints " +  $scope.dataPuntosCliente.puntos) ; 
+               dataCliente.update({
+                  puntos : $scope.dataPuntosCliente.puntos ,
+                  puntosEnCanje:   $scope.dataPuntosCliente.nuevoEnCanje 
+                });
+            
             }
          
     }
@@ -1223,11 +1441,32 @@ estado: 'EnviadaArtista',
 
     }
 
-    $scope.scanearCodigoCliente = function (){
+    $scope.scanearCodigoCliente = function (estadoNuevo , idCliente, inkPoints,fechaPropuesta){
 
         $cordovaBarcodeScanner.scan().then(function(imageData) {
-            alert(imageData.text);
-            $scope.cambiarEstadoSolicitud("Tatuandome" ,imageData.text,0,null);
+
+            alert("envio directo");
+            $scope.dataCode = imageData.text.split("-");
+            console.log($scope.dataCode[0]);
+            if($scope.dataCode[1] === $rootScope.dataArtistaRegistrado.uid ){
+                //$scope.cambiarEstadoSolicitud("Tatuandome" ,$scope.dataCode[0],inkPoints,fechaPropuesta);
+
+
+            var refSolicitudes = ref.child("SolicitudesCliente").child(idCliente);
+            var refSolicitudesArtista = ref.child("SolicitudesArtista").child($rootScope.dataArtistaRegistrado.uid);
+         //refSolicitudes.child(idArtista).on("value", function(datos){
+           // console.log(JSON.stringify(datos.val()));
+            refSolicitudes.child($rootScope.dataArtistaRegistrado.uid).update({
+              estado: estadoNuevo
+            });
+
+            refSolicitudesArtista.child(idCliente).update({
+              estado: estadoNuevo
+            });
+            }else{
+               alert("Este es un codigo de activacion no pertenece a este artista") ; 
+            }
+            
             console.log("Barcode Format -> " + imageData.format);
             console.log("Cancelled -> " + imageData.cancelled);
         }, function(error) {
@@ -1303,6 +1542,7 @@ estado: 'EnviadaArtista',
               
                 $rootScope.dataClienteRegistrado.puntos  = datos.val();
                 console.log( $rootScope.dataClienteRegistrado.puntos );
+                 $scope.$apply();
                 // window.localStorage.setItem('clienteLogueado' ,  JSON.stringify($rootScope.dataClienteRegistrado));          
     });
 
@@ -1347,9 +1587,8 @@ estado: 'EnviadaArtista',
 //                  alert("nuevos puntos a recargar " + $scope.nuevosPuntos  )
     
            
-              refUser.set({
-                  puntos:  $scope.nuevosPuntos ,
-                  tipoUsuario:"cliente"
+              refUser.update({
+                  puntos:  $scope.nuevosPuntos 
               });
 
               alert("Felicidades has recargado " + $scope.infoClienteRecarga[2] );
@@ -2760,7 +2999,11 @@ $scope.claves={};
                     refUser.set({
                       puntos: $scope.datosClientes.puntosRegistro,
                       tipoUsuario:"cliente",
-                      puntosEnCanje : 0 
+                      puntosEnCanje : 0 ,
+                      paqueteCalificacion : 0 ,
+                      posicionCalificacion : 0 ,
+                      fechaUltimaCalificacion : 'nuevo',
+                      fechaIngreso : 'nuevo'
                     });
 
                   }else{
@@ -3117,6 +3360,11 @@ $scope.scrollTop = function() {//ng-click for back to top button
            
             $scope.abrirLoginCliente();
             //$rootScope.shuffleArray($rootScope.artistas);
+         }
+         else if (nombre === 'calificar'){
+          console.log("ir calificacion");
+          $state.go('app.'+nombre);
+          //$state.reload();
          }
          else{
 

@@ -15,9 +15,9 @@
               <a class="item item-thumbnail-left" ng-click="mostrarInfoSolicitud($index)">
                 <img src="{{solicitud.photoURL}}">
                 <h2>Cita con:{{solicitud.nombreArtista}}</h2>
-                <p  ion-datetime-picker am-pm   ng-model="solicitud.fechaCita"> {{solicitud.fechaCita | date: "yyyy-MM-dd H:mm:ss a" }}</p>
+                <p> {{solicitud.fechaPropuesta | date: "yyyy-MM-dd H:mm:ss a" }}</p>
                 <p>Estado: {{solicitud.estado}} </p>
-                <p>InkPoints: {{solicitud.inkPoints}} <span ng-if="solicitud.estado === 'ConfirmadaCliente'">restantes ({{solicitud.inkPoints - 50}})</span> </p>
+                <p>InkPoints: {{solicitud.inkPoints}} <span ng-if="solicitud.estado === 'ConfirmadaCliente'">restantes ({{solicitud.inkPoints - solicitud.puntosXcita}})</span> </p>
                 <button style="color:green;" ng-show="dataClienteRegistrado.puntos >= artista.puntosXsesion ">Puntos suficientes para agendar</button>
               </a>
                
@@ -27,17 +27,17 @@
                     esperando respuesta tatuador
                  </div>
                  <div ng-show="solicitud.estado == 'AceptadaArtista'">
-                   La cita a sido aceptaada por el artista, solo debes confirmala  para que se agende. Al confirmar 50 inkpoint se daran al artista a manera de reserva.
+                   La cita a sido aceptaada por el artista, solo debes confirmala  para que se agende. Al confirmar {{solicitud.puntosXcita}}  inkpoint se daran al artista a manera de reserva.
                    <button ng-click="cambiarEstadoSolicitud( 'ConfirmadaCliente',solicitud.uidArtista,solicitud.inkPoints)"> Confirmar</button>
                    <button ng-click="cambiarEstadoSolicitud('RechazadaCliente',solicitud.uidArtista,solicitud.inkPoints)"> Cancelar</button>
                  </div>
                    <div ng-show="solicitud.estado == 'AceptadaArtistaFechaDiferente'">
-                   La cita a sido aceptaada por el artista, pero para el dia {{solicitud.fechaCita}}. Al confirmar 50 inkpoint se daran al artista a manera de reserva.
+                   La cita a sido aceptaada por el artista, pero para el dia {{solicitud.fechaPropuesta | date: "yyyy-MM-dd H:mm:ss a" }}. Al confirmar {{solicitud.puntosXcita}} inkpoint se daran al artista a manera de reserva.
                    <button ng-click="cambiarEstadoSolicitud( 'ConfirmadaCliente',solicitud.uidArtista,solicitud.inkPoints)"> Confirmar</button>
                    <button ng-click="cambiarEstadoSolicitud('RechazadaCliente',solicitud.uidArtista,solicitud.inkPoints)"> Cancelar</button>
                  </div>
                   <div ng-show="solicitud.estado == 'FechaModificadaArtista'">
-                   El artista no puede el dia que le indicas pero te ofrece el dia  {{solicitud.fechaCita}}
+                   El artista no puede el dia que le indicas pero te ofrece el dia  {{solicitud.fechaPropuesta | date: "yyyy-MM-dd H:mm:ss a"}}
                  </div>
                   <div ng-show="solicitud.estado == 'RechazadaCliente'">
                     Solicitud rechazada por el cliente antes de confirmar 
@@ -46,9 +46,9 @@
                     Solicitud rechazada por el se devuelven puntos 
                  </div>
                   <div ng-show="solicitud.estado == 'ConfirmadaCliente'">
-                    Felicidades tienes un tatuaje para el dia {{solicitud.fechaCita}} no olvides alimentarte muy bien antes de ir a a cita. 
+                    Felicidades tienes un tatuaje para el dia {{solicitud.fechaPropuesta  | date: "yyyy-MM-dd H:mm:ss a" }} no olvides alimentarte muy bien antes de ir a a cita. 
                       <center>
-                      <qrcode data="{{dataClienteRegistrado.uid}}" size="250"></qrcode>
+                      <qrcode data="{{dataClienteRegistrado.uid}}-{{solicitud.uidArtista}}" size="250"></qrcode>
                       <br>
                      <button ng-click="cambiarEstadoSolicitud('RechazadaClienteDevolucionPuntos',solicitud.uidArtista,solicitud.inkPoints)"> Cancelar cita </button>
                      </center>
@@ -58,6 +58,9 @@
                  </div>
                   <div ng-show="solicitud.estado == 'Tatuandome'">
                     Disfruta mientras te tatuas.
+                 </div>
+                  <div ng-show="solicitud.estado == 'RechazadaArtistaDevolucion'">
+                    La cita a sido rechaazada por el artista  te vamos a compensar con.
                  </div>
                   <div ng-show="solicitud.estado == 'TatuajeFinalizado'">
                    Tatuaje finalizado calificar * * * * * 

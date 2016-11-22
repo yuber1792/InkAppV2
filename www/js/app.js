@@ -9,15 +9,28 @@ var db = null;
 
 
 
-angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize','pascalprecht.translate' ,'inkgps.services','firebase','ngCordovaOauth','mdo-angular-cryptography','monospaced.qrcode' ,'ion-datetime-picker'])
+angular.module('starter', ['ionic',
+  'ngCordova',
+  'starter.controllers',
+  'ngSanitize',
+  'pascalprecht.translate',
+  'inkgps.services',
+  'firebase','ngCordovaOauth',
+  'mdo-angular-cryptography',
+  'monospaced.qrcode' ,
+  'ion-datetime-picker',
+  'inkgps.califica',
+  'ionic.contrib.ui.tinderCards2'
+
+  ])
 
 
 .run(function($ionicPlatform, $cordovaSQLite,$translate,$rootScope) {
   $rootScope.appReady = {status:false};
   $ionicPlatform.ready(function() {
-    db = $cordovaSQLite.openDB("my.db");
+  //  db = $cordovaSQLite.openDB("my.db");
 
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+  //  $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
     //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS artistas (id integer primary key, idArtista text,texto text)");
     
     $ionicPlatform.registerBackButtonAction(function () {
@@ -205,7 +218,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             proveedores :"Proveedores",
             loginCliente:"Login cliente",
             perfilCliente:"Perfil cliente",
-            recargaInkPoints: "Recarga de InkPoints"
+            recargaInkPoints: "Recarga de InkPoints",
+            procedimientosRealizados: "procedimientos realizados"
 
 
 
@@ -268,7 +282,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             proveedores :"Proveedores",
               loginCliente:"Ingreso clientes",
               perfilCliente:"Perfil cliente",
-              recargaInkPoints: "Recarga de InkPoints"
+              recargaInkPoints: "Recarga de InkPoints",
+               procedimientosRealizados: "procedimientos realizados"
 
 
 
@@ -331,7 +346,8 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
             proveedores :"Proveedores",
               loginCliente:"Login cliente",
               perfilCliente:"Perfil cliente",
-              recargaInkPoints: "Recarga de InkPoints"
+              recargaInkPoints: "Recarga de InkPoints",
+               procedimientosRealizados: "procedimientos realizados"
 
 
 
@@ -720,6 +736,26 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
       }
     })  
 
+      .state('app.procedimientosArtista', {
+      url: "/procedimientosArtista",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/procedimientosArtista.html",
+          controller: 'procedimientosArtistaController'
+        }
+      }
+    })  
+
+      .state('app.procedimientosCliente', {
+      url: "/procedimientosCliente",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/procedimientosCliente.html",
+          controller: 'procedimientosClienteController'
+        }
+      }
+    })  
+
       .state('app.recargarInkPointsArtista', {
       url: "/recargarInkPointsArtista",
       views: {
@@ -739,6 +775,15 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','ngSanitize
         }
       }
     })
+      .state('app.calificar', {
+      url: "/calificar",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/calificar.html",
+          controller: 'calificarController'
+        }
+      }
+    })  
 
         .state('app.perfilArtista', {
       url: "/perfilArtista",
