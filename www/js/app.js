@@ -20,7 +20,22 @@ angular.module('starter', ['ionic',
   'monospaced.qrcode' ,
   'ion-datetime-picker',
   'inkgps.califica',
-  'ionic.contrib.ui.tinderCards2'
+  'inkgps.recargaInkPoints',
+  'inkgps.bocetos',
+  'inkgps.multimedia',
+  'inkgps.promociones',
+  'inkgps.eventos',
+  'inkgps.estudios',
+  'inkgps.estilos',
+  'inkgps.cambiarInkPoints',
+  'inkgps.procedimientosArtista',
+  'inkgps.procedimientosCliente',
+  'inkgps.solicitudesCliente',
+  'inkgps.solicitudesArtista',
+  'inkgps.perfilArtista',
+  'inkgps.perfilCliente',
+  'inkgps.recargaInkPointArtista',
+  'inkgps.registro'
 
   ])
 
@@ -128,6 +143,8 @@ angular.module('starter', ['ionic',
     }
   };
 })
+
+
 
   .service('$cordovaScreenshot', ['$q', function($q) {
     return {
@@ -531,16 +548,7 @@ angular.module('starter', ['ionic',
     }
   })
 
-  .state('app.intro', {
-    url: '/intro',
-    views: {
-      'menuContent': {
-         templateUrl: 'templates/intro.html',
-        controller: 'IntroCtrl'
-      }
-    }
-   
-  })
+ 
 
  
 
@@ -840,16 +848,7 @@ angular.module('starter', ['ionic',
         }
       }
     })
-     .state('app.publicidadProveedor', {
-      url: "/publicidadProveedor",
-    //  cache : false,
-      views: {
-        'menuContent': {
-          templateUrl: "templates/publicidadProveedores.html",
-          controller: 'publicidadProveedoresController'
-        }
-      }
-    })
+    
      .state('app.descubrir', {
       url: "/descubrir",
       views: {

@@ -1,6 +1,11 @@
 angular.module('inkgps.califica', [])
+  .filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+})
 
-.controller('calificarController', function($ionicSlideBoxDelegate,$sce,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ,$firebaseArray,$firebaseAuth,$cordovaOauth,$cordovaBarcodeScanner,$crypto,TDCardDelegate) {
+.controller('calificarController', function($ionicSlideBoxDelegate,$sce,$q,$cordovaSQLite,$state,$ionicLoading, $ionicScrollDelegate,$scope,$ionicModal ,$window,$http ,$rootScope ,$ionicPopup,$timeout ,$compile,$cordovaCamera, $stateParams,Scopes ,$cordovaDevice,$cordovaSocialSharing ,$cordovaScreenshot ,$templateCache,$firebaseObject,$ionicSideMenuDelegate ,$firebaseArray,$firebaseAuth,$cordovaOauth,$cordovaBarcodeScanner,$crypto) {
   Scopes.store('calificarController', $scope);
 
 
@@ -9,6 +14,8 @@ angular.module('inkgps.califica', [])
   $rootScope.dataClienteRegistrado = JSON.parse(window.localStorage.getItem('clienteLogueado'));
   var ref =  firebase.database().ref() ;
   var refDataCliente = ref.child("PuntosCliente");
+  var refCalificaciones = ref.child("Calificaciones");
+  var refRanking = ref.child("Ranking");
   $scope.contador =  0 ; 
   $scope.calificacionActiva = false  ;
   $scope.dataFecha = {};
@@ -16,7 +23,7 @@ angular.module('inkgps.califica', [])
   refDataCliente.child($rootScope.dataClienteRegistrado.uid).update({
 	  		fechaIngreso : firebase.database.ServerValue.TIMESTAMP
   });
-$scope.puntos = 0 ; 
+  $scope.puntos = 0 ; 
   	refDataCliente.child($rootScope.dataClienteRegistrado.uid).child("puntos").on("value", function(datosPuntos){
 
   		$scope.puntos = datosPuntos.val();
@@ -63,13 +70,15 @@ $scope.puntos = 0 ;
 
 
 
-  $scope.calificar = function(calificacion  , posicion ){
+  $scope.calificar = function(calificacion  , posicion ,urlImagen ){
 
   	console.log("calificacion");
   	console.log("calificacion : " + calificacion);
   	console.log("idCliente  :"+$rootScope.dataClienteRegistrado.uid);
   	console.log("paquete : " + $scope.datosCLiente.paqueteCalificacion);
   	console.log("posicion : " + posicion);
+  	console.log("imagen : " + urlImagen);
+
   //	console.log("posicionCalificacion : " +$scope.datosCLiente.posicionCalificacion );
   	$scope.cardTypes[posicion].visible = false ;
   
@@ -79,11 +88,50 @@ $scope.puntos = 0 ;
   	refDataCliente.child($rootScope.dataClienteRegistrado.uid).child("posicionCalificacion").once("value", function(datos){
 	  	$scope.contador = datos.val();
 	  	$scope.contador  = parseInt($scope.contador) + 1 ;  
+	  	//actualiza contador
 	  	refDataCliente.child($rootScope.dataClienteRegistrado.uid).update({
 	  		posicionCalificacion : parseInt($scope.contador)
 	  	});
+	  	//crea registro calificacion cliente 
+	  	 refCalificaciones.child($rootScope.dataClienteRegistrado.uid ).push({
+		  			 	calificacion :  calificacion , 		  			 	
+		  			 	paquete  : $scope.datosCLiente.paqueteCalificacion ,
+		  			 	posicion : posicion
+
+		  			 });
+
+	  	 //actuliza valor  ranking 
+	  	 refRanking.child($scope.datosCLiente.paqueteCalificacion + "-" + posicion).child("totalPuntos").once("value", function(datos){
+
+	  	 	 $scope.totalpuntos = datos.val();
+	  	 	 $scope.totalpuntos = $scope.totalpuntos + calificacion ; 
+	  	 	 refRanking.child($scope.datosCLiente.paqueteCalificacion + "-" + posicion).update({
+	  	 	 	totalPuntos :  $scope.totalpuntos,
+	  	 	 	imagen : urlImagen
+        	 })
+
+/*        	 refRanking.child($scope.datosCLiente.paqueteCalificacion + "-" + posicion).update({
+	  	 	    $scope.totalpuntos
+        	 })
+*/
+
+	  	 	 /* 
+					.then(function(result){
+        	 	 refRanking.child($scope.datosCLiente.paqueteCalificacion + "-" + posicion).child('puntaje-'+calificacion).push({
+        	 	 		uidCliente :$rootScope.dataClienteRegistrado.uid ,
+        	 	 		calificacion : calificacion ,
+        	 	 		fecha :firebase.database.ServerValue.TIMESTAMP
+
+        	 	 }); //end  push 
+
+        	 }); //end then   update 
+	  	 	 */
+
+	  	 });
+        
+
 	  	console.log("contador : " +parseInt($scope.contador));
-	  	  console.log("tamaño" +$scope.cardTypes.length);
+	  	console.log("tamaño" +$scope.cardTypes.length);
     //$scope.validador = $scope.cardTypes.length-1;
     if($scope.contador  ===   $scope.cardTypes.length){
     	console.log("finaliza calificacion ");
@@ -105,6 +153,8 @@ $scope.puntos = 0 ;
 				  		posicionCalificacion : 0 ,
 				  		puntos :  $scope.puntos 
 		  			 });
+
+		  			
 		  			
 		  			 $scope.calificacionActiva = true  ;
 		  	         $scope.mostrarFotos = true ; 
@@ -122,6 +172,68 @@ $scope.puntos = 0 ;
   
 
 
+  }
+
+ var qProfile = $q.defer();
+ $scope.RankingData  =  [];
+ $scope.conteo = 0  ; 
+  $scope.ranking = function(){
+	//var  ranking  = rorderByChild('totalPuntos');
+	console.log("data ranking ");
+	refRanking.orderByChild('totalPuntos').limitToLast(10).on("child_added", function (snapshot) {
+
+		console.log(snapshot.key);
+		console.log(snapshot.val().totalPuntos);
+		console.log("ubicacion " + snapshot.val().imagen);
+		
+		
+
+		var storage = firebase.storage();
+	    var pathReference = storage.ref('fotosPaquetes/'+snapshot.val().imagen);
+	     pathReference.getDownloadURL().then(function(url) {
+	      console.log("descarga archivo "); 
+	      console.log(url);
+	      snapshot.url =  url;
+	    $scope.$apply();
+	      
+	      }).catch(function(error) {
+	        switch (error.code) {
+	          case 'storage/object_not_found':
+	            // File doesn't exist
+	            break;
+
+	          case 'storage/unauthorized':
+	            // User doesn't have permission to access the object
+	            break;
+
+	          case 'storage/canceled':
+	            // User canceled the upload
+	            break;
+
+	          case 'storage/unknown':
+	            // Unknown error occurred, inspect the server response
+	            break;
+	        }
+	      });
+
+		
+   
+	      $scope.RankingData[$scope.conteo]= snapshot ; 
+		$scope.conteo = $scope.conteo + 1  ; 
+        $scope.$apply();
+	      
+
+
+		
+      
+        qProfile.resolve(snapshot.val());
+       
+    }, function (errorObject) {
+        qProfile.reject(errorObject);
+    });
+
+	
+	
   }
 
   $scope.cargarFotosCalificacion = function(){
@@ -155,7 +267,8 @@ $scope.puntos = 0 ;
 					      	 $scope.cardTypes[key] = {image:url,
 					      					uidArtista:$scope.dataFotos[key].uidArtista,
 					      				    visible : true ,
-					      				    contador  :  $scope.contador};
+					      				    contador  :  $scope.contador,
+					      				     url : $scope.dataFotos[key].photoUrl };
 						   
 					      }
 					        $scope.contador = $scope.contador + 1 ;
@@ -209,75 +322,8 @@ $scope.puntos = 0 ;
   }
  
 
- 		
-  
- 
 
 
-  
-
-
-$scope.cardDestroyed = function(index) {
-			    $scope.cards.active.splice(index, 1);
-			      var card = $scope.cards.active[index];
-			  };
-
-
-			  
-			  $scope.addCard = function() {
-			    var newCard = cardTypes[0];
-			    $scope.cards.active.push(angular.extend({}, newCard));
-			  }
-
-
-			  $scope.refreshCards = function() {
-			    // Set $scope.cards to null so that directive reloads
-			    $scope.cards.active = null;
-			    $timeout(function() {
-			      $scope.cards.active = Array.prototype.slice.call($scope.cards.master, 0);
-			    });
-			  }
-
-			  $scope.$on('removeCard', function(event, element, card) {
-			    var discarded = $scope.cards.master.splice($scope.cards.master.indexOf(card), 1);
-			    $scope.cards.discards.push(discarded);
-			  });
 			
-			  $scope.cardSwipedLeft = function(index) {
-			    console.log('LEFT SWIPE');
-			    console.log("no me gusta" + $scope.cards.master.length);
-			     if($scope.calificacionActiva){
-				    var card = $scope.cards.active[index];
-				    $scope.cards.disliked.push(card);
-				    //califica
-				    $scope.calificar(false, $rootScope.dataClienteRegistrado.uid  ,$scope.datosCLiente.paqueteCalificacion, $scope.contador);
-				    $scope.contador  = $scope.contador + 1 ;  
-				    if($scope.contador  === $scope.cards.master.length){
-				    	console.log("finaliza debe asignar puntos");
-				    	$scope.calificacionActiva= false ; 
-				    }
-				}else{
-					console.log("calificaicon finalizada");
-				}
-			      
-			  };
-			  $scope.cardSwipedRight = function(index) {
-			    console.log('RIGHT SWIPE');
-			    console.log("me gusta" + $scope.cards.master.length);
-			    if($scope.calificacionActiva){
-				    var card = $scope.cards.active[index];
-				    $scope.cards.liked.push(card);
-				    $scope.calificar(true, $rootScope.dataClienteRegistrado.uid  ,$scope.datosCLiente.paqueteCalificacion, $scope.contador);
-				     $scope.contador  = $scope.contador + 1 ; 
-				    if($scope.contador  === $scope.cards.master.length){
-				    	console.log("finaliza debe asignar puntos");
-				    	$scope.calificacionActiva = false ; 
-				    }
-				}else{
-					console.log("calificaicon finalizada");
-				}
-			      
-			  };
-  
 
 })

@@ -1,7 +1,30 @@
 <ion-view view-title="{{'Calificar' | translate}}" class="feed-view">
   <ion-content>
    <center><h2 class="letraBlanca">Mis ink points : {{puntos}}</h2></center>
-  <h3 ng-show="mostrarFotos" class="letraBlanca">No tienes tatuajes para  calificar, vuelve mañana. </h3>
+   <center><h4 class="letraBlanca">Fecha  servidor  : {{dataFecha.fechaActual }}</h4></center>
+   <center><h4 class="letraBlanca">Fecha calificacion : {{dataFecha.fechaCalificacion}}</h4></center>
+   <div ng-show="mostrarFotos" >
+       <h3 class="letraBlanca">No tienes tatuajes para  calificar, vuelve mañana. </h3>
+
+        <button class="button button-full button-stable  letraBlanca" ng-click="ranking()">
+             ver ranking 
+          </button>    
+
+          <div ng-repeat="data  in RankingData | reverse">
+               <a class="item item-thumbnail-left" href="#">
+                <img src="{{data.url}}">
+                <h2>foto numero {{$index + 1 }}</h2>
+                <p> total:{{data.val().totalPuntos}}</p>
+              
+             
+              </a> 
+           
+             
+
+          </div>
+
+   </div>
+ 
   <div ng-repeat="card in cardTypes  track by $index-1" >
           <div  class="post-card" ng-show="card.visible" >
                 <div  class="list card" >
@@ -15,11 +38,11 @@
         
                     
                   <div class="item item-body">
-                    <input value="1" type="button" ng-click="calificar(1,$index)"></input>
-                    <input value="2" type="button" ng-click="calificar(2,$index)"></input>
-                    <input value="3" type="button" ng-click="calificar(3,$index)"></input>
-                    <input value="4" type="button" ng-click="calificar(4,$index)"></input>
-                    <input value="5" type="button" ng-click="calificar(5,$index)"></input>
+                    <input value="1" type="button" ng-click="calificar(1,$index,card.url)"></input>
+                    <input value="2" type="button" ng-click="calificar(2,$index,card.url)"></input>
+                    <input value="3" type="button" ng-click="calificar(3,$index,card.url)"></input>
+                    <input value="4" type="button" ng-click="calificar(4,$index,card.url)"></input>
+                    <input value="5" type="button" ng-click="calificar(5,$index,card.url)"></input>
                     <h4 class="card-title"> {{card.uidArtista}}</h4>
                   
                   </div>

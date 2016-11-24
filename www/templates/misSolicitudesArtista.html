@@ -9,7 +9,7 @@
               <div ng-repeat="solicitud in solicitudesArtista" >
                 <a class="item item-thumbnail-left" ng-click="mostrarInfoSolicitud($index)">
                   <img src="{{solicitud.photoURL}}">
-                  <h2>{{solicitud.tipoUsuario}}</h2>
+                
                   <p>Fecha: {{solicitud.fechaPropuesta  | date: "yyyy-MM-dd H:mm:ss a" }} </p>
                   <p>Estado: {{solicitud.estado}} </p>
                   <p>InkPoints: {{solicitud.inkPoints}} </p>
